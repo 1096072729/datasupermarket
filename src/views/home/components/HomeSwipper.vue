@@ -34,27 +34,29 @@
 
 // Import Swiper styles
 // import cute from '../../../assets/img/home'
-import cute from '../../../assets/img/home/banner_1.png'
+
 export default {
   name: 'HomeSwipper',
   data () {
     return {
 
-      list: [
-        // { id: 0, imgUrl: '@/assets/img/home/banner_1.png' },
-        { id: 0, imgUrl: cute },
-        { id: 1, imgUrl: 'http://img1.qunarzz.com/piao/fusion/1801/1a/94428c6dea109402.jpg_640x200_2cf590d8.jpg' }
-      ],
       swiperOptions: {
         loop: true,
         pagination: {
           el: '.swiper-pagination',
           type: 'custom',
-
+        },
+        autoplay: {
+          delay: 5000,
+          stopOnLastSlide: false,
+          disableOnInteraction: true,
         },
         // Some Swiper option/callback...
       }
     }
+  },
+  props: {
+    list: Array
   },
 
   computed: {

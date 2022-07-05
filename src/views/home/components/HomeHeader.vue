@@ -9,17 +9,45 @@
         text-color="#e4eaef"
         @select="handleSelect"
       >
-        <el-menu-item index="1">首页</el-menu-item>
-        <el-menu-item index="2">产品中心</el-menu-item>
-        <el-menu-item index="3">需求大厅</el-menu-item>
-        <el-menu-item index="4">资源目录</el-menu-item>
-        <el-menu-item index="5">通知公告</el-menu-item>
-        <el-menu-item index="6">诚邀加入</el-menu-item>
-        <el-menu-item index="7">关于我们</el-menu-item>
+        <el-menu-item
+          index="1"
+          class="item"
+        >首页</el-menu-item>
+        <el-menu-item
+          index="2"
+          class="item"
+        >产品中心</el-menu-item>
+        <el-menu-item
+          index="3"
+          class="item"
+        >需求大厅</el-menu-item>
+        <el-menu-item
+          index="4"
+          class="item"
+        >资源目录</el-menu-item>
+        <el-menu-item
+          index="5"
+          class="item"
+        >通知公告</el-menu-item>
+        <el-menu-item
+          index="6"
+          class="item"
+        >诚邀加入</el-menu-item>
+        <el-menu-item
+          index="7"
+          class="item"
+        >关于我们</el-menu-item>
       </el-menu>
     </div>
     <div class="right">
-      <el-menu
+      <div class="search-box">
+        <el-input
+          class="search-input"
+          v-model="input"
+          placeholder="请输入内容"
+        ></el-input>
+      </div>
+      <!-- <el-menu
         class="el-menu-demo"
         mode="horizontal"
         active-text-color="#47afff"
@@ -36,7 +64,7 @@
         </el-menu-item>
         <el-menu-item index="2">产品中心</el-menu-item>
 
-      </el-menu>
+      </el-menu> -->
     </div>
 
   </div>
@@ -61,6 +89,9 @@ export default {
 
 
 <style lang="scss" scoped>
+.el-menu.el-menu--horizontal {
+  border-width: 0px;
+}
 .home-header {
   color: #fff;
   display: flex;
@@ -70,22 +101,22 @@ export default {
     flex: 1;
     .el-menu-demo {
       background-color: #003568;
-
+      .item {
+        border: 0;
+      }
       // text-color: #47afff;
     }
   }
   .right {
     float: right;
-    .el-menu-demo {
-      background-color: #003568;
-      .search-box {
-        .search-input {
-          width: 100%;
-          padding: 0 5px;
-          background-color: #003568;
+    .search-box {
+      .search-input {
+        line-height: 100%;
+        height: 60px;
+        :hover {
+          width: 300px;
         }
       }
-      // text-color: #47afff;
     }
   }
 }
