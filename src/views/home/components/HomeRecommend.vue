@@ -6,10 +6,13 @@
 
     <div class="see-more">查看更多></div>
     <div class="out-content-box">
-      <div class="in-content-box">
+      <div
+        v-for="item of recommendList"
+        :key="item.id"
+        class="in-content-box"
+      >
+
         <el-card
-          v-for="item of recommendList"
-          :key="item.id"
           :body-style="{ padding: '0px' }"
           class="content-cart"
         >
@@ -66,13 +69,15 @@ export default {
     color: #0090ff;
   }
   .out-content-box {
-    margin-top: 8px;
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
     .in-content-box {
+      padding: 20px;
+      box-sizing: border-box;
+      width: 25%;
       .content-cart {
-        margin: 8px 8px;
-        float: left;
         // box-sizing: border-box;
-        width: 23%;
         .img-box {
           .cart-image {
             width: 100%;

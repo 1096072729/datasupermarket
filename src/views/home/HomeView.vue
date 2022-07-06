@@ -44,7 +44,7 @@ export default {
         //获取各个数据home的组件数据
         this.swiperList = data.homeSwipper;
         this.recommendList = data.recommendList;
-        
+
       }
     }
   },
