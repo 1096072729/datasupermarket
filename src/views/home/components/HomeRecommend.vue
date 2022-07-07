@@ -23,12 +23,13 @@
             >
           </div>
           <div>
-            <p class="content-title">{{item.title}}</p>
+            <strong class="content-title">{{item.title}}</strong>
+            <br>
             <p class="content-synopsis">{{item.synopsis}}</p>
 
           </div>
         </el-card>
-        <div style="clear: both;"></div>
+
       </div>
 
     </div>
@@ -61,14 +62,17 @@ export default {
   .title {
     font-size: 24px;
     text-align: center;
+    line-height: 24px;
   }
   .see-more {
-    margin-top: 8px;
+    margin-top: 16px;
     text-align: center;
     font-size: 12px;
     color: #0090ff;
   }
   .out-content-box {
+    max-width: 1000px;
+    margin: 0 auto;
     margin-top: 16px;
     display: flex;
     flex-wrap: wrap;
@@ -86,9 +90,11 @@ export default {
       }
       .content-title {
         font-size: 16px;
+        line-height: 24px;
         color: #333333;
       }
       .content-synopsis {
+        line-height: 24px;
         font-size: 12px;
         color: #999999;
       }

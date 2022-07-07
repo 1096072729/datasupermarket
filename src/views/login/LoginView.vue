@@ -35,8 +35,8 @@
         </div>
         <div class="form-input">
           <el-input
-            class="account"
-            v-model="account"
+            class="username"
+            v-model="username"
             placeholder="请输入账号"
           ></el-input>
           <el-input
@@ -54,7 +54,7 @@
               <el-button
                 type="primary"
                 class="login-button"
-                @click="handleSubmit"
+                @click="login"
               >登录</el-button>
             </el-row>
           </div>
@@ -67,7 +67,7 @@
           国家政务服务平台账号登陆
         </div>
         <div class="to-signup">
-          <span class="has-account">还没有账号？</span>
+          <span class="has-username">还没有账号？</span>
           <span class="signup">去注册</span>
         </div>
       </div>
@@ -79,13 +79,13 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 export default {
   name: 'LoginView',
   data () {
     return {
       type: 'personal',
-      account: '',
+      username: '',
       password: '',
     }
   },
@@ -93,10 +93,26 @@ export default {
     select (type) {
       this.type = type
     },
-    handleSubmit () {
 
-      //跳转
-      this.$router.push('/')
+    login () {
+      console.log('login')
+      axios.post("http://localhost:8080/auth/login", { username: this.username, password: this.password })
+        .then((res) => {
+          this.loginSuc(res);
+
+        })
+    },
+    loginSuc (res) {
+      console.log(res)
+      console.log('loginSuc')
+      if (res.data.meta.status == 200) {
+        this.$store.state.user = res.data.user
+        console.log(this.$store.state.user)
+        this.$router.push('/')
+      }
+      else {
+        alert('登录失败 ')
+      }
     }
   }
 }
@@ -132,7 +148,7 @@ export default {
   .login-form {
     position: absolute;
     top: 50px;
-    right: 250px;
+    left: 1000px;
     background-color: white;
     width: 320px;
 
@@ -163,7 +179,7 @@ export default {
       }
       .form-input {
         margin-top: 16px;
-        .account {
+        .username {
         }
         .password {
           margin-top: 16px;
@@ -193,7 +209,7 @@ export default {
     text-align: center;
     margin-top: 24px;
     font-size: 12px;
-    .has-account {
+    .has-username {
       color: #999999;
     }
     .signup {

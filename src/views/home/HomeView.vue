@@ -4,7 +4,8 @@
     <home-header></home-header>
     <home-swipper :list="swiperList"></home-swipper>
     <home-recommend :recommendList="recommendList"></home-recommend>
-    <home-development></home-development>
+    <home-development :developmentList="developmentList"></home-development>
+    <home-third-party></home-third-party>
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import HomeHeader from '@/views/home/components/HomeHeader.vue'
 import HomeSwipper from '@/views/home/components/HomeSwipper.vue'
 import HomeRecommend from '@/views/home/components/HomeRecommend.vue'
 import HomeDevelopment from '@/views/home/components/HomeDevelopment.vue'
+import HomeThirdParty from '@/views/home/components/HomeThirdParty.vue'
 
 import axios from 'axios'
 export default {
@@ -22,14 +24,16 @@ export default {
   data () {
     return {
       swiperList: [],
-      recommendList: []
+      recommendList: [],
+      developmentList: []
     }
   },
   components: {
     HomeHeader,
     HomeSwipper,
     HomeRecommend,
-    HomeDevelopment
+    HomeDevelopment,
+    HomeThirdParty
   },
   methods: {
     getHomeInfo () {
@@ -44,12 +48,14 @@ export default {
         //获取各个数据home的组件数据
         this.swiperList = data.homeSwipper;
         this.recommendList = data.recommendList;
+        this.developmentList = data.developmentList;
 
       }
     }
   },
   mounted () {
     this.getHomeInfo()
+    console.log(this.$router.options.routes)
   }
 }
 </script>

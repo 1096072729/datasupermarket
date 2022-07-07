@@ -46,25 +46,17 @@
           v-model="input"
           placeholder="请输入内容"
         ></el-input>
-      </div>
-      <!-- <el-menu
-        class="el-menu-demo"
-        mode="horizontal"
-        active-text-color="#47afff"
-        text-color="#e4eaef"
-        @select="handleSelect"
-      >
-        <el-menu-item index="1">
-          <div class="search-box">
-            <input
-              type="text"
-              class="search-input"
-            >
-          </div>
-        </el-menu-item>
-        <el-menu-item index="2">产品中心</el-menu-item>
 
-      </el-menu> -->
+      </div>
+      <ul class="log-ul">
+        <router-link
+          tag="li"
+          to="/login"
+          class="login log-li"
+        >登录</router-link>
+
+        <li class="logout log-li">注册</li>
+      </ul>
     </div>
 
   </div>
@@ -101,7 +93,11 @@ export default {
     flex: 1;
     .el-menu-demo {
       background-color: #003568;
+      :hover {
+        background-color: #86b8e6;
+      }
       .item {
+       
         border: 0;
       }
       // text-color: #47afff;
@@ -109,13 +105,30 @@ export default {
   }
   .right {
     float: right;
+    display: flex;
+
     .search-box {
+      background-color: #003568;
       .search-input {
-        line-height: 100%;
-        height: 60px;
+        background-color: #86b8e6;
+        // background-color: #003568;
+
         :hover {
           width: 300px;
         }
+      }
+    }
+
+    .log-ul {
+      .log-li {
+        list-style: none;
+        line-height: 60px;
+        float: left;
+        height: 60px;
+        padding: 0 20px;
+      }
+      :hover {
+        background-color: #0090ff;
       }
     }
   }
