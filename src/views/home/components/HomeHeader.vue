@@ -1,6 +1,39 @@
 <template>
   <div class="home-header">
+
     <div class="left">
+      <el-menu
+        :default-active="activeIndex"
+        class="el-menu-demo"
+        mode="horizontal"
+        active-text-color="#47afff"
+        text-color="#e4eaef"
+        @select="handleSelect"
+      >
+        <router-link
+          tag="el-menu-item"
+          v-for="(item,index) of this.$router.options.routes[0].children"
+          :key="index"
+          :index="item.path"
+          class="item"
+          :to="item.path"
+        >{{item.meta.title}}</router-link>
+        <!-- <el-menu-item
+          v-for="(item,index) of this.$router.options.routes[0].children"
+          :key="index"
+          :index="item.path"
+          class="item"
+          router="true"
+        >{{item.meta.title}}
+        </el-menu-item> -->
+      </el-menu>
+    </div>
+
+
+
+
+
+    <!-- <div class="left">
       <el-menu
         :default-active="activeIndex1"
         class="el-menu-demo"
@@ -57,7 +90,7 @@
 
         <li class="logout log-li">注册</li>
       </ul>
-    </div>
+    </div> -->
 
   </div>
 </template>
@@ -67,16 +100,26 @@ export default {
   name: 'HomeHeader',
   data () {
     return {
-      activeIndex1: '1',
-      activeIndex2: '1'
+      activeIndex: '/home/index',
+
     };
   },
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath);
     }
+  },
+  mounted () {
+    this.routes = this.$router.options.routes;
+    console.log(this.$router.options.routes[0])
+    for (const key in this.routes) {
+      console.log(key)
+      console.log('asdasd')
+
+    }
   }
 }
+
 </script>
 
 
@@ -85,7 +128,7 @@ export default {
   border-width: 0px;
 }
 .home-header {
-  color: #fff;
+  // color: #fff;
   display: flex;
   background-color: #003568;
   .left {
@@ -93,11 +136,10 @@ export default {
     flex: 1;
     .el-menu-demo {
       background-color: #003568;
-      :hover {
-        background-color: #86b8e6;
-      }
+      // :hover {
+      //   background-color: #86b8e6;
+      // }
       .item {
-       
         border: 0;
       }
       // text-color: #47afff;

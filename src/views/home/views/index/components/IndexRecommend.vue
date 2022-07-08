@@ -1,5 +1,5 @@
 <template>
-  <div class="home-recommend">
+  <div class="index-recommend">
     <div class="title">
       热门推荐
     </div>
@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: 'HomeRecommend',
+  name: 'IndexRecommend',
   data () {
     return {
 
@@ -54,7 +54,7 @@ export default {
 
 
 <style lang="scss" scoped>
-.home-recommend {
+.index-recommend {
   // display: flex;
   // flex-direction: column;
   // align-items: center;

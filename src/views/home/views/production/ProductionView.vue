@@ -1,0 +1,62 @@
+<template>
+  <div class="Production">
+
+    <production-search :recommendList="recommendList"></production-search>
+    <production-limit :searchLimit="searchLimit"></production-limit>
+    <production-list :productionList="productionList"></production-list>
+  </div>
+</template>
+
+<script>
+
+
+import ProductionSearch from './components/ProductionSearch.vue'
+import ProductionLimit from './components/ProductionLimit.vue'
+import ProductionList from './components/ProductionList.vue'
+import axios from 'axios'
+export default {
+  name: 'ProductionView',
+  data () {
+    return {
+      recommendList: []
+    }
+  },
+  components: {
+    ProductionSearch,
+    ProductionLimit,
+    ProductionList
+  },
+  methods: {
+    getProductionInfo () {
+      axios.get("http://localhost:8080/home/production")
+        .then((res) => {
+          this.getProductionInfoSuc(res);
+        })
+    },
+    getProductionInfoSuc (res) {
+
+      const data = res.data;
+      if (data.length !== 0) {
+        //获取各个数据home的组件数据
+        this.recommendList = data.recommendList;
+        this.searchLimit = data.searchLimit;
+        this.productionList = data.productionList;
+        console.log('productionList')
+        console.log(this.productionList)
+        // this.thirdPartyList = data.thirdPartyList
+      }
+    }
+  },
+  mounted () {
+
+    this.getProductionInfo();
+  }
+}
+</script>
+
+
+<style lang="scss" scoped>
+.Production {
+  background-color: #f0f2f5;
+}
+</style>

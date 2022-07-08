@@ -4,6 +4,7 @@ import banner3 from '../../assets/img/home/banner3.png';
 import recom from '../../assets/img/home/recom.png';
 import swiperImgUrl from '../../assets/img/home/icon02.png';
 import content from '../../assets/img/home/pic201.png';
+import thirdPartyImg from '../../assets/img//home/pic105.png';
 const Mock = require('mockjs');
 let data = Mock.mock({
   homeSwipper: [
@@ -135,6 +136,38 @@ let data = Mock.mock({
           synopsis: '一杠一杠一杠一杠一杠一杠一杠一杠',
         },
       ],
+    },
+  ],
+  thirdPartyList: [
+    {
+      id: 0,
+      imgUrl: thirdPartyImg,
+      title: '超级项目',
+      synopsis: 'asdddddddddddddddddddddddddddddddddaaaaaasdasdasdasd',
+    },
+    {
+      id: 1,
+      imgUrl: thirdPartyImg,
+      title: '超级项目',
+      synopsis: 'asdddddddddddddddddddddddddddddddddaaaaaasdasdasdasd',
+    },
+    {
+      id: 2,
+      imgUrl: thirdPartyImg,
+      title: '超级项目',
+      synopsis: 'asdddddddddddddddddddddddddddddddddaaaaaasdasdasdasd',
+    },
+    {
+      id: 3,
+      imgUrl: thirdPartyImg,
+      title: '超级项目',
+      synopsis: 'asdddddddddddddddddddddddddddddddddaaaaaasdasdasdasd',
+    },
+    {
+      id: 4,
+      imgUrl: thirdPartyImg,
+      title: '超级项目',
+      synopsis: 'asdddddddddddddddddddddddddddddddddaaaaaasdasdasdasd',
     },
   ],
 });

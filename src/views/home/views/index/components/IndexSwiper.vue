@@ -1,5 +1,5 @@
 <template>
-  <div class="home-swipper">
+  <div class="index-swiper">
     <swiper
       ref="mySwiper"
       :options="swiperOptions"
@@ -36,21 +36,32 @@
 // import cute from '../../../assets/img/home'
 
 export default {
-  name: 'HomeSwipper',
+  name: 'IndexSwiper',
   data () {
     return {
 
       swiperOptions: {
+        // effect: 'coverflow',
+        // slidesPerView: 3,
+        // centeredSlides: true,
+        // coverflowEffect: {
+        //   rotate: 15,
+        //   stretch: 10,
+        //   depth: 60,
+        //   modifier: 2,
+        //   slideShadows: true
+        // },
         loop: true,
-        pagination: {
-          el: '.swiper-pagination',
-          type: 'custom',
-        },
+        // pagination: {
+        //   el: '.swiper-pagination',
+        //   type: 'custom',
+        // },
         autoplay: {
           delay: 5000,
           stopOnLastSlide: false,
           disableOnInteraction: true,
         },
+
         // Some Swiper option/callback...
       }
     }
@@ -70,7 +81,7 @@ export default {
 
 
 <style lang="scss" scoped>
-.home-swipper {
+.index-swiper {
   overflow: hidden;
   width: 100%;
   height: 0;

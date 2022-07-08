@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <img
-      src="../../assets/img/login/背景图.png"
+      src="@/assets/img/login/背景图.png"
       alt=""
       class="bcImg"
     >
