@@ -15,10 +15,10 @@
         >
       </swiper-slide>
 
-      <div
+      <!-- <div
         class="swiper-pagination"
         slot="pagination"
-      ></div>
+      ></div> -->
     </swiper>
 
 

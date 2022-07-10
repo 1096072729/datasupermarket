@@ -1,5 +1,9 @@
 <template>
-  <div class="home">
+  <div
+    class="home"
+    ref="appRef"
+    style="height:100%"
+  >
 
     <home-header></home-header>
     <router-view />
@@ -10,7 +14,7 @@
 <script>
 
 import HomeHeader from '@/views/home/components/HomeHeader.vue'
-
+import drawMixin from "@/utils/drawMixin.js";
 
 export default {
   name: 'HomeView',
@@ -20,6 +24,7 @@ export default {
 
     }
   },
+  mixins: [drawMixin],
   components: {
     HomeHeader
   },
@@ -32,4 +37,14 @@ export default {
 
 
 <style lang="scss" scoped>
+.home {
+  line-height: 8px;
+  transform-origin: 0 0;
+  position: fixed;
+
+  // position: relative;
+  left: 50%;
+  top: 50%;
+  transform: 0.3s;
+}
 </style>

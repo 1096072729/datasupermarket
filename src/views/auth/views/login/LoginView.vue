@@ -121,11 +121,16 @@ export default {
 
 <style lang="scss" scoped>
 .login {
+  line-height: 24px;
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
+
+  // position: absolute;
+  // width: 100%;
+  // height: 100%;
   background-color: #f5f5f5;
   .bcImg {
     position: absolute;
@@ -150,7 +155,7 @@ export default {
     top: 50px;
     left: 1000px;
     background-color: white;
-    width: 320px;
+    width: 400px;
 
     .form-in {
       margin: 20px auto;
