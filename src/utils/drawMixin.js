@@ -15,7 +15,8 @@ export default {
     /* 窗口改变事件*/
     const erd = elementResizeDetectorMaker();
     erd.listenTo(this.$refs.appRef.parentElement.parentElement, element => {
-      console.log(element);
+      // console.log(element);
+      element;
       that.$nextTick(() => {
         //监听到事件后执行的业务逻辑
         // console.log(111);
@@ -25,8 +26,8 @@ export default {
   },
   methods: {
     getScale() {
-      console.log(this.$refs.appRef);
-      console.log('this.$refs.appRef');
+      // console.log(this.$refs.appRef);
+      // console.log('this.$refs.appRef');
       // const w =
       //   this.$refs.appRef.parentElement.parentElement.clientWidth /
       //   this.style.width;

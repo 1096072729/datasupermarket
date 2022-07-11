@@ -1,10 +1,21 @@
 <template>
+
+
   <div class="Production">
 
     <production-search :recommendList="recommendList"></production-search>
-    <production-limit :searchLimit="searchLimit"></production-limit>
-    <production-list :productionList="productionList"></production-list>
+    <production-limit
+      :searchLimit="searchLimit"
+      @handleLaunchTime="handleLaunchTime"
+      @handleArrange="handleArrange"
+        :productionList="productionList"
+    ></production-limit>
+    <production-list
+      :productionList="productionList"
+      ref="productionList"
+    ></production-list>
   </div>
+
 </template>
 
 <script>
@@ -45,6 +56,14 @@ export default {
         console.log(this.productionList)
         // this.thirdPartyList = data.thirdPartyList
       }
+    },
+    handleLaunchTime (keyValue, reserve) {
+      // console.log(keyValue)
+      // console.log(reserve)
+      this.$refs.productionList.sort(keyValue, reserve)
+    }, handleArrange (arrange) {
+      this.$refs.productionList.handleArrange(arrange)
+
     }
   },
   mounted () {

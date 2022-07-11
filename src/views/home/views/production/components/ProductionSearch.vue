@@ -34,6 +34,7 @@ export default {
 
   data () {
     return {
+      input: ''
       // recommendList: ['asd', 'asd', 'asdasd', 'asdasdddddddddddddd', 'asdasd', 'asdasdasdasd', '阿三大苏打']
     }
   },
@@ -69,6 +70,7 @@ export default {
       color: #999999;
       font-size: 14px;
       margin-top: 8px;
+      line-height: 24px;
     }
   }
 }

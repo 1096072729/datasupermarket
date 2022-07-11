@@ -22,6 +22,7 @@ const routes = [
         meta: {
           title: '产品中心',
         },
+
         component: () =>
           import('../views/home/views/production/ProductionView.vue'),
       },
@@ -50,14 +51,23 @@ const routes = [
         },
       },
       {
-        path: '',
+        path: '/detail',
         meta: {
           title: '关于我们',
         },
+        component: () =>
+          import('../views/home/views/production/components/Detail.vue'),
       },
     ],
   },
-
+  // {
+  //   path: '/detail',
+  //   meta: {
+  //     title: '详情',
+  //   },
+  //   component: () =>
+  //     import('../views/home/views/production/components/Detail.vue'),
+  // },
   {
     path: '/auth',
 

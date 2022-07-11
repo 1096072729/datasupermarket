@@ -2,7 +2,6 @@
   <div
     class="home"
     ref="appRef"
-    style="height:100%"
   >
 
     <home-header></home-header>
@@ -41,7 +40,7 @@ export default {
   line-height: 8px;
   transform-origin: 0 0;
   position: fixed;
-
+  background-color: #f0f2f5;
   // position: relative;
   left: 50%;
   top: 50%;

@@ -13,27 +13,42 @@
           v-for="content,index of item.criteriaContent"
           :key="index"
           @click="select(item.id,content)"
-          :class="{ active:content== Limitlist[index] }"
+          :class="{ active:a(item.id,content) }"
         >{{content}}</span>
       </div>
 
       <div class="sort-mothod">
         <!-- <span v-for="item,index of sortList" :key="index"></span> -->
         <div class="sort-left">
-          <div class="sort-title">
+          <div
+            class="sort-title"
+            @click="handleLaunchTime('appliedNumber')"
+          >
             <span>综合排序<span class="iconfont">&#xe8f7;</span></span>
           </div>
-          <div class="sort-title">
+          <div
+            class="sort-title"
+            @click="handleLaunchTime('launchTime')"
+          >
             <span>按上架时间<span class="iconfont">&#xe8f7;</span></span>
           </div>
-          <div class="sort-title">
+          <div
+            class="sort-title"
+            @click="handleLaunchTime('price')"
+          >
             <span>按照价格<span class="iconfont">&#xe8f7;</span></span>
           </div>
         </div>
         <div class="sort-right">
           <span class="sort-title">共为您找到{{length}}条结果</span>
-          <div class="icon-box sort-title"><span class="iconfont">&#xe71d;</span></div>
-          <div class="icon-box sort-title"><span class="iconfont">&#xe6c4;</span></div>
+          <div
+            class="icon-box sort-title"
+            @click="handleArrange('block')"
+          ><span class="iconfont">&#xe71d;</span></div>
+          <div
+            class="icon-box sort-title"
+            @click="handleArrange('transverse')"
+          ><span class="iconfont">&#xe6c4;</span></div>
         </div>
       </div>
     </div>
@@ -42,6 +57,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'ProductionLimit',
   data () {
@@ -61,37 +77,55 @@ export default {
       //   }
       // ],
       Limitlist: [],
-      length: 100
+      length: 0,
+      lastClick: '',
+      clickNumber: 0
     }
   },
   props: {
-    searchLimit: Array
+    searchLimit: Array,
+    productionList: Array
   }
   ,
   methods: {
     select (id, value) {
+
+      console.log(this.searchLimit)
       console.log(id + value)
       console.log(this.Limitlist)
       this.Limitlist[id] = value
     },
-  }
-  ,
-
-  updated: {
-    s () {
-      this.Limitlist = [];
-      for (const item of this.searchLimit) {
-        this.Limitlist.push(item.criteriaContent[0])
-      }
+    a (id, content) {
       console.log(this.Limitlist)
-      console.log('Limitlist')
+      return this.Limitlist[id] == content
+    },
+    handleLaunchTime (sortKey) {
+      if (sortKey == this.lastClick) {
+        this.clickNumber = this.clickNumber + 1;
+        if (this.clickNumber % 2 !== 0)
+          this.$emit('handleLaunchTime', sortKey, false)
+        else {
+          this.$emit('handleLaunchTime', sortKey, true)
+        }
+      } else {
+        this.lastClick = sortKey
+        this.$emit('handleLaunchTime', sortKey, false)
+        this.clickNumber = 1;
 
+      }
+      console.log(this.clickNumber)
+    },
+    handleArrange (arrange) {
+      this, this.$emit('handleArrange', arrange)
+    }
+  },
+
+  watch: {
+    productionList () {
+      this.length = this.productionList.length
     }
   }
-  ,
-  mounted () {
 
-  }
 }
 </script>
 
