@@ -39,10 +39,14 @@ const routes = [
         },
       },
       {
-        path: '',
+        path: '/create',
         meta: {
           title: '通知公告',
         },
+        component: () =>
+          import(
+            '../views/home/views/production/components/CreateProduction.vue'
+          ),
       },
       {
         path: '',

@@ -108,7 +108,7 @@ export default {
       if (res.data.meta.status == 200) {
         this.$store.state.user = res.data.user
         console.log(this.$store.state.user)
-        this.$router.push('/')
+        this.$router.push('/home/index')
       }
       else {
         alert('登录失败 ')

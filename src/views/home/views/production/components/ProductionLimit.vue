@@ -111,7 +111,6 @@ export default {
         this.lastClick = sortKey
         this.$emit('handleLaunchTime', sortKey, false)
         this.clickNumber = 1;
-
       }
       console.log(this.clickNumber)
     },

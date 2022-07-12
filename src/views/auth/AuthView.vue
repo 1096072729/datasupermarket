@@ -19,6 +19,7 @@ export default {
 
 <style lang="scss" scoped>
 .auth {
+  font-size: 12px;
   transform-origin: 0 0;
   position: fixed;
   left: 50%;
