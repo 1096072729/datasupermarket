@@ -38,8 +38,9 @@ export default {
 <style lang="scss" scoped>
 .home {
   font-size: 12px;
-  line-height: 18px;
+  line-height: 16px;
   transform-origin: 0 0;
+  // position: relative;
   position: fixed;
   background-color: #f0f2f5;
   // position: relative;

@@ -39,6 +39,21 @@
 
               <create-form-one @next="next"></create-form-one>
             </div>
+            <div v-if="active==1">
+
+              <create-form-two
+                @next="next"
+                @last="last"
+              ></create-form-two>
+            </div>
+            <div v-if="active==2">
+
+              <create-form-one @next="next"></create-form-one>
+            </div>
+            <div v-if="active==3">
+
+              <create-form-one @next="next"></create-form-one>
+            </div>
           </div>
         </div>
       </div>
@@ -49,6 +64,7 @@
 <script>
 
 import CreateFormOne from './CreateOne.vue'
+import CreateFormTwo from './CreateTwo.vue'
 export default {
   name: 'CreateProduction',
   data () {
@@ -59,10 +75,15 @@ export default {
     }
   },
   components: {
-    CreateFormOne
-  }, methods: {
+    CreateFormOne, CreateFormTwo
+  }
+  ,
+  methods: {
     next () {
       this.active++;
+    },
+    last () {
+      this.active--;
     }
   }
 }
@@ -84,9 +105,8 @@ export default {
       margin: 24px;
       .steps-in-box {
         background-color: #fff;
-        padding: 24px 300px;
+        padding: 24px 250px;
         margin: 0 auto;
-      
       }
     }
   }

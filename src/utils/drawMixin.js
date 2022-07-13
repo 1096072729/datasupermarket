@@ -5,6 +5,7 @@ export default {
       style: {
         width: '1920',
         height: '1080',
+        // height: '1080',
         transform: 'scaleY(1) scaleX(1) translate(-50%, -50%)',
       },
     };
