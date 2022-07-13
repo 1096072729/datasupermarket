@@ -53,8 +53,12 @@
             accept=".jpg,.jepg,.bmp,.png"
           >
             <span class="el-icon-circle-plus plus"></span>
+            <div
+              class="el-upload__tip"
+              slot="tip"
+            >上传的图片格式要求.jpg、.jepg、.bmp、.png，不超过10M</div>
           </el-upload>
-          <span>上传的图片格式要求.jpg、.jepg、.bmp、.png，不超过10M</span>
+
         </div>
       </el-form-item>
       <el-form-item
