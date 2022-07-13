@@ -487,7 +487,6 @@ export default {
       this.$emit('last')
     },
     showAddParameterDefinition () {
-      console.log('asdasdddddddddddddddddddddddddddddd')
       this.addParameterDefinitionVisible = true
     }
   },

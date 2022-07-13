@@ -5,7 +5,7 @@
     <el-form
       :model="ruleForm"
       :rules="rules"
-      ref="ruleFormOne"
+      ref="ruleForm"
       label-width="100px"
       class="demo-ruleForm"
       size="small"
@@ -101,7 +101,7 @@
       <el-form-item>
         <el-button
           type="primary"
-          @click="next"
+          @click="submitForm('ruleForm')"
         >
           <!-- @click="submitForm('ruleForm')" -->
           下一步
@@ -212,8 +212,17 @@ export default {
       this.inputVisible = false;
       this.inputValue = '';
     },
-    next () {
+    submitForm (formName) {
+      console.log(formName)
       this.$emit('next');
+      // this.$refs[formName].validate((valid) => {
+      //   if (valid) {
+      //     this.$emit('next');
+      //   } else {
+      //     console.log('error submit!!');
+      //     return false;
+      //   }
+      // });
     }
   }
 }

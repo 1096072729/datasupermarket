@@ -48,7 +48,11 @@
             </div>
             <div v-if="active==2">
 
-              <create-form-one @next="next"></create-form-one>
+              <create-form-three
+                @next="next"
+                @last="last"
+              >
+              </create-form-three>
             </div>
             <div v-if="active==3">
 
@@ -65,6 +69,7 @@
 
 import CreateFormOne from './CreateOne.vue'
 import CreateFormTwo from './CreateTwo.vue'
+import CreateFormThree from './CreateThree.vue'
 export default {
   name: 'CreateProduction',
   data () {
@@ -75,7 +80,9 @@ export default {
     }
   },
   components: {
-    CreateFormOne, CreateFormTwo
+    CreateFormOne,
+    CreateFormTwo,
+    CreateFormThree
   }
   ,
   methods: {
