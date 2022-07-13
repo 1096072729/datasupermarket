@@ -13,7 +13,7 @@
 <script>
 
 import HomeHeader from '@/views/home/components/HomeHeader.vue'
-import drawMixin from "@/utils/drawMixin.js";
+// import drawMixin from "@/utils/drawMixin.js";
 
 export default {
   name: 'HomeView',
@@ -23,7 +23,7 @@ export default {
 
     }
   },
-  mixins: [drawMixin],
+  // mixins: [drawMixin],
   components: {
     HomeHeader
   },
@@ -36,16 +36,16 @@ export default {
 
 
 <style lang="scss" scoped>
-.home {
-  font-size: 12px;
-  line-height: 16px;
-  transform-origin: 0 0;
-  // position: relative;
-  position: fixed;
-  background-color: #f0f2f5;
-  // position: relative;
-  left: 50%;
-  top: 50%;
-  transform: 0.3s;
-}
+// .home {
+//   font-size: 12px;
+//   line-height: 16px;
+//   transform-origin: 0 0;
+//   // position: relative;
+//   position: fixed;
+//   background-color: #f0f2f5;
+//   // position: relative;
+//   left: 50%;
+//   top: 50%;
+//   transform: 0.3s;
+// }
 </style>

@@ -58,30 +58,34 @@
       </el-form-item> -->
       <div class="upload">
 
-        <span>
+        <span class="upload-title">
           API调用说明手册：
         </span>
-        <!-- <el-upload
+        <el-upload
           class="upload-demo"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action="http://localhost:8080/upload"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :before-remove="beforeRemove"
           multiple
           :limit="1"
           :on-exceed="handleExceed"
+          accept=".pdf"
           :file-list="fileList"
         >
           <el-button
-            size="small"
-            type="primary"
-          >点击上传</el-button>
+            plain
+            size="mini"
+          >
+            <span class="iconfont">&#xe667;</span>
+            上传文件
+          </el-button>
           <div
             slot="tip"
             class="el-upload__tip"
           >支持扩展名：.pdf格式文件，大小不超过10M</div>
-        </el-upload> -->
-        <el-upload
+        </el-upload>
+        <!-- <el-upload
           ref="upload"
           class="upload-demo"
           action="#"
@@ -92,14 +96,17 @@
           :limit="1"
         >
           <el-button
-            size="small"
-            type="primary"
-          >点击上传</el-button>
+            plain
+            size="mini"
+          >
+            <span class="iconfont">&#xe667;</span>
+            上传文件
+          </el-button>
           <div
             slot="tip"
             class="el-upload__tip"
           >支持扩展名：.pdf格式文件，大小不超过10M</div>
-        </el-upload>
+        </el-upload> -->
 
       </div>
       <el-form-item>
@@ -194,33 +201,33 @@ export default {
     last () {
       this.$emit('last')
     },
-    // handleRemove (file, fileList) {
-    //   console.log(file, fileList);
-    // },
-    // handlePreview (file) {
-    //   console.log(file);
-    // },
-    // handleExceed (files, fileList) {
-    //   this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
-    // },
-    // beforeRemove (file) {
-    //   return this.$confirm(`确定移除 ${file.name}？`);
-    // },
-    uploadFile (item) {
-      let formData = new FormData()
-      let file = item.raw
-      formData.append('file', file)
-      this.$http({
-        url: ' ', //后端提供的接口
-        method: 'post',
-        data: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(({ data }) => {
-        this.$alert(data.data)
-      })
-    }
+    handleRemove (file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview (file) {
+      console.log(file);
+    },
+    handleExceed (files, fileList) {
+      this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+    },
+    beforeRemove (file) {
+      return this.$confirm(`确定移除 ${file.name}？`);
+    },
+    // uploadFile (item) {
+    //   let formData = new FormData()
+    //   let file = item.raw
+    //   formData.append('file', file)
+    //   this.$http({
+    //     url: ' ', //后端提供的接口
+    //     method: 'post',
+    //     data: formData,
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data'
+    //     }
+    //   }).then(({ data }) => {
+    //     this.$alert(data.data)
+    //   })
+    // }
 
   }
 }
@@ -252,6 +259,11 @@ export default {
     }
     .upload {
       display: flex;
+      .upload-title {
+        font-size: 16px;
+        position: relative;
+        top: 10px;
+      }
     }
     .operation {
       text-align: center;

@@ -45,7 +45,7 @@ export default {
         spaceBetween: 50,
         freeMode: true,
         slidesPerView: 5,
-        initialSlide: 2,  
+        initialSlide: 2,
         centeredSlides: true,
         coverflowEffect: {
           rotate: 5,
@@ -59,11 +59,6 @@ export default {
   },
   props: {
     thirdPartyList: Array,
-  },
-  watch: {
-    thirdPartyList () {
-      console.log(this.thirdPartyList)
-    }
   }
 }
 </script>

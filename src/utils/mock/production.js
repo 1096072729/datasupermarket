@@ -132,3 +132,7 @@ Mock.mock(RegExp('/home/popularity'), 'get', () => {
 Mock.mock(RegExp('/home/detail*'), 'get', () => {
   return detail;
 });
+
+Mock.mock(RegExp('/upload'), 'post', () => {
+  return;
+});
