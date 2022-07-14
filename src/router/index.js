@@ -33,10 +33,12 @@ const routes = [
         },
       },
       {
-        path: '',
+        path: '/test',
         meta: {
           title: '资源目录',
         },
+        component: () =>
+          import('../views/home/views/production/components/APItest.vue'),
       },
       {
         path: '/create',

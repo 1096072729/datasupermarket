@@ -1,7 +1,10 @@
 <template>
   <div class="create-production">
     <div class="path">
-      <el-breadcrumb separator="/">
+      <el-breadcrumb
+        class="breadcrumb"
+        separator="/"
+      >
         <el-breadcrumb-item>活动列表</el-breadcrumb-item>
         <el-breadcrumb-item
           class="nowPath"
@@ -109,6 +112,9 @@ export default {
 .create-production {
   padding: 20px;
   .path {
+    .breadcrumb {
+      margin: 0 24px;
+    }
     //重写面包屑的字体颜色
     // .nowPath >>> .el-breadcrumb__item:last-child .el-breadcrumb__inner {
     //   color: #00e27c;

@@ -128,7 +128,7 @@
           >上一步</el-button>
           <el-button
             size="small"
-            @click="last"
+            @click="toApiTest"
           >API测试</el-button>
           <el-button
             type="text"
@@ -213,6 +213,9 @@ export default {
     beforeRemove (file) {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
+    toApiTest () {
+      this.$router.push('/test')
+    }
     // uploadFile (item) {
     //   let formData = new FormData()
     //   let file = item.raw

@@ -5,7 +5,10 @@
   >
 
     <home-header></home-header>
-    <router-view />
+    <keep-alive>
+
+      <router-view />
+    </keep-alive>
 
   </div>
 </template>

@@ -21,9 +21,11 @@ export default {
   padding: 0px;
   margin: 0px;
   border: 0px;
+
+  font-size: 16px;
 }
 .app {
-  font-size: 12px;
+  overflow: auto;
   line-height: 16px;
   transform-origin: 0 0;
   // position: relative;
@@ -33,6 +35,23 @@ export default {
   left: 50%;
   top: 50%;
   transform: 0.3s;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: #ddd;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ccc;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #999;
 }
 
 // #app {
