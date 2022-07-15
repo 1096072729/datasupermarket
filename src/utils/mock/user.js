@@ -1,5 +1,5 @@
 import Mock from 'mockjs'; //导入mockjs
-
+// import footImg from '../../assets/img/login/'
 const userList = {
   //定义用户数据
   data: {
@@ -43,6 +43,10 @@ const userList = {
     },
   },
 };
+
+// let data = Mock.mock({
+
+// })
 
 Mock.mock(/auth\/login/, 'post', req => {
   //路径与请求方式

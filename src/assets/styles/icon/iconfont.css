@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3488683 */
-  src: url('iconfont.woff2?t=1657682654396') format('woff2'),
-       url('iconfont.woff?t=1657682654396') format('woff'),
-       url('iconfont.ttf?t=1657682654396') format('truetype');
+  src: url('iconfont.woff2?t=1657853477088') format('woff2'),
+       url('iconfont.woff?t=1657853477088') format('woff'),
+       url('iconfont.ttf?t=1657853477088') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,30 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shouye:before {
+  content: "\e6cb";
+}
+
+.icon-huiyuan:before {
+  content: "\e640";
+}
+
+.icon-shuju:before {
+  content: "\e779";
+}
+
+.icon-bijibendiannao_o:before {
+  content: "\eb49";
+}
+
+.icon-tuichudenglu:before {
+  content: "\e723";
+}
+
+.icon-jinggao:before {
+  content: "\e64f";
 }
 
 .icon-shangchuan:before {
@@ -29,8 +53,16 @@
   content: "\e65e";
 }
 
+.icon-four-fraction-layout-copy:before {
+  content: "\eb79";
+}
+
 .icon-four-fraction-layout:before {
   content: "\e6c4";
+}
+
+.icon-hengxiangbuju-copy:before {
+  content: "\eb7a";
 }
 
 .icon-hengxiangbuju:before {

@@ -73,6 +73,32 @@
       </div>
 
     </div>
+    <div
+      class="footer"
+      @mousemove="show='two'"
+      @mouseleave="show='one'"
+    >
+      <div
+        class="one"
+        v-if="show=='one'"
+      >
+
+        <div class="footer-simple-explain">
+          <p>浏览器</p>
+          <p>使用说明</p>
+        </div>
+        <div class="icon">
+          <span class="iconfont">&#xe689;</span>
+        </div>
+      </div>
+      <div
+        v-if="show=='two'"
+        class="two"
+      >
+        <p class="title">您的浏览器在兼容范围内：</p>
+        <p class="content">IE浏览器10版本及以上；Google Chrome浏览器76版本及以上；360浏览器13版本及以上，且内核版本76及以上</p>
+      </div>
+    </div>
 
   </div>
 
@@ -87,6 +113,7 @@ export default {
       type: 'personal',
       username: '',
       password: '',
+      show: 'one'
     }
   },
   methods: {
@@ -107,6 +134,7 @@ export default {
       console.log('loginSuc')
       if (res.data.meta.status == 200) {
         this.$store.state.user = res.data.user
+        console.log('this.$store.state.user')
         console.log(this.$store.state.user)
         this.$router.push('/home/index')
       }
@@ -219,6 +247,52 @@ export default {
     }
     .signup {
       color: #0090ff;
+    }
+  }
+  .footer:hover {
+    background-color: #000;
+    height: 50px;
+    width: 100%;
+    bottom: 0;
+
+    animation: fadenum 3s;
+  }
+
+  @keyframes fadenum {
+    0% {
+      width: 60px;
+    }
+  }
+  .footer {
+    transition: width 2s;
+    color: white;
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    .one {
+      display: flex;
+      background-color: #000;
+      line-height: 20px;
+      border-radius: 0px 20px 20px 0;
+      width: 70px;
+      height: 40px;
+      p {
+        width: 50px;
+        font-size: 12px;
+      }
+      .icon {
+        line-height: 40px;
+      }
+    }
+    .two {
+      text-align: center;
+      margin: 0 auto;
+      .title {
+        font-size: 16px;
+      }
+      .content {
+        font-size: 12px;
+      }
     }
   }
 }

@@ -34,6 +34,12 @@
           disabled
         >
         </el-input>
+        <div class="top button">
+          <el-button
+            plain
+            size="small"
+          >返回</el-button>
+        </div>
       </div>
     </div>
   </div>
@@ -70,6 +76,7 @@ export default {
       padding: 24px 340px;
       .button {
         text-align: center;
+        font-size: 12px;
       }
       .top {
         margin-top: 20px;
@@ -89,14 +96,9 @@ export default {
         height: 400px;
         overflow: auto;
       }
-      // /deep/ .el-textarea__inner {
-      //   height: 400px;
-      // }
-      //     .wrap /deep/ .example {
-
-      //     color: red;
-
-      // }
+      :deep(.el-textarea__inner) {
+        height: 400px;
+      }
     }
   }
 }

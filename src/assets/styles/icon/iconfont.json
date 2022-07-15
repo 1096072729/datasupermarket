@@ -6,6 +6,48 @@
   "description": "travel练手项目icon",
   "glyphs": [
     {
+      "icon_id": "673799",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e6cb",
+      "unicode_decimal": 59083
+    },
+    {
+      "icon_id": "2811147",
+      "name": "会员",
+      "font_class": "huiyuan",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "4294046",
+      "name": "数据",
+      "font_class": "shuju",
+      "unicode": "e779",
+      "unicode_decimal": 59257
+    },
+    {
+      "icon_id": "5387754",
+      "name": "笔记本电脑_o",
+      "font_class": "bijibendiannao_o",
+      "unicode": "eb49",
+      "unicode_decimal": 60233
+    },
+    {
+      "icon_id": "15692740",
+      "name": "退出登录",
+      "font_class": "tuichudenglu",
+      "unicode": "e723",
+      "unicode_decimal": 59171
+    },
+    {
+      "icon_id": "410498",
+      "name": "警告",
+      "font_class": "jinggao",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
       "icon_id": "145494",
       "name": "上传",
       "font_class": "shangchuan",
@@ -34,11 +76,25 @@
       "unicode_decimal": 58974
     },
     {
+      "icon_id": "30592360",
+      "name": "四分式布局-copy",
+      "font_class": "four-fraction-layout-copy",
+      "unicode": "eb79",
+      "unicode_decimal": 60281
+    },
+    {
       "icon_id": "4878219",
       "name": "四分式布局",
       "font_class": "four-fraction-layout",
       "unicode": "e6c4",
       "unicode_decimal": 59076
+    },
+    {
+      "icon_id": "30592365",
+      "name": "横向布局-copy",
+      "font_class": "hengxiangbuju-copy",
+      "unicode": "eb7a",
+      "unicode_decimal": 60282
     },
     {
       "icon_id": "9149471",

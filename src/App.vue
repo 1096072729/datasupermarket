@@ -22,11 +22,11 @@ export default {
   margin: 0px;
   border: 0px;
 
-  font-size: 16px;
+  font-size: 14px;
 }
 .app {
   overflow: auto;
-  line-height: 16px;
+  line-height: 14px;
   transform-origin: 0 0;
   // position: relative;
   position: fixed;
