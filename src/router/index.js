@@ -1,5 +1,7 @@
+//
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+
 import HomeView from '../views/home/HomeView.vue';
 
 Vue.use(VueRouter);
@@ -20,6 +22,7 @@ const routes = [
       {
         path: '/home/production',
         meta: {
+          isAuth: true,
           title: '产品中心',
         },
 
@@ -35,6 +38,7 @@ const routes = [
       {
         path: '/test',
         meta: {
+          isAuth: true,
           title: '资源目录',
         },
         component: () =>
@@ -43,6 +47,7 @@ const routes = [
       {
         path: '/create',
         meta: {
+          isAuth: true,
           title: '通知公告',
         },
         component: () =>
@@ -59,6 +64,7 @@ const routes = [
       {
         path: '/detail',
         meta: {
+          isAuth: true,
           title: '关于我们',
         },
         component: () =>
@@ -102,5 +108,25 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+// router.afterEach((to, next) => {
+//   if (to.meta.isAuth == true) {
+//     const username = store.state.user.username;
+//     if (username !== '') {
+//       next();
+//     }
+//   }
+// });
+//使用meta
+
+// router.beforeEach(to => {
+//   // if (to.meta.isAuth) {
+//   //   if (store.state.user.username !== '') {
+//   //     return to;
+//   //   }
+//   // }
+//   console.log(to);
+//   console.log('asdddddddddddddddddddddddddddddddddaaaaaasdasdasdasd   ');
+//   return '/auth/login';
+// });
 
 export default router;

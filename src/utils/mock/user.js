@@ -10,6 +10,7 @@ const userList = {
         username: 'admin',
         password: '123456',
         roles: 'admin',
+        identity: 'legalPerson',
         name: '张三',
         age: 23,
         job: '前端工程师',
@@ -17,9 +18,10 @@ const userList = {
         id: '100',
       },
       {
-        username: 'editor',
-        password: '123456',
+        username: 'asdasd',
+        password: 'asdasd',
         roles: 'editor',
+        identity: 'personal',
         name: '测试1',
         'age|20-30': 23,
         job: '前端工程师',
@@ -50,13 +52,14 @@ const userList = {
 
 Mock.mock(/auth\/login/, 'post', req => {
   //路径与请求方式
-  const { username, password } = JSON.parse(req.body); //将传递进来的数据保存
+  const { username, password ,identity} = JSON.parse(req.body); //将传递进来的数据保存
   alert(username);
   for (let i = 0; i < userList.data.userinfo.length; i++) {
     //判断userList中是否存在该用户并且用户密码是否正确
     if (
       username === userList.data.userinfo[i].username &&
-      password === userList.data.userinfo[i].password
+      password === userList.data.userinfo[i].password &&
+      identity ===userList.data.userinfo[i].identity
     ) {
       return {
         meta: {

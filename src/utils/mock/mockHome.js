@@ -167,7 +167,8 @@ let data = Mock.mock({
       id: 4,
       imgUrl: thirdPartyImg,
       title: '超级项目',
-      synopsis: 'asdddddddddddddddddddddddddddddddddaaaaaasdasdasdasd',
+      synopsis:
+        'asdddddddddddddddddddddddddddddasddddddddddddaaaaaasdasdasdasd',
     },
   ],
 });

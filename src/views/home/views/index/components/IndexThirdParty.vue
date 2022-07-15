@@ -24,7 +24,7 @@
             {{item.title}}
           </strong>
           <br>
-          <p class="content-synopsis">{{item.synopsis}}</p>
+          <span class="content-synopsis">{{item.synopsis}}</span>
 
 
         </swiper-slide>
@@ -43,7 +43,7 @@ export default {
       swiperOptions: {
         effect: 'coverflow',
         spaceBetween: 50,
-        freeMode: true,
+        // freeMode: true,
         slidesPerView: 5,
         initialSlide: 2,
         centeredSlides: true,
@@ -84,14 +84,9 @@ export default {
         font-size: 16px;
       }
       .content-synopsis {
-        text-overflow: -o-ellipsis-lastline;
+        display: inline-block;
+        // height: 200px;
         overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        /* autoprefixer: ignore next */
-        -webkit-box-orient: vertical;
         font-size: 12px;
       }
     }

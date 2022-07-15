@@ -43,12 +43,28 @@
           <span class="sort-title">共为您找到{{length}}条结果</span>
           <div
             class="icon-box sort-title"
-            @click="handleArrange('block')"
-          ><span class="iconfont">&#xe71d;</span></div>
+            @click="handleArrange('transverse')"
+          ><span
+              class="iconfont"
+              v-show="'transverse'!==state"
+            >&#xe71d;</span>
+            <span
+              class="iconfont"
+              v-show="'transverse'==state"
+            >&#xeb7a;</span>
+          </div>
           <div
             class="icon-box sort-title"
-            @click="handleArrange('transverse')"
-          ><span class="iconfont">&#xe6c4;</span></div>
+            @click="handleArrange('block')"
+          ><span
+              class="iconfont "
+              v-show="'block'!==state"
+            >&#xe6c4;</span>
+            <span
+              class="iconfont "
+              v-show="'block'==state"
+            >&#xeb79;</span>
+          </div>
         </div>
       </div>
     </div>
@@ -79,7 +95,8 @@ export default {
       Limitlist: [],
       length: 0,
       lastClick: '',
-      clickNumber: 0
+      clickNumber: 0,
+      state: 'block'
     }
   },
   props: {
@@ -115,7 +132,9 @@ export default {
       console.log(this.clickNumber)
     },
     handleArrange (arrange) {
-      this, this.$emit('handleArrange', arrange)
+      console.log(arrange)
+      this.state = arrange;
+      this.$emit('handleArrange', arrange)
     }
   },
 
@@ -160,8 +179,13 @@ export default {
       justify-content: space-between;
       .sort-left {
         display: flex;
+        .light-color {
+          color: #0090ff;
+        }
         .sort-title {
           padding: 5px 20px;
+        }
+        .icon-box {
         }
       }
       .sort-right {

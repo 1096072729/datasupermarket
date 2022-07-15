@@ -10,14 +10,23 @@
         text-color="#e4eaef"
         @select="handleSelect"
       >
-        <router-link
-          tag="el-menu-item"
+        <el-menu-item
           v-for="(item,index) of this.$router.options.routes[0].children"
           :key="index"
-          :index="index"
+          :index="item.path"
+          class="item"
+          @click="to(item.path)"
+        >
+          {{item.meta.title}}
+        </el-menu-item>
+        <!-- <router-link
+          tag="el-menu-item"
+          v-for="(item) of this.$router.options.routes[0].children"
+          :key="item.path"
+          :index="item.path"
           class="item"
           :to="item.path"
-        >{{item.meta.title}}{{index}}</router-link>
+        >{{item.meta.title}}</router-link> -->
         <!-- <el-menu-item
           v-for="(item,index) of this.$router.options.routes[0].children"
           :key="index"
@@ -50,14 +59,14 @@
           v-if="showIcon=='focus'"
         >
 
-          <span class="iconfont icon">&#xe779;</span>|<span class="iconfont icon">&#xe779; </span>
+          <span class="iconfont icon">&#xe651;</span>|<span class="iconfont icon">&#xe64d;</span>
         </div>
         <div
           class="search-icon"
           v-if="showIcon=='blur'"
         >
 
-          <span class="iconfont icon">&#xe779;</span>
+          <span class="iconfont icon">&#xe651;</span>
         </div>
       </div>
       <div
@@ -78,7 +87,6 @@
       <div
         class="right-box"
         v-if="hasUser"
-        @click="a"
       >
         <el-dropdown
           size="medium"
@@ -97,7 +105,7 @@
             <el-dropdown-item command="b"> <span class="iconfont">&#xe6cb;</span>首页</el-dropdown-item>
             <el-dropdown-item command="c"><span class="iconfont">&#xeb49;</span>系统管理</el-dropdown-item>
             <el-dropdown-item command="d"> <span class="iconfont">&#xe640;</span>会员中心</el-dropdown-item>
-            <el-dropdown-item command="e"><span class="iconfont">&#xe723;</span>退出登录</el-dropdown-item>
+            <el-dropdown-item command="signout"><span class="iconfont">&#xe723;</span>退出登录</el-dropdown-item>
             <!-- <el-dropdown-item
               command="d"
               disabled
@@ -112,7 +120,9 @@
 
 
     </div>
-    <div class="search-content"></div>
+    <div class="search-content">
+
+    </div>
 
   </div>
 </template>
@@ -124,7 +134,7 @@ export default {
   name: 'HomeHeader',
   data () {
     return {
-      activeIndex: '1',
+      activeIndex: '/home/index',
       input: '',
       state1: '',
       user: {},
@@ -135,10 +145,7 @@ export default {
     handleSelect (key, keyPath) {
       console.log(key, keyPath);
     },
-    a () {
-      console.log(this.user)
-      console.log(this.user)
-    },
+
     search () {
       this.showIcon = 'focus'
     },
@@ -146,6 +153,11 @@ export default {
 
     login () {
       this.$router.push('/auth/login');
+    },
+    handleCommand (command) {
+      if (command == 'signout') {
+        this.signout()
+      }
     },
     querySearch (queryString, cb) {
       var restaurants = this.restaurants;
@@ -157,6 +169,14 @@ export default {
       return (restaurant) => {
         return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
       };
+    },
+    to (path) {
+      this.$router.push(path)
+    },
+    signout () {
+      console.log("signoutsignoutsignoutsignout")
+      this.user = { username: '' };
+      this.$store.state.user = { username: '' }
     },
     loadAll () {
       return [
@@ -218,13 +238,7 @@ export default {
   mounted () {
     this.user = this.$store.state.user;
     this.restaurants = this.loadAll();
-    this.routes = this.$router.options.routes;
-    console.log(this.$router.options.routes[0])
-    for (const key in this.routes) {
-      console.log(key)
-      console.log('asdasd')
 
-    }
   },
   components: {
     // FadeAnimation
@@ -353,5 +367,13 @@ export default {
     //   }
     // }
   }
+  // .search-content {
+  //   z-index: 10;
+  //   position: absolute;
+  //   top: 60px;
+  //   width: 300px;
+  //   height: 300px;
+  //   background-color: #000;
+  // }
 }
 </style>

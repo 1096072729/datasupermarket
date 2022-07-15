@@ -123,19 +123,18 @@ export default {
 
     login () {
       console.log('login')
-      axios.post("http://localhost:8080/auth/login", { username: this.username, password: this.password })
+      axios.post("http://localhost:8080/auth/login", { username: this.username, password: this.password, identity: this.type })
         .then((res) => {
           this.loginSuc(res);
 
         })
     },
+  
     loginSuc (res) {
       console.log(res)
       console.log('loginSuc')
       if (res.data.meta.status == 200) {
         this.$store.state.user = res.data.user
-        console.log('this.$store.state.user')
-        console.log(this.$store.state.user)
         this.$router.push('/home/index')
       }
       else {

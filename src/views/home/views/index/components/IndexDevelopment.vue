@@ -27,14 +27,13 @@
             >
           </div>
         </swiper-slide>
-
-
       </swiper>
-      <div class="swiper-button-prev">
+
+      <!-- <div class="swiper-button-prev">
         ..
-      </div>
+      </div> -->
       <!--左箭头。如果放置在swiper外面，需要自定义样式。-->
-      <div class="swiper-button-next"></div>
+      <!-- <div class="swiper-button-next"></div> -->
       <!--右箭头。如果放置在swiper外面，需要自定义样式。-->
     </div>
 
@@ -88,8 +87,8 @@ export default {
   data () {
     return {
       swiperNumber: 0,
+      activeIndex: 1,
       swiperOptions: {
-
         effect: 'coverflow',
         centeredSlides: true,
         spaceBetween: '16%',
@@ -107,38 +106,9 @@ export default {
           el: '.swiper-pagination',
           type: 'fraction',
         },
-
-
-        // navigation: {
-        //   nextEl: '.swiper-button-next',
-        //   prevEl: '.swiper-button-prev',
-        // },
-
-        // slidesPerView: 3,//一页的个数
-        // // loop: true, // 循环模式选项
-        // centeredSlides: true,
-        // // spaceBetween: 20,//距离
-        // effect: 'coverflow',
-        // // spaceBetween: '10%',
-        // // autoplay: {
-        // //   disableOnInteraction: false,
-        // // },
-        // // loopedSlides: 2,
-        // coverflowEffect: {
-        //   rotate: 0,
-        //   stretch: 0,
-        //   depth: 400,
-        //   modifier: 1,
-        //   slideShadows: false,
-
-
-
-
-
-        // }
-
-
       },
+
+
 
       list: ['', '', '']
     }
@@ -148,6 +118,12 @@ export default {
     developmentList: Array
   },
   watch: {
+  },
+  computed: {
+    swiper () {
+      return this.$refs.mySwiper.swiper
+    },
+
   }
 }
 
