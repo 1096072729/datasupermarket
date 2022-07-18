@@ -3,9 +3,10 @@
     <span class="service-title">数据产品超市服务保障</span>
     <div class="service-content">
       <div
-        class="content-out-box"
+        class="content-out-box animate__animated animate__flipInY"
         v-for="item,index of serviceList "
         :key="index"
+        :style="{ animationDelay: index*0.3 +'s' }"
       >
         <div class="content-in-box">
           <img

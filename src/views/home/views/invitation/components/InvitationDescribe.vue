@@ -3,11 +3,14 @@
 
     <div class="describe-content-box">
       <span
-        class="describe-content-item animate__animated animate__bounceInRight"
+        class="describe-content-item animate__animated animate__fadeInRight"
         v-for="item,index of Content"
+        :style="{ animationDelay: index*0.3 +'s' }"
         :key="index"
       >
-        {{item}}</span>
+        <!-- :style="{ animation-delay: index*3 +'s' }" -->
+        {{item}}
+      </span>
     </div>
     <img
       class="describe-content-img"

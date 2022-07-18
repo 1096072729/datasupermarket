@@ -1,8 +1,8 @@
 <template>
   <div class="index-recommend">
-    <div class="title">
+    <span class="title">
       热门推荐
-    </div>
+    </span>
 
     <div class="see-more">查看更多></div>
     <div class="out-content-box">
@@ -55,14 +55,15 @@ export default {
 
 <style lang="scss" scoped>
 .index-recommend {
-  // display: flex;
-  // flex-direction: column;
+  display: flex;
+  flex-direction: column;
   // align-items: center;
   margin-top: 24px;
   .title {
+    padding: 36px 0 0 0;
+    font-weight: 600;
+    margin: 0 auto;
     font-size: 24px;
-    text-align: center;
-    line-height: 24px;
   }
   .see-more {
     margin-top: 16px;

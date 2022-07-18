@@ -141,9 +141,10 @@ export default {
     width: 100%;
   }
   .development-title {
-    margin-top: 24px;
+    padding: 36px 0;
+    font-weight: 600;
+    margin: 0 auto;
     font-size: 24px;
-    text-align: center;
   }
   .swipper {
     text-align: center;

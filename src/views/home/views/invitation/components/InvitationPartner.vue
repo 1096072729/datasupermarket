@@ -3,9 +3,10 @@
     <span class="partner-title">合作伙伴招募计划</span>
     <div class="partner-content">
       <div
-        class="item-out-box animate__animated animate__bounceInDown"
+        class="item-out-box animate__animated animate__fadeInDown"
         v-for="item,index of partnerList"
         :key="index"
+        :style="{ animationDelay: index*0.3 +'s' }"
       >
         <div class="item-in-box">
           <img

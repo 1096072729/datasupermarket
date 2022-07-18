@@ -4,9 +4,10 @@
     <span class="plan-title">合作伙伴招募计划</span>
     <div class="plan-content-box ">
       <div
-        class="plan-item-out-box animate__animated animate__bounceInUp"
+        class="plan-item-out-box animate__animated animate__fadeInUp"
         v-for="item,index of planList"
         :key=index
+        :style="{ animationDelay: index*0.3 +'s' }"
       >
         <!-- <el-card
         shadow="hover"
@@ -67,13 +68,17 @@ export default {
     display: flex;
     height: 160px;
     .plan-item-out-box:hover {
-      box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.15); /* 鼠标悬浮时盒子出现的阴影 */
-      transform: translate(0, -10px); /* 鼠标悬浮时盒子上移10px */
-      margin-bottom: 10px;
+      // box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.15); /* 鼠标悬浮时盒子出现的阴影 */
+      // transform: translate(0, -10px); /* 鼠标悬浮时盒子上移10px */
+      // margin-bottom: 10px;
+      position: relative;
+      top: -10px;
     }
     .plan-item-out-box {
+      animation-duration: 2s;
       background-color: white;
       margin: 0 1.5%;
+      margin-bottom: 20px;
       width: 30%;
       transition: all 0.5s ease-in-out; /* 上浮这个过程需要的时间 */
 

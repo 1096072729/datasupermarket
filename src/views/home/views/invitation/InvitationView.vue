@@ -64,11 +64,17 @@ export default {
         //获取各个数据home的组件数据
         // this.thirdPartyList = data.thirdPartyList
       }
+    },
+    handleScroll () {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      console.log(scrollTop)
     }
   },
   mounted () {
-
     this.getInvitation()
+    // window.addEventListener('scroll', this.handleScroll)
+
+
   },
   components: {
     InvitationBanner,
