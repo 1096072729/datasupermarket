@@ -12,6 +12,7 @@ import './utils/mock/invitation.js';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'swiper/css/swiper.css';
 import '@/assets/styles/icon/iconfont.css';
+import 'animate.css';
 // import './utils/mock/index.js';
 
 Vue.use(VueAwesomeSwiper);

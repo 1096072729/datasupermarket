@@ -143,32 +143,31 @@ let data = Mock.mock({
       id: 0,
       imgUrl: thirdPartyImg,
       title: '超级项目',
-      synopsis: 'asdddddddddddddddddddddddddddddddddaaaaaasdasdasdasd',
+      synopsis: 'asdddddddddddsd',
     },
     {
       id: 1,
       imgUrl: thirdPartyImg,
       title: '超级项目',
-      synopsis: 'asdddddddddddddddddddddddddddddddddaaaaaasdasdasdasd',
+      synopsis: 'asdddddasdasd',
     },
     {
       id: 2,
       imgUrl: thirdPartyImg,
       title: '超级项目',
-      synopsis: 'asdddddddddddddddddddddddddddddddddaaaaaasdasdasdasd',
+      synopsis: 'asddddddasdasd',
     },
     {
       id: 3,
       imgUrl: thirdPartyImg,
       title: '超级项目',
-      synopsis: 'asdddddddddddddddddddddddddddddddddaaaaaasdasdasdasd',
+      synopsis: 'asddddddddaasdasd',
     },
     {
       id: 4,
       imgUrl: thirdPartyImg,
       title: '超级项目',
-      synopsis:
-        'asdddddddddddddddddddddddddddddasddddddddddddaaaaaasdasdasdasd',
+      synopsis: 'asdasdasdasd',
     },
   ],
 });

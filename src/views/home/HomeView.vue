@@ -1,10 +1,8 @@
 <template>
-  <div
-    class="home"
-  >
+  <div class="home">
 
     <home-header></home-header>
-    <keep-alive>
+    <keep-alive exclude="InvitaionView">
 
       <router-view />
     </keep-alive>
