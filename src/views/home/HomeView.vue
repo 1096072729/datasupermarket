@@ -1,7 +1,6 @@
 <template>
   <div
     class="home"
-    ref="appRef"
   >
 
     <home-header></home-header>

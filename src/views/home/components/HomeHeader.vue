@@ -45,14 +45,16 @@
 
     <div class="right">
 
-      <div class="search-box">
+      <div
+        class="search-box"
+        @focusin="search"
+        @focusout="unsearch"
+      >
 
         <input
           class="search-input"
           v-model="input"
           placeholder="请输入内容"
-          @focus="search"
-          @blur="unsearch"
         >
         <div
           class="search-icon"
@@ -149,7 +151,10 @@ export default {
     search () {
       this.showIcon = 'focus'
     },
-    unsearch () { this.showIcon = 'blur' },
+    unsearch () {
+      this.showIcon = 'blur'
+      console.log(this.showIcon)
+    },
 
     login () {
       this.$router.push('/auth/login');
@@ -314,11 +319,11 @@ export default {
       border-style: solid;
       border-color: #fff;
       color: #666666;
-      .search-input:focus {
-        // margin-top: -10px;
-        width: 200px;
-      }
+      // margin-top: -10px;
       .search-input {
+        &:focus {
+          width: 200px;
+        }
         outline: none;
 
         padding: 0 8px;

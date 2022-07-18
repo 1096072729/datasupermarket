@@ -8,6 +8,7 @@ import '@/utils/rem';
 import './utils/mock/mockHome.js';
 import './utils/mock/user.js';
 import './utils/mock/production.js';
+import './utils/mock/invitation.js';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'swiper/css/swiper.css';
 import '@/assets/styles/icon/iconfont.css';

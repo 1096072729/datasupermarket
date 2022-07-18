@@ -1,6 +1,7 @@
 //
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Router from 'vue-router';
 
 import HomeView from '../views/home/HomeView.vue';
 
@@ -56,10 +57,12 @@ const routes = [
           ),
       },
       {
-        path: '',
+        path: '/invitation',
         meta: {
           title: '诚邀加入',
         },
+        component: () =>
+          import('../views/home/views/invitation/InvitationView.vue'),
       },
       {
         path: '/detail',
@@ -128,5 +131,9 @@ const router = new VueRouter({
 //   console.log('asdddddddddddddddddddddddddddddddddaaaaaasdasdasdasd   ');
 //   return '/auth/login';
 // });
+const VueRouterPush = Router.prototype.push;
+Router.prototype.push = function push(to) {
+  return VueRouterPush.call(this, to).catch(err => err);
+};
 
 export default router;

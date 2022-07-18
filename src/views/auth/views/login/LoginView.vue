@@ -129,7 +129,7 @@ export default {
 
         })
     },
-  
+
     loginSuc (res) {
       console.log(res)
       console.log('loginSuc')
@@ -263,7 +263,7 @@ export default {
     }
   }
   .footer {
-    transition: width 2s;
+    transition: width 2s ease-in-out;
     color: white;
     position: absolute;
     left: 0;
