@@ -43,9 +43,10 @@ export default {
       swiperOptions: {
         effect: 'coverflow',
         spaceBetween: 50,
-        // freeMode: true,
+        freeMode: true,
+        initialSlide: 3,
         slidesPerView: 5,
-        initialSlide: 2,
+        // initialSlide: 2,
         centeredSlides: true,
         coverflowEffect: {
           rotate: 5,

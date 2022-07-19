@@ -23,7 +23,7 @@
             <strong class="card-title ellipsis">{{item.title}}</strong>
             <span class="card-usage">适用场景：</span>
             <span
-              class="card-usage "
+              class="card-usage"
               v-for="ite,index of item.usageScenarios"
               :key="index"
             >{{ite}} </span>
@@ -83,19 +83,38 @@
         </div>
       </div>
     </div>
+    <div class="pagination">
+
+      <el-pagination
+        background
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage2"
+        :page-sizes="[8, 12, 16, 20]"
+        :page-size="pageSize"
+        layout="total, prev, pager, next,sizes"
+        :total="1000"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
 
 <script>
 
-
+import axios from 'axios'
 export default {
   name: 'ProductionList',
   data () {
     return {
       list: [],
-      arrange: 'block'
-
+      arrange: 'block',
+      pageSize: 12,
+      search: '',
+      type: '全部',
+      field: '全部',
+      minPrice: 0,
+      maxPrice: 1000000000000
     }
   },
   props: {
@@ -129,12 +148,38 @@ export default {
     },
     toDetail (id) {
       this.$router.push({ path: '/detail', query: { id: id } })
+    },
+    handleSizeChange () {
+
+    },
+    updateProduct () {
+      axios.post("http://localhost:8080/home/production/update", { search: this.searchValue, type: this.type, field: this.field, minPrice: this.minPrice, maxPrice: this.maxPrice })
+        .then((res) => {
+          this.loginSuc(res);
+
+        })
     }
   },
   watch: {
     productionList () {
       this.list = this.productionList
-    }
+    },
+    search () {
+      this.updateProduct()
+    },
+    type () {
+      this.updateProduct()
+    },
+    field () {
+      this.updateProduct()
+    },
+    minPrice () {
+      this.updateProduct()
+    },
+    maxPrice () {
+      this.updateProduct()
+    },
+
   }
 }
 </script>
@@ -259,6 +304,14 @@ export default {
           border-color: #faad14;
         }
       }
+    }
+  }
+  .pagination {
+    display: flex;
+    justify-content: end;
+    padding: 24px;
+    :deep(.el-pager li) {
+      background-color: #fff;
     }
   }
 }

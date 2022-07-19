@@ -27,7 +27,17 @@ let data = Mock.mock({
   'productionList|20': [
     {
       'id|+1': 0,
-      title: 'TESsaddddddddddddasdasdddddddddasd',
+      'title|1': [
+        'mysql',
+        '高级数据库教程',
+        'nodejs全套讲解',
+        '程序员的自我修养--链接、装载与库',
+        '深入理解计算机系统',
+        '计算机科学导论',
+        '计算机科学概论',
+        'C程序设计语言',
+        'C Primer Plus(第6版)',
+      ],
       imgUrl: banner1,
       'usageScenarios|1': ['大白天'],
       'type|1': [
@@ -46,7 +56,7 @@ let data = Mock.mock({
         '萨阿瑟东',
       ],
       launchTime: '@date(yyyy-MM-dd)',
-      'price|+1': 9090,
+      'price|+10000': 50000,
       'viewsNumber|1-1000': 1,
       'appliedNumber|1-1000': 1,
     },

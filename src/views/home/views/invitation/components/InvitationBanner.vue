@@ -36,22 +36,22 @@ export default {
     banner: String
   },
   methods: {
-    showList (i) {
-      console.log(i)
-      console.log(this.list)
-      let that = this
-      console.log(this, 'this')
-      if (i < this.list.length) {
-        this.list[i] = true
-        console.log(that, 'that')
-        that.showList(i + 1)
-        setTimeout(console.log('111'), 5000)
-      }
-    }
+    // showList (i) {
+    //   console.log(i)
+    //   console.log(this.list)
+    //   let that = this
+    //   console.log(this, 'this')
+    //   if (i < this.list.length) {
+    //     this.list[i] = true
+    //     console.log(that, 'that')
+    //     that.showList(i + 1)
+    //     setTimeout(console.log('111'), 5000)
+    //   }
+    // }
   },
   mounted () {
 
-    this.showList(0);
+    // this.showList(0);
   },
   activated () {
   }

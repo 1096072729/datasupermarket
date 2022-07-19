@@ -27,8 +27,8 @@ export default {
   },
   methods: {
     getScale() {
-      console.log(this.$refs.appRef);
-      console.log('this.$refs.appRef');
+      // console.log(this.$refs.appRef);
+      // console.log('this.$refs.appRef');
       const w =
         this.$refs.appRef.parentElement.parentElement.clientWidth /
         this.style.width;
@@ -37,7 +37,7 @@ export default {
         this.style.height;
       // const w = window.innerWidth / this.style.width;
       // const h = window.innerHeight / this.style.height;
-      console.log(w, h);
+      // console.log(w, h);
       return { x: w, y: h };
     },
     setScale() {

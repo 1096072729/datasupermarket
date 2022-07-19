@@ -1,4 +1,5 @@
 <template>
+  <!-- 
   <div class="index-swiper">
     <swiper
       ref="mySwiper"
@@ -15,25 +16,34 @@
         >
       </swiper-slide>
 
-      <!-- <div
+      <div class="swiper-pagination">asasda</div>
+    </swiper>
+  </div> -->
+  <div class="wrapper">
+    <swiper :options="swiperOptions">
+      <swiper-slide
+        v-for="item of list"
+        :key="item.id"
+      >
+        <img
+          class="swiper-img"
+          :src="item.imgUrl"
+          alt=""
+        >
+      </swiper-slide>
+      <div
         class="swiper-pagination"
         slot="pagination"
-      ></div> -->
+      ></div>
     </swiper>
-
-
-
-
-
   </div>
 </template>
 
 
 <script>
 
+import 'swiper/css/swiper.css';
 
-// Import Swiper styles
-// import cute from '../../../assets/img/home'
 
 export default {
   name: 'IndexSwiper',
@@ -41,28 +51,25 @@ export default {
     return {
 
       swiperOptions: {
-        // effect: 'coverflow',
-        // slidesPerView: 3,
-        // centeredSlides: true,
-        // coverflowEffect: {
-        //   rotate: 15,
-        //   stretch: 10,
-        //   depth: 60,
-        //   modifier: 2,
-        //   slideShadows: true
-        // },
+
+        pagination: '.swiper-pagination',
+        paginationType: 'fraction',
+        observeParents: true,
+        observer: true,
+
         loop: true,
+
         // pagination: {
         //   el: '.swiper-pagination',
-        //   type: 'custom',
+        //   type: 'bullets',
         // },
         autoplay: {
           delay: 5000,
           stopOnLastSlide: false,
           disableOnInteraction: true,
+
         },
 
-        // Some Swiper option/callback...
       }
     }
   },
@@ -72,6 +79,7 @@ export default {
 
   computed: {
     showSwiper () {
+
       return this.list.length
     }
   }
@@ -82,14 +90,21 @@ export default {
 
 <style lang="scss" scoped>
 .index-swiper {
-  overflow: hidden;
-  width: 100%;
-  height: 0;
-  padding-bottom: 31.25%;
+  // overflow: hidden;
+  // width: 100%;
+  // height: 0;
+  // padding-bottom: 31.25%;
   background: #eee;
   .swiper-img {
     width: 100%;
   }
+  .my-bullet-active {
+    background-color: #000;
+    width: 20px;
+  }
+  // .swiper-pagination {
+
+  // }
 }
 </style>
 

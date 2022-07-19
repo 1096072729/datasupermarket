@@ -155,7 +155,7 @@ export default {
       margin: 0 auto;
       width: 100px;
       .img-box {
-        background-color: rgb(125, 30, 30);
+        background-color: #345dff;
         border-radius: 50%;
         width: 100px;
         height: 100px;

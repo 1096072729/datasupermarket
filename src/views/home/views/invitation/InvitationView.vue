@@ -1,14 +1,27 @@
 <template>
-  <div class="invitation">
+  <div
+    class="invitation"
+    @scroll="scrollShow()"
+    ref="invitation"
+  >
     <invitation-banner :banner="banner"> </invitation-banner>
     <invitation-describe
       :Content="discribeContent"
       :imgUrl="discribeImg"
     > </invitation-describe>
     <invitation-plan :planList="planList"> </invitation-plan>
-    <invitation-partner :partnerList="partnerList"> </invitation-partner>
-    <invitation-join :joinImg="joinImg"> </invitation-join>
-    <invitation-service :serviceList="serviceList"> </invitation-service>
+    <invitation-partner
+      :partnerList="partnerList"
+      v-show="showPartner"
+    > </invitation-partner>
+    <invitation-join
+      :joinImg="joinImg"
+      v-show="showJoin"
+    > </invitation-join>
+    <invitation-service
+      :serviceList="serviceList"
+      v-show="showService"
+    > </invitation-service>
 
   </div>
 
@@ -33,7 +46,10 @@ export default {
       partnerList: [],
       planList: [],
       joinImg: '',
-      serviceList: []
+      serviceList: [],
+      showJoin: false,
+      showPartner: false,
+      showService: false,
     }
   },
   methods: {
@@ -58,7 +74,7 @@ export default {
         console.log(data.serviceList)
         console.log(data.partnerList)
         console.log(data.joinImg)
-        console.log('asdddddddddddddddddddddd')
+        // console.log('获取各个数据home的组件数据')
         // console.log(this.discribeImg)
         // console.log(this.discribeContent)
         //获取各个数据home的组件数据
@@ -66,15 +82,57 @@ export default {
       }
     },
     handleScroll () {
-      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       console.log(scrollTop)
+    },
+    scrollShow () {
+      let scrollHeight = this.$refs.invitation.scrollTop
+      let children = this.$refs.invitation.children;
+      for (const element in children) {
+        if (element == 3) {
+
+          if (children[element].offsetTop - scrollHeight < 1080) {
+            this.showPartner = true
+          }
+          if (children[element].offsetTop - scrollHeight > 1080) {
+            this.showPartner = false;
+          }
+        }
+        if (element == 4) {
+
+          if (children[element].offsetTop - scrollHeight < 1080) {
+            this.showJoin = true
+          }
+          if (children[element].offsetTop - scrollHeight > 1080) {
+            this.showJoin = false;
+          }
+        }
+        if (element == 5) {
+
+          if (children[element].offsetTop - scrollHeight < 1080) {
+            this.showService = true
+          }
+          if (children[element].offsetTop - scrollHeight > 1080) {
+            this.showService = false;
+          }
+        }
+      }
+      console.log(children)
+
+
     }
   },
   mounted () {
     this.getInvitation()
     // window.addEventListener('scroll', this.handleScroll)
 
+  },
 
+  activated () {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  deactivated () {
+    window.removeEventListener('scroll', this.handleScroll)
   },
   components: {
     InvitationBanner,
@@ -89,4 +147,8 @@ export default {
 
 
 <style lang="scss" scoped>
+.invitation {
+  height: 1000px;
+  overflow: auto;
+}
 </style>

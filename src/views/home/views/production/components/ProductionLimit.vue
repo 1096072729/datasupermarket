@@ -1,7 +1,7 @@
 <template>
   <div class="limit">
     <div class="in-box">
-      <div
+      <!-- <div
         class="criteria"
         v-for="item of searchLimit"
         :key="item.id"
@@ -15,6 +15,87 @@
           @click="select(item.id,content)"
           :class="{ active:a(item.id,content) }"
         >{{content}}</span>
+        <el-button
+          plain
+          size="mini"
+          class="el-icon-arrow-down open-strip"
+        >更多</el-button>
+      </div> -->
+      <div class="criteria">
+        <span class="criteria-title">产品分类：</span>
+        <span
+          class="criteria-content"
+          :class="{active:type==item}"
+          v-for="item,index of typeLimitList"
+          :key="index"
+          @click="changeType(item)"
+        >{{item}}</span>
+        <el-button
+          plain
+          size="mini"
+          class="el-icon-arrow-down open-strip"
+        >更多</el-button>
+      </div>
+
+      <div class="criteria">
+        <span class="criteria-title">所属领域：</span>
+        <span
+          class="criteria-content"
+          :class="{active:field==item}"
+          v-for="item,index of fieldLimitList"
+          :key="index"
+          @click="changeField(item)"
+        >
+          <span v-if="fieldAll?true:index>13?false:true">
+            {{item}}
+          </span>
+        </span>
+        <el-button
+          plain
+          size="mini"
+          class="el-icon-arrow-down open-strip"
+          @click="fieldAll=!fieldAll"
+        >更多</el-button>
+      </div>
+
+      <div class="criteria">
+        <span class="criteria-title">价格：</span>
+        <span
+          :class="{active:price==item}"
+          class="criteria-content"
+          v-for="item,index of priceLimitList"
+          :key="index"
+          @click="changePrice(item)"
+        >{{item}}</span>
+
+
+        <el-input
+          size="mini"
+          v-model="minPrice"
+        >
+          <i
+            slot="suffix"
+            class="icon"
+          >￥</i>
+        </el-input>
+        -
+        <el-input
+          size="mini"
+          v-model="maxPrice"
+        >
+          <i
+            slot="suffix"
+            class="icon"
+          >￥</i>
+        </el-input>
+        <el-button
+          plain
+          size="mini"
+        >确认</el-button>
+        <el-button
+          plain
+          size="mini"
+        >重置</el-button>
       </div>
 
       <div class="sort-mothod">
@@ -78,25 +159,26 @@ export default {
   name: 'ProductionLimit',
   data () {
     return {
-      // searchLimit: [
-      //   {
-      //     id: 0,
-      //     type: '',
-      //     criteriaTitle: '产品分类',
-      //     criteriaContent: ['全部', '数据服务', '数据分析报告', '数据报表', '数据模型', '通用软件', '其他', '数据分析报告', '数据报表', '数据模型', '通用软件']
-      //   },
-      //   {
-      //     id: 1,
-      //     type: 'price',
-      //     criteriaTitle: '产品asd',
-      //     criteriaContent: ['全部', '数据服务', '数据分析报告', '数据报表', '数据模型', '通用软件', '其他']
-      //   }
-      // ],
+      typeLimitList: ['全部',
+        '数据服务',
+        '数据分析报告',
+        '数据报表',
+        '数据模型',
+        '通用软件',
+        '其他',],
+      fieldLimitList: ['全部', '科技创新', '财务金融', '公共安全', '机构团体', '法律服务', '市场监管', '资源能源', '安全生产', '生活服务', '信用服务', '气象服务', '教育文化', '社保就业', '社会救助', '商贸互通'],
+      priceLimitList: ['全部', '10万以下', '10-500万', '500-1000万', '1000万以上'],
       Limitlist: [],
       length: 0,
       lastClick: '',
       clickNumber: 0,
-      state: 'block'
+      state: 'block',
+      minPrice: 0,
+      maxPrice: 0,
+      fieldAll: false,
+      type: '全部',
+      field: '全部',
+      price: '全部'
     }
   },
   props: {
@@ -135,6 +217,37 @@ export default {
       console.log(arrange)
       this.state = arrange;
       this.$emit('handleArrange', arrange)
+    },
+    changeType (item) {
+      this.type = item
+      this.$emit('changeType', item)
+    },
+    changeField (item) {
+      this.field = item
+      this.$emit('changeField', item)
+    },
+    changePrice (item) {
+      this.price = item;
+      if (item == '全部') {
+        this.minPrice = 0
+        this.maxPrice = 100000000000000
+      }
+      else if (item == '10万以下') {
+        this.minPrice = 0
+        this.maxPrice = 100000
+      }
+      else if (item == '10-500万') {
+        this.minPrice = 100000
+        this.maxPrice = 5000000
+      }
+      else if (item == '500-1000万') {
+        this.minPrice = 5000000
+        this.maxPrice = 10000000
+      }
+      else {
+        this.minPrice = 10000000
+        this.maxPrice = 100000000000000000000
+      }
     }
   },
 
@@ -142,6 +255,9 @@ export default {
     productionList () {
       this.length = this.productionList.length
     }
+  },
+  computed: {
+
   }
 
 }
@@ -155,9 +271,26 @@ export default {
   .in-box {
     padding: 10px;
     .criteria {
+      position: relative;
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
       background-color: #f5f7fa;
       padding: 5px 20px;
       font-size: 14px;
+      :deep(.el-input) {
+        padding-right: 15px;
+        padding: 0 5px;
+        width: 60px;
+      }
+      :deep(.el-input--suffix .el-input__inner) {
+        padding-right: 5px;
+      }
+      .icon {
+        position: relative;
+        right: 50px;
+        top: 7px;
+      }
       .criteria-title {
         line-height: 36px;
         color: #999999;
@@ -165,6 +298,10 @@ export default {
       .criteria-content {
         padding: 0 20px;
         color: #666666;
+      }
+      .open-strip {
+        position: absolute;
+        right: 30px;
       }
       .active {
         color: #0090ff;
