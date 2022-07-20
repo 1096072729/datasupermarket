@@ -7,6 +7,7 @@ import content from '../../assets/img/home/pic201.png';
 import thirdPartyImg from '../../assets/img//home/pic105.png';
 import pre from '../../assets/img//home/arrl.png';
 import next from '../../assets/img//home/arr.png';
+import signnImg from '../../assets/img//home/cardTagWarning.png';
 const Mock = require('mockjs');
 let data = Mock.mock({
   homeSwipper: [
@@ -14,51 +15,39 @@ let data = Mock.mock({
     { id: 1, imgUrl: banner2 },
     { id: 2, imgUrl: banner3 },
   ],
-  recommendList: [
+  'recommendList|8': [
     {
-      id: 0,
+      'id|+1': 0,
       imgUrl: recom,
-      title: '新项目',
-      synopsis: '一杠一杠一杠一杠一杠一杠一杠一杠',
-    },
-    {
-      id: 1,
-      imgUrl: recom,
-      title: '新项目',
-      synopsis: '一杠一杠一杠一杠一杠一杠一杠一杠',
-    },
-    {
-      id: 2,
-      imgUrl: recom,
-      title: '新项目',
-      synopsis: '一杠一杠一杠一杠一杠一杠一杠一杠',
-    },
-    {
-      id: 3,
-      imgUrl: recom,
-      title: '新项目',
-      synopsis: '一杠一杠一杠一杠一杠一杠一杠一杠',
-    },
-    {
-      id: 4,
-      imgUrl: recom,
-      title: '新项目',
-      synopsis: '一杠一杠一杠一杠一杠一杠一杠一杠',
+      signnImg:signnImg,
+      title:
+        '新项asdasdasdddddddd目dsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsd',
+      synopsis:
+        '一杠一asdasdasdasdasd杠一杠aasddddddasdasdasdsdasd一杠一asdddddddddddddddddddddd杠一杠一杠一杠',
     },
   ],
   'developmentList|3': [
     {
       'id+1': 0,
       swiperImgUrl: swiperImgUrl,
-      'title|+1': ['数据开发', '数据治理', '数据服务'],
+      'title|+1': [
+        '数据开发',
+        '数据治理sadddddddddddddddddddddddddddddddddddddddddddddddddd',
+        '数据服务',
+      ],
       preImg: pre,
       nextImg: next,
       'show|4': [
         {
           'showId|+1': 0,
           imgUrl: content,
-          'title|1': ['快速建模', '联邦学习', '线上预测', '安全运行环境'],
-          synopsis: '@csentence(60)',
+          'title|1': [
+            '快速建模asdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsd',
+            '联邦学习',
+            '线上预测',
+            '安全运行环境',
+          ],
+          synopsis: '@csentence(80)',
         },
       ],
     },
@@ -68,13 +57,13 @@ let data = Mock.mock({
       'id|+1': 0,
       imgUrl: thirdPartyImg,
       'title|+1': [
-        '安全评测',
+        '安全评测asdddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddddd',
         '项目招标代理',
         '项目咨询设计',
         '信息安全风险评估',
         '项目软件测试',
       ],
-      'synopsis|1': '@csentence(20)',
+      'synopsis|1': '@csentence(100)',
     },
   ],
 });

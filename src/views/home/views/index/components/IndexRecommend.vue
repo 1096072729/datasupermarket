@@ -29,6 +29,14 @@
 
           </div>
         </el-card>
+        <div class="cart-signn">
+          <span class="cart-signn-span">最新上架</span>
+          <img
+            class="cart-signn-img"
+            :src="item.signnImg"
+            alt=""
+          >
+        </div>
 
       </div>
 
@@ -78,26 +86,61 @@ export default {
     display: flex;
     flex-wrap: wrap;
     .in-content-box {
+      display: flex;
+      flex-direction: column;
       padding: 20px;
       box-sizing: border-box;
       width: 25%;
+      position: relative;
       .content-cart {
+        border-radius: 3px;
         // box-sizing: border-box;
         .img-box {
           .cart-image {
+            border-radius: 3px 3px 0 0;
             width: 100%;
           }
+        }
+      }
+      .cart-signn {
+        top: 15px;
+        right: -10px;
+        width: 60px;
+        position: absolute;
+        .cart-signn-span {
+          z-index: 10;
+          position: relative;
+          color: white;
+          top: 17px;
+          right: 15px;
+          font-size: 12px;
+        }
+        .cart-signn-img {
+          position: relative;
+          right: 22px;
+          width: 55px;
         }
       }
       .content-title {
         font-size: 16px;
         line-height: 24px;
         color: #333333;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /*2行*/
+        -webkit-box-orient: vertical;
       }
       .content-synopsis {
         line-height: 24px;
         font-size: 12px;
         color: #666666;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /*2行*/
+        -webkit-box-orient: vertical;
       }
     }
   }

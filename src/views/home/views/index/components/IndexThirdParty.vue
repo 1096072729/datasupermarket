@@ -87,6 +87,11 @@ export default {
         line-height: 50px;
         margin-top: 24px;
         font-size: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /*2行*/
+        -webkit-box-orient: vertical;
       }
       .content-synopsis {
         color: #999999;
@@ -94,6 +99,11 @@ export default {
         // height: 200px;
         overflow: hidden;
         font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4; /*2行*/
+        -webkit-box-orient: vertical;
       }
     }
   }

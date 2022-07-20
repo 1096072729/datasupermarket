@@ -50,7 +50,7 @@
         </el-input>
         <!-- v-else -->
         <el-button
-          v-if="dynamicTags.length<=3"
+          v-if="ruleForm.dynamicTags.length<3"
           class="button-new-tag"
           size="mini"
           @click="showInput"
@@ -209,7 +209,12 @@ export default {
 
     handleInputConfirm () {
       let inputValue = this.inputValue;
-
+      // if (this.ruleForm.dynamicTags.indexOf(inputValue)) {
+      //   this.$message.error('不可以添加重复标签');
+      //   this.inputVisible = false;
+      //   this.inputValue = '';
+      //   return
+      // }
       if (inputValue) {
         this.ruleForm.dynamicTags.push(inputValue);
       }

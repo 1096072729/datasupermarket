@@ -121,6 +121,7 @@ export default {
   background-color: #fff;
 }
 :deep(.swiper-pagination-bullet) {
+  height: 2px;
   border-radius: 1px;
   width: 30px;
 }

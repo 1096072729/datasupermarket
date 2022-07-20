@@ -131,6 +131,9 @@ export default {
         background-color: #fff;
         padding: 24px 250px;
         margin: 0 auto;
+        .step-content {
+          min-height: 1000px;
+        }
       }
     }
   }

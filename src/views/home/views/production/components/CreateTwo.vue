@@ -115,7 +115,7 @@
           show-icon
         >
         </el-alert>
-
+        <!-- 
         <el-alert
           class="parameter-alert"
           :title="selectNumberMessage"
@@ -123,9 +123,12 @@
           type="warning"
           @close="deleteAllParameterDefinition"
         >
-        </el-alert>
+        </el-alert> -->
 
-        <!-- <div class="parameter-alert"><span></span></div> -->
+        <div class="delete-all">
+          <div class="delete-all-left"> <span class="iconfont">&#xe64f;</span><span>{{selectNumberMessage}}</span></div>
+          <div class="delete-all-right"></div>
+        </div>
         <el-table
           ref="multipleTable"
           :data="parameterDefinitionData"
@@ -148,13 +151,13 @@
             label="参数位置"
             width="100"
           >
-            <template slot-scope="scope">{{ scope.row.place }}</template>
+            <template slot-scope="scope">{{ scope.row.place.value }}</template>
           </el-table-column>
           <el-table-column
             label="类型"
             width="110"
           >
-            <template slot-scope="scope">{{ scope.row.type }}</template>
+            <template slot-scope="scope">{{ scope.row.type.value }}</template>
           </el-table-column>
           <el-table-column
             label="是否必填"
@@ -178,7 +181,7 @@
             label="后续位置参数"
             width="130"
           >
-            <template slot-scope="scope">{{ scope.row.lastPlace }}</template>
+            <template slot-scope="scope">{{ scope.row.lastPlace.value }}</template>
           </el-table-column>
           <el-table-column
             label="示例"
@@ -191,7 +194,10 @@
             width="140"
           >
             <template slot-scope="scope">
-              <el-button type="text">编辑 </el-button> |
+              <el-button
+                type="text"
+                @click="updateParameterDefinition(scope.row)"
+              >编辑 </el-button> |
               <el-button
                 type="text"
                 @click="delateParameterDefinition(scope.row)"
@@ -245,7 +251,7 @@
             label="参数位置"
             width="250"
           >
-            <template slot-scope="scope">{{ scope.row.place }}</template>
+            <template slot-scope="scope">{{ scope.row.place.value }}</template>
           </el-table-column>
           <el-table-column
             label="参数值"
@@ -265,7 +271,10 @@
             width="140"
           >
             <template slot-scope="scope">
-              <el-button type="text">编辑</el-button> |
+              <el-button
+                type="text"
+                @click="updateConstant(scope.row)"
+              >编辑</el-button> |
               <el-button
                 type="text"
                 @click="delateconstantDefinitionData(scope.row)"
@@ -278,7 +287,7 @@
         <el-button
           size="small"
           class="button"
-          @click="addConstantVisible=true"
+          @click="handleAddConstantVisible"
         ><span class="iconfont">&#xeb78;</span>添加常量参数</el-button>
       </div>
     </CollapseTransition>
@@ -440,6 +449,7 @@
           ></el-input>
 
         </el-form-item>
+
       </el-form>
       <div
         slot="footer"
@@ -448,7 +458,7 @@
         <el-button @click="addParameterDefinitionVisible = false">取 消</el-button>
         <el-button
           type="primary"
-          @click="addParameterDefinitionVisible = false"
+          @click="addParameterDefinitionClick"
         >确 定</el-button>
       </div>
     </el-dialog>
@@ -483,11 +493,11 @@
         >
           <el-select
             size="small"
-            v-model="addParameterDefinitionform.place.value"
+            v-model="addConstantform.place.value"
             placeholder="请选择"
           >
             <el-option
-              v-for="item in addParameterDefinitionform.place.options"
+              v-for="item in addConstantform.place.options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -530,7 +540,7 @@
         <el-button @click="addConstantVisible = false">取 消</el-button>
         <el-button
           type="primary"
-          @click="addConstantVisible = false"
+          @click="addConstantVisibleClike"
         >确 定</el-button>
       </div>
     </el-dialog>
@@ -612,10 +622,10 @@ export default {
         agreement: 'https',
         method: {
           options: [{
-            value: '选项1',
+            value: 'GET',
             label: 'GET'
           }, {
-            value: '选项2',
+            value: 'POST',
             label: 'POST'
           }],
           value: ''
@@ -623,10 +633,10 @@ export default {
         crossDomain: false,
         backendMethod: {
           options: [{
-            value: '选项1',
+            value: 'GET',
             label: 'GET'
           }, {
-            value: '选项2',
+            value: 'POST',
             label: 'POST'
           }],
           value: 'POST'
@@ -655,17 +665,7 @@ export default {
         ],
       },
       //自定义参数数据
-      parameterDefinitionData: [{
-        name: '王小虎',
-        place: 'HEADER',
-        type: 'STRING',
-        required: '',
-        defaultValue: '',
-        lastName: '',
-        lastPlace: '',
-        example: '',
-        describe: '',
-      }],
+      parameterDefinitionData: [],
 
       multipleSelection: [],
       //添加自定义参数的小模块显示
@@ -675,10 +675,10 @@ export default {
         name: '',
         place: {
           options: [{
-            value: '选项1',
+            value: 'HEADER',
             label: 'HEADER'
           }, {
-            value: '选项2',
+            value: 'BODY',
             label: 'BODY'
           }],
           value: ''
@@ -686,14 +686,14 @@ export default {
         date: '',
         type: {
           options: [{
-            value: '选项1',
+            value: 'STRING',
             label: 'STRING'
           }, {
-            value: '选项2',
+            value: 'NUMBER',
             label: 'NUMBER'
           },
           {
-            value: '选项3',
+            value: 'BOOLEAN',
             label: 'BOOLEAN'
           }],
           value: ''
@@ -703,14 +703,61 @@ export default {
         lastName: '',
         lastPlace: {
           options: [{
-            value: '选项1',
+            value: '后端位置参数1',
             label: '后端位置参数1'
           }, {
-            value: '选项2',
+            value: '后端位置参数2',
             label: '后端位置参数2'
           },
           {
-            value: '选项3',
+            value: '后端位置参数3',
+            label: '后端位置参数3'
+          }],
+          value: ''
+        },
+        example: '',
+        describe: '',
+      },
+      addOldParameterDefinitionform: {
+        name: '',
+        place: {
+          options: [{
+            value: 'HEADER',
+            label: 'HEADER'
+          }, {
+            value: 'BODY',
+            label: 'BODY'
+          }],
+          value: ''
+        },
+        date: '',
+        type: {
+          options: [{
+            value: 'STRING',
+            label: 'STRING'
+          }, {
+            value: 'NUMBER',
+            label: 'NUMBER'
+          },
+          {
+            value: 'BOOLEAN',
+            label: 'BOOLEAN'
+          }],
+          value: ''
+        },
+        required: true,
+        defaultValue: '',
+        lastName: '',
+        lastPlace: {
+          options: [{
+            value: '后端位置参数1',
+            label: '后端位置参数1'
+          }, {
+            value: '后端位置参数2',
+            label: '后端位置参数2'
+          },
+          {
+            value: '后端位置参数3',
             label: '后端位置参数3'
           }],
           value: ''
@@ -728,14 +775,30 @@ export default {
         example: [{ required: true, message: '请输入示例', trigger: 'blur' }],
       },
       addConstantVisible: false,
+      //添加常量参数的form
       addConstantform: {
         name: '',
         place: {
           options: [{
-            value: '选项1',
+            value: 'HEADER',
             label: 'HEADER'
           }, {
-            value: '选项2',
+            value: 'BODY',
+            label: 'BODY'
+          }],
+          value: ''
+        },
+        value: '',
+        describe: ''
+      },
+      addOldConstantform: {
+        name: '',
+        place: {
+          options: [{
+            value: 'HEADER',
+            label: 'HEADER'
+          }, {
+            value: 'BODY',
             label: 'BODY'
           }],
           value: ''
@@ -753,13 +816,7 @@ export default {
       deleteAllParameterDefinitionform: {},
       deleteAllParameterDefinitionRules: {},
       formLabelWidth: '120px',
-      constantDefinitionData: [{
-        name: '王小虎',
-        place: 'HEADER',
-        value: 'asddddddd',
-        describe: 'asdaaaaaaaaa'
-
-      }],
+      constantDefinitionData: [],
 
     }
   },
@@ -815,10 +872,44 @@ export default {
       this.$emit('last')
     },
     showAddParameterDefinition () {
+      this.operation = 'add'
+      this.addParameterDefinitionform = JSON.parse(JSON.stringify(this.addOldParameterDefinitionform));
       this.addParameterDefinitionVisible = true
     },
     deleteAllParameterDefinition () {
       this.deleteAllParameterDefinitionVisible = true
+    },
+    addParameterDefinitionClick () {
+      if (this.operation == 'add') {
+        this.parameterDefinitionData.push(this.addParameterDefinitionform)
+      }
+      this.addParameterDefinitionVisible = false;
+    },
+    updateParameterDefinition (row) {
+      this.operation = 'update'
+      this.addParameterDefinitionform = row
+      this.addParameterDefinitionVisible = true;
+    },
+    //添加常量参数
+    handleAddConstantVisible () {
+      this.addConstantform = JSON.parse(JSON.stringify(this.addOldConstantform));
+      this.addConstantVisible = true
+      this.operation = 'add'
+    },
+    //修改常量参数
+    updateConstant (row) {
+      this.addConstantform = row
+      this.addConstantVisible = true
+      this.operation = 'update'
+    },
+    //添加常量参数的确认按钮
+    addConstantVisibleClike () {
+      if (this.operation == 'add') {
+        console.log(this.addConstantform)
+        this.constantDefinitionData.push(this.addConstantform)
+      }
+      console.log(this.constantDefinitionData)
+      this.addConstantVisible = false;
     }
   },
   components: {
@@ -854,6 +945,25 @@ export default {
       // color:#e6f7ff
       background-color: #e6f7ff;
     }
+    .delete-all {
+      margin: 16px 0;
+      padding: 0 10px;
+      width: 1000px;
+      height: 35px;
+      background-color: #e6f7ff;
+      display: flex;
+      justify-content: space-between;
+      .delete-all-left {
+        display: flex;
+        align-items: center;
+        color: #666666;
+        .iconfont {
+          padding: 0 5px;
+        }
+      }
+      .delete-all-right {
+      }
+    }
     .button {
       margin: 16px 0;
       border: 2px dashed;
@@ -873,19 +983,19 @@ export default {
   font-size: 12px;
 }
 
-.delete-all {
-  .delete-all-content {
-    line-height: 24px;
-    display: flex;
-    .title-icon {
-      text-align: right;
-      width: 50px;
-      .iconfont {
-        padding: 0 15px;
-      }
-    }
-  }
-}
+// .delete-all {
+//   .delete-all-content {
+//     line-height: 24px;
+//     display: flex;
+//     .title-icon {
+//       text-align: right;
+//       width: 50px;
+//       .iconfont {
+//         padding: 0 15px;
+//       }
+//     }
+//   }
+// }
 // .el-form-item__label {
 //   padding-right: 50px;
 // }

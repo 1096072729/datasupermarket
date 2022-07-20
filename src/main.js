@@ -14,7 +14,8 @@ import 'swiper/css/swiper.css';
 import '@/assets/styles/icon/iconfont.css';
 import 'animate.css';
 // import './utils/mock/index.js';
-
+import Carousel3d from 'vue-carousel-3d';
+Vue.use(Carousel3d);
 Vue.use(VueAwesomeSwiper);
 Vue.use(ElementUI);
 

@@ -22,12 +22,12 @@
           <div class="card-content">
             <strong class="card-title ellipsis">{{item.title}}</strong>
             <span class="card-usage">适用场景：</span>
-            <span
+            <!-- <span
               class="card-usage"
               v-for="ite,index of item.usageScenarios"
               :key="index"
-            >{{ite}} </span>
-
+            >{{ite}} </span> -->
+            <span>{{item.usageScenarios}}</span>
             <p class="card-type ellipsis">产品类型: {{item.type}}</p>
             <p class="card-service-provider ellipsis">服务商：{{item.serviceProvider}}</p>
             <div class="footer-box">
@@ -62,11 +62,12 @@
           <div class="transverse-content">
             <strong class="card-title ellipsis">{{item.title}}</strong>
             <span class="card-usage">适用场景：</span>
-            <span
+            <!-- <span
               class="card-usage "
               v-for="ite,index of item.usageScenarios"
               :key="index"
-            >{{ite}} </span>
+            >{{ite}} </span> -->
+            <span>{{item.usageScenarios}}</span>
 
             <p class="card-type ellipsis">产品类型: {{item.type}}</p>
             <p class="card-service-provider ellipsis">服务商：{{item.serviceProvider}}</p>
