@@ -3,16 +3,23 @@
 
   <div class="Production">
 
-    <production-search :recommendList="recommendList"></production-search>
+    <production-search
+      :recommendList="recommendList"
+      @search="search"
+    ></production-search>
     <production-limit
       :searchLimit="searchLimit"
       @handleLaunchTime="handleLaunchTime"
       @handleArrange="handleArrange"
-        :productionList="productionList"
+      :productionList="productionList"
+      @changeType="changeType"
+      @changeField="changeField"
+      @changePrice="changePrice"
     ></production-limit>
     <production-list
-      :productionList="productionList"
+      :oldProductionList="productionList"
       ref="productionList"
+      :oldTotal="total"
     ></production-list>
   </div>
 
@@ -29,7 +36,9 @@ export default {
   name: 'ProductionView',
   data () {
     return {
-      recommendList: []
+      recommendList: [],
+      total: 100,
+      productionList: []
     }
   },
   components: {
@@ -52,6 +61,8 @@ export default {
         this.recommendList = data.recommendList;
         this.searchLimit = data.searchLimit;
         this.productionList = data.productionList;
+        this.total = data.total
+        console.log(data.total)
         console.log('productionList')
         console.log(this.productionList)
         // this.thirdPartyList = data.thirdPartyList
@@ -61,9 +72,23 @@ export default {
       // console.log(keyValue)
       // console.log(reserve)
       this.$refs.productionList.sort(keyValue, reserve)
-    }, handleArrange (arrange) {
+    },
+    handleArrange (arrange) {
       this.$refs.productionList.handleArrange(arrange)
 
+    },
+    search (searchValue) {
+      this.$refs.productionList.search = searchValue
+    },
+    changeType (type) {
+      this.$refs.productionList.type = type
+    },
+    changeField (field) {
+      this.$refs.productionList.field = field
+    },
+    changePrice (minPrice, maxPrice) {
+      this.$refs.productionList.minPrice = minPrice
+      this.$refs.productionList.maxPrice = maxPrice
     }
   },
   mounted () {

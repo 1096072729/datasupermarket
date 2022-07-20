@@ -24,7 +24,8 @@ let data = Mock.mock({
       ],
     },
   ],
-  'productionList|20': [
+  total: 300,
+  'productionList|12': [
     {
       'id|+1': 0,
       'title|1': [
@@ -131,6 +132,59 @@ let detail = Mock.mock({
     },
   ],
 });
+
+let uptateList = Mock.mock({
+  total: 300,
+  page: 1,
+  'productionList|300': [
+    {
+      'id|+1': 0,
+      'title|1': [
+        'mysql',
+        '高级数据库教程',
+        'nodejs全套讲解',
+        '程序员的自我修养--链接、装载与库',
+        '深入理解计算机系统',
+        '计算机科学导论',
+        '计算机科学概论',
+        'C程序设计语言',
+        'C Primer Plus(第6版)',
+      ],
+      imgUrl: banner1,
+      'usageScenarios|1': ['大白天'],
+      'type|1': [
+        '数据服务',
+        '数据分析报告',
+        '数据报表',
+        '数据模型',
+        '通用软件',
+        '其他',
+      ],
+      'serviceProvider|1': [
+        '阿斯顿',
+        '大实打',
+        '莫阿斯顿',
+        '青蛙撒',
+        '萨阿瑟东',
+      ],
+      launchTime: '@date(yyyy-MM-dd)',
+      'price|+10000': 50000,
+      'viewsNumber|1-1000': 1,
+      'appliedNumber|1-1000': 1,
+    },
+  ],
+});
+
+let apiTest = Mock.mock({
+  textarea: `
+    "code":0,
+    "message":"校验完成",
+    "data":{
+      "result":1,
+      "remark":"验证通过"
+    }`,
+});
+
 Mock.mock(/home\/production/, 'get', () => {
   //三个参数。第一个：路径，第二个：请求方式post/get，第三个：回调，返回值
   return data;
@@ -151,4 +205,24 @@ Mock.mock(RegExp('/home/detail*'), 'get', () => {
 
 Mock.mock(RegExp('/upload'), 'post', () => {
   return;
+});
+Mock.mock(RegExp('/home/production/update'), 'post', req => {
+  var list = JSON.parse(JSON.stringify(uptateList));
+  // const { searchValue, type ,field ,currentPage ,pageSize,minprice} = JSON.parse(req.body); //将传递进来的数据保存
+  const { pageSize, currentPage } = JSON.parse(req.body); //将传递进来的数据保存
+
+  list.page = 1;
+  console.log(currentPage);
+  console.log(currentPage * pageSize);
+  console.log(currentPage * pageSize + pageSize);
+  list.productionList = list.productionList.slice(
+    currentPage * pageSize,
+    currentPage * pageSize + pageSize
+  );
+
+  return list;
+});
+
+Mock.mock(RegExp('/create/test'), 'post', () => {
+  return apiTest;
 });

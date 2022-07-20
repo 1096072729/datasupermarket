@@ -51,6 +51,7 @@ export default {
         this.recommendList = data.recommendList;
         this.developmentList = data.developmentList;
         this.thirdPartyList = data.thirdPartyList
+        console.log(data.developmentList)
       }
     }
   },

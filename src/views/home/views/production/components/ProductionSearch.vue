@@ -11,6 +11,7 @@
         <el-button
           type="primary"
           class="search-button"
+          @click="search"
         >搜索</el-button>
       </div>
       <div class="search-recommend">
@@ -40,6 +41,11 @@ export default {
   },
   props: {
     recommendList: Array
+  },
+  methods: {
+    search(){
+      this.$emit('search',this.input)
+    }
   }
 }
 </script>

@@ -12,13 +12,17 @@
       </el-breadcrumb>
       <div class="test-content">
         <p class="title">Request</p>
-        <div class="text-area">
-
-        </div>
+        <el-input
+          class="text-area"
+          type="textarea"
+          v-model="testContent"
+        >
+        </el-input>
         <div class="top button">
           <el-button
             type="primary"
             size="small"
+            @click="postApiTest"
           >开始测试</el-button>
           <el-button
             plain
@@ -38,6 +42,7 @@
           <el-button
             plain
             size="small"
+            @click="returnLast"
           >返回</el-button>
         </div>
       </div>
@@ -46,15 +51,35 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 
 export default {
   name: 'CreateProduction',
   data () {
     return {
-
+      testContent: '',
+      textarea: ``
     }
   },
+  methods: {
+    postApiTest () {
+      axios.post("http://localhost:8080/create/test", { testContent: this.testContent })
+        .then((res) => {
+          this.postApiTestSuc(res);
+
+        })
+    },
+    postApiTestSuc (res) {
+      let data = res.data
+      if (data) {
+        this.textarea = data.textarea
+      }
+    },
+    returnLast () {
+
+      this.$router.go(-1)
+    }
+  }
 
 }
 </script>
@@ -86,18 +111,14 @@ export default {
         font-weight: 700;
       }
       .text-area {
-        box-sizing: border-box;
-        padding: 20px;
         border: 1px solid #ebeef5;
-        border-radius: 2px;
+        font-size: 24px;
         margin-top: 20px;
         // background-color: #f5f7fa;
-        width: 100%;
-        height: 400px;
-        overflow: auto;
       }
       :deep(.el-textarea__inner) {
         height: 400px;
+        font-size: 24px;
       }
     }
   }

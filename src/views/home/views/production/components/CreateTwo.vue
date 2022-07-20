@@ -115,13 +115,7 @@
           show-icon
         >
         </el-alert>
-        <!-- <el-alert
-          class="parameter-alert"
-          :title="selectNumberMessage"
-          type="info"
-          show-icon
-        >
-        </el-alert> -->
+
         <el-alert
           class="parameter-alert"
           :title="selectNumberMessage"
@@ -131,6 +125,7 @@
         >
         </el-alert>
 
+        <!-- <div class="parameter-alert"><span></span></div> -->
         <el-table
           ref="multipleTable"
           :data="parameterDefinitionData"
@@ -273,8 +268,9 @@
               <el-button type="text">编辑</el-button> |
               <el-button
                 type="text"
-                @click="delateParameterDefinition(scope.row)"
+                @click="delateconstantDefinitionData(scope.row)"
               >删除</el-button>
+              <!-- @click="delateParameterDefinition(scope.row)" -->
             </template>
           </el-table-column>
 
@@ -779,8 +775,18 @@ export default {
       this.multipleSelection = val;
     },
     delateParameterDefinition (row) {
-      console.log(row)
-      console.log(row)
+      this.parameterDefinitionData.splice(
+        this.parameterDefinitionData.findIndex((v) => v === row),
+        1
+      );
+
+    },
+    delateconstantDefinitionData (row) {
+      this.constantDefinitionData.splice(
+        this.constantDefinitionData.findIndex((v) => v === row),
+        1
+      );
+
     }
     ,
     handleClose (tag) {
@@ -849,6 +855,7 @@ export default {
       background-color: #e6f7ff;
     }
     .button {
+      margin: 16px 0;
       border: 2px dashed;
       width: 100%;
     }

@@ -60,7 +60,7 @@
             <div v-if="active==3">
 
               <create-form-four
-                @next="next"
+                @create="create"
                 @last="last"
               ></create-form-four>
             </div>
@@ -99,6 +99,12 @@ export default {
     },
     last () {
       this.active--;
+    },
+    create () {
+      this.$message({
+        message: '恭喜你，创建产品成功',
+        type: 'success'
+      });
     }
   }
 }

@@ -248,6 +248,7 @@ export default {
         this.minPrice = 10000000
         this.maxPrice = 100000000000000000000
       }
+       this.$emit('changePrice', this.minPrice,this.maxPrice)
     }
   },
 

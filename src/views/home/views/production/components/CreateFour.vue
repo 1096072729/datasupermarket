@@ -250,7 +250,7 @@ export default {
 
     submitForm (formName) {
       console.log(formName)
-      this.$emit('next');
+      this.$emit('create');
       // this.$refs[formName].validate((valid) => {
       //   if (valid) {
       //     this.$emit('next');

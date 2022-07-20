@@ -243,6 +243,9 @@ export default {
 
 <style lang="scss" scoped>
 .create-form-three {
+  :deep(.el-textarea__inner) {
+    height: 400px;
+  }
   // padding: 20px 340px;
   padding: 20px 0;
   .demo-ruleForm {

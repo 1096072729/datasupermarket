@@ -23,13 +23,15 @@
       </el-form-item>
       <el-form-item
         label="产品标签"
-        prop="label"
+        prop="dynamicTags"
       >
-        <el-input suffix-icon="el-icon-plus">
+        <!-- suffix-icon="el-icon-plus" -->
+        <el-input>
         </el-input>
         <el-tag
+          class="input-old-tag"
           :key="tag"
-          v-for="tag in dynamicTags"
+          v-for="tag in ruleForm.dynamicTags"
           closable
           :disable-transitions="false"
           @close="handleClose(tag)"
@@ -41,15 +43,16 @@
           v-if="inputVisible"
           v-model="inputValue"
           ref="saveTagInput"
-          size="small"
+          size="mini"
           @keyup.enter.native="handleInputConfirm"
           @blur="handleInputConfirm"
         >
         </el-input>
+        <!-- v-else -->
         <el-button
-          v-else
+          v-if="dynamicTags.length<=3"
           class="button-new-tag"
-          size="small"
+          size="mini"
           @click="showInput"
         >+ New Tag</el-button>
       </el-form-item>
@@ -129,7 +132,7 @@ export default {
       ruleForm: {
         name: '',
         response: 'default',
-        label: [],
+        dynamicTags: [],
         APISummary: '',
         APIIntroduce: '',
         price: 999,
@@ -156,7 +159,7 @@ export default {
           { required: true, message: '请输入API名称', trigger: 'blur' },
           { min: 3, max: 255, message: '长度在 3 到 255 个字符', trigger: 'blur' }
         ],
-        label: [
+        dynamicTags: [
           { required: true, message: '请输入产品标签', trigger: 'change' }
         ],
         APISummary: [
@@ -184,7 +187,7 @@ export default {
           { required: true, message: '请填写活动形式', trigger: 'blur' }
         ]
       },
-      dynamicTags: ['标签一', '标签二', '标签三'],
+      dynamicTags: [],
       inputVisible: false,
       inputValue: ''
     }
@@ -194,7 +197,7 @@ export default {
       console.log('submit!');
     },
     handleClose (tag) {
-      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+      this.dynamicTags.splice(this.ruleForm.dynamicTags.indexOf(tag), 1);
     },
 
     showInput () {
@@ -206,8 +209,9 @@ export default {
 
     handleInputConfirm () {
       let inputValue = this.inputValue;
+
       if (inputValue) {
-        this.dynamicTags.push(inputValue);
+        this.ruleForm.dynamicTags.push(inputValue);
       }
       this.inputVisible = false;
       this.inputValue = '';
@@ -244,11 +248,19 @@ export default {
     line-height: 30px;
     padding-top: 0;
     padding-bottom: 0;
+    position: relative;
+    bottom: 34px;
   }
   .input-new-tag {
+    position: relative;
+    bottom: 34px;
     width: 90px;
     margin-left: 10px;
     vertical-align: bottom;
+  }
+  .input-old-tag {
+    position: relative;
+    bottom: 34px;
   }
 }
 </style>

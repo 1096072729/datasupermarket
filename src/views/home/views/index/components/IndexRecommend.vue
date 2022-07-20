@@ -97,7 +97,7 @@ export default {
       .content-synopsis {
         line-height: 24px;
         font-size: 12px;
-        color: #999999;
+        color: #666666;
       }
     }
   }

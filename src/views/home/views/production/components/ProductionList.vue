@@ -87,13 +87,13 @@
 
       <el-pagination
         background
-        @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page.sync="currentPage2"
+        @size-change="handleSizeChange"
+        :current-page.sync="currentPage"
         :page-sizes="[8, 12, 16, 20]"
         :page-size="pageSize"
         layout="total, prev, pager, next,sizes"
-        :total="1000"
+        :total="total"
       >
       </el-pagination>
     </div>
@@ -103,22 +103,27 @@
 <script>
 
 import axios from 'axios'
+
 export default {
   name: 'ProductionList',
   data () {
     return {
       list: [],
       arrange: 'block',
-      pageSize: 12,
+      pageSize: 8,
       search: '',
       type: '全部',
       field: '全部',
       minPrice: 0,
-      maxPrice: 1000000000000
+      maxPrice: 1000000000000,
+      currentPage: 1,
+      productionList: [],
+      total: 0
     }
   },
   props: {
-    productionList: Array
+    oldProductionList: Array,
+    oldTotal: Number
   },
   methods: {
     sort (sortKey, direction) {
@@ -150,14 +155,26 @@ export default {
       this.$router.push({ path: '/detail', query: { id: id } })
     },
     handleSizeChange () {
-
+      console.log(this.pageSize)
     },
     updateProduct () {
-      axios.post("http://localhost:8080/home/production/update", { search: this.searchValue, type: this.type, field: this.field, minPrice: this.minPrice, maxPrice: this.maxPrice })
+      console.log('updateProduct')
+      axios.post("http://localhost:8080/home/production/update", { search: this.searchValue, type: this.type, field: this.field, minPrice: this.minPrice, maxPrice: this.maxPrice, pageSize: this.pageSize, currentPage: this.currentPage })
         .then((res) => {
-          this.loginSuc(res);
+          this.updateSuc(res)
 
         })
+    },
+    updateSuc (res) {
+      console.log(res)
+      let data = res.data;
+      if (data) {
+        this.total = data.total
+        this.productionList = data.productionList
+      }
+    },
+    handleCurrentChange () {
+      console.log(this.currentPage)
     }
   },
   watch: {
@@ -165,20 +182,38 @@ export default {
       this.list = this.productionList
     },
     search () {
+
       this.updateProduct()
+      this.currentPage = 1
     },
     type () {
       this.updateProduct()
+      this.currentPage = 1
     },
     field () {
       this.updateProduct()
+      this.currentPage = 1
     },
     minPrice () {
       this.updateProduct()
+      this.currentPage = 1
     },
     maxPrice () {
       this.updateProduct()
+      this.currentPage = 1
     },
+    oldProductionList () {
+      this.productionList = this.oldProductionList
+    },
+    oldTotal () {
+      this.total = this.oldTotal
+    },
+    currentPage () {
+      this.updateProduct()
+    },
+    pageSize () {
+      this.updateProduct()
+    }
 
   }
 }

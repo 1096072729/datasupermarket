@@ -15,9 +15,10 @@
         :options="swiperOptions"
       >
         <swiper-slide
-          v-for="item of list"
-          :key="item.id"
+          v-for="item,index of developmentList"
+          :key="index"
           class="swiper-slide"
+          @mousemove="timeoutShowNavigation(index)"
         >
           <div class="img-box">
             <img
@@ -26,15 +27,33 @@
               alt=""
             >
           </div>
+          <span class="item-title">{{item.title}}</span>
         </swiper-slide>
       </swiper>
+      <!-- <div class="swiper-button-prev navigation"></div>
 
-      <!-- <div class="swiper-button-prev">
-        ..
-      </div> -->
-      <!--左箭头。如果放置在swiper外面，需要自定义样式。-->
-      <!-- <div class="swiper-button-next"></div> -->
-      <!--右箭头。如果放置在swiper外面，需要自定义样式。-->
+      <div class="swiper-button-next navigation"></div> -->
+      <div
+        class="navigation-box"
+        v-if="showNavigation"
+      >
+        <img
+          @click="pre"
+          class="preImg"
+          :src="developmentList[0].preImg"
+          alt=""
+        >
+      </div>
+      <div
+        class="navigation-box"
+        v-if="showNavigation"
+      > <img
+          @click="next"
+          class="nextImg"
+          :src="developmentList[0].nextImg"
+          alt=""
+        ></div>
+
     </div>
 
 
@@ -52,8 +71,8 @@
       v-if="developmentList.length>0"
     >
       <div
-        v-for="item of developmentList[swiperNumber].show"
-        :key="item.id"
+        v-for="item,index of developmentList[swiperNumber].show"
+        :key="index"
         class="in-content-box"
       >
 
@@ -86,15 +105,18 @@ export default {
   name: 'IndexDevelopment',
   data () {
     return {
-      swiperNumber: 0,
+      swiperNumber: 1,
       activeIndex: 1,
+      showNavigation: false,
+      timer: null,
       swiperOptions: {
         effect: 'coverflow',
-        centeredSlides: true,
+        centeredSlides: false,
         spaceBetween: '16%',
         slidesPerView: 3,
         loop: true,
         autoplay: false, // 是否自动播放
+        initialSlide: 2,
         coverflowEffect: {
           rotate: 0,
           stretch: 0,
@@ -102,15 +124,23 @@ export default {
           modifier: 1,
           slideShadows: false,
         },
-        pagination: { // 分页器
-          el: '.swiper-pagination',
-          type: 'fraction',
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
         },
+        
+        // on: {
+        //   slideChangeTransitionStart: function () {
+        //     this.swiperNumber = this.swiper.activeIndex - 4
+        //   },
+        // },
+
+
       },
 
 
 
-      list: ['', '', '']
+
     }
 
   },
@@ -121,9 +151,30 @@ export default {
   },
   computed: {
     swiper () {
-      return this.$refs.mySwiper.swiper
+      return this.$refs.mySwiper.$swiper
+    }
+  },
+  methods: {
+    next () {
+      this.swiper.slideNext()
+      this.swiperNumber = this.swiper.activeIndex - 4
+      console.log(this.swiperNumber)
     },
+    pre () {
 
+      this.swiper.slidePrev()
+      this.swiperNumber = this.swiper.activeIndex - 4
+    },
+    timeoutShowNavigation (index) {
+      console.log(index + 'asdasd' + this.swiperNumber)
+      if (index == this.swiperNumber) {
+        const that = this
+        this.showNavigation = true;
+        if (this.timer)
+          clearTimeout(this.timer)
+        this.timer = setTimeout(() => that.showNavigation = false, 5000)
+      }
+    }
   }
 }
 
@@ -131,14 +182,17 @@ export default {
 
 <style lang="scss" scoped>
 .index-development {
+  position: relative;
   display: flex;
   flex-direction: column;
+  height: 630px;
   .bgImg {
     z-index: -1;
     position: absolute;
     left: 0;
     right: 0;
     width: 100%;
+    height: 630px;
   }
   .development-title {
     padding: 36px 0;
@@ -150,26 +204,36 @@ export default {
     text-align: center;
     margin-top: 24px;
     .swiper-slide {
-      position: relative;
-      left: 45%;
+      height: 150px;
       margin: 0 auto;
       width: 100px;
       .img-box {
-        background-color: #345dff;
+        background-color: #0090ff;
         border-radius: 50%;
         width: 100px;
         height: 100px;
+        position: relative;
+        left: 170px;
+        font-size: 24px;
         .swiper-img {
           position: relative;
           top: 20px;
-          width: 70%;
+          width: 60px;
+          height: 60px;
           text-align: center;
         }
+      }
+      .item-title {
+        position: relative;
+        top: 20px;
+        font-size: 24px;
       }
     }
     // height: 1000px;
   }
   .text-content {
+    position: relative;
+    top: 100px;
     max-width: 1000px;
     margin: 0 auto;
     margin-top: 16px;
@@ -192,7 +256,7 @@ export default {
         position: absolute;
         top: 50px;
         left: 30px;
-        font-size: 16px;
+        font-size: 18px;
 
         color: #333333;
       }
@@ -202,6 +266,33 @@ export default {
         color: #999999;
       }
     }
+  }
+  .swiper-button-next {
+    position: absolute;
+    top: 160px;
+    right: 830px;
+  }
+  .swiper-button-prev {
+    position: absolute;
+    top: 160px;
+    left: 830px;
+  }
+  .preImg {
+    z-index: 10;
+    position: relative;
+    right: 100px;
+    bottom: 110px;
+    width: 30px;
+  }
+  .nextImg {
+    z-index: 10;
+    position: relative;
+    left: 100px;
+    bottom: 110px;
+    width: 30px;
+  }
+  .navigation-box {
+    height: 0px;
   }
 }
 </style>

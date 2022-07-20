@@ -67,7 +67,7 @@ export default {
 
 <style lang="scss" scoped>
 .index-third-party {
-  margin: 0 auto;
+  margin: 36px auto;
   max-width: 1000px;
   .third-party-title {
     text-align: center;
@@ -82,9 +82,14 @@ export default {
         width: 100%;
       }
       .content-title {
+        color: #0090ff;
+        // padding: 24px 5px;
+        line-height: 50px;
+        margin-top: 24px;
         font-size: 16px;
       }
       .content-synopsis {
+        color: #999999;
         display: inline-block;
         // height: 200px;
         overflow: hidden;

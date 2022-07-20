@@ -35,6 +35,7 @@
         class="swiper-pagination"
         slot="pagination"
       ></div>
+
     </swiper>
   </div>
 </template>
@@ -52,23 +53,30 @@ export default {
 
       swiperOptions: {
 
-        pagination: '.swiper-pagination',
+        // pagination: '.swiper-pagination',
         paginationType: 'fraction',
         observeParents: true,
         observer: true,
 
         loop: true,
 
-        // pagination: {
-        //   el: '.swiper-pagination',
-        //   type: 'bullets',
-        // },
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'bullets',
+          // renderBullet: function (index, className) {
+          //   return '<span class="' + className + '">' + (index + 1) + '</span>';
+          // },
+        },
         autoplay: {
           delay: 5000,
           stopOnLastSlide: false,
           disableOnInteraction: true,
 
         },
+        // navigation: {
+        //   nextEl: '.swiper-button-next',
+        //   prevEl: '.swiper-button-prev',
+        // },
 
       }
     }
@@ -102,9 +110,19 @@ export default {
     background-color: #000;
     width: 20px;
   }
-  // .swiper-pagination {
-
-  // }
+  .swiper-pagination {
+    width: 20px;
+    height: 20px;
+  }
+}
+:deep(.swiper-pagination-bullet-active) {
+  border-radius: 1px;
+  width: 30px;
+  background-color: #fff;
+}
+:deep(.swiper-pagination-bullet) {
+  border-radius: 1px;
+  width: 30px;
 }
 </style>
 

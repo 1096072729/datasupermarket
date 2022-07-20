@@ -251,7 +251,7 @@ export default {
   .footer:hover {
     background-color: #000;
     height: 50px;
-    width: 100%;
+    width: 1920px;
     bottom: 0;
 
     animation: fadenum 3s;
