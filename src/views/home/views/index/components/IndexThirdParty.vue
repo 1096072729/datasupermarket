@@ -53,7 +53,7 @@ export default {
           stretch: 1,
           depth: 10,
           modifier: 3,
-          slideShadows: true
+          slideShadows: false
         },
       }
     }
@@ -68,7 +68,7 @@ export default {
 <style lang="scss" scoped>
 .index-third-party {
   margin: 36px auto;
-  max-width: 1000px;
+  max-width: 1100px;
   .third-party-title {
     text-align: center;
     font-size: 24px;
@@ -84,7 +84,7 @@ export default {
       .content-title {
         color: #0090ff;
         // padding: 24px 5px;
-        line-height: 50px;
+        line-height: 30px;
         margin-top: 24px;
         font-size: 16px;
         overflow: hidden;

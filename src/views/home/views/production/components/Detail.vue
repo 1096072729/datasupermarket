@@ -243,7 +243,7 @@ export default {
       font-size: 14px;
       line-height: 30px;
       // height: 200px;
-      margin-top: 15px;
+      // margin-top: 15px;
       background-color: #fff;
       // background-color: #f5f7fa;
       padding: 0 15px;

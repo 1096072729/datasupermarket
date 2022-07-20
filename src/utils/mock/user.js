@@ -52,14 +52,13 @@ const userList = {
 
 Mock.mock(/auth\/login/, 'post', req => {
   //路径与请求方式
-  const { username, password ,identity} = JSON.parse(req.body); //将传递进来的数据保存
-  alert(username);
+  const { username, password, identity } = JSON.parse(req.body); //将传递进来的数据保存
   for (let i = 0; i < userList.data.userinfo.length; i++) {
     //判断userList中是否存在该用户并且用户密码是否正确
     if (
       username === userList.data.userinfo[i].username &&
       password === userList.data.userinfo[i].password &&
-      identity ===userList.data.userinfo[i].identity
+      identity === userList.data.userinfo[i].identity
     ) {
       return {
         meta: {

@@ -66,7 +66,8 @@ export default {
   display: flex;
   flex-direction: column;
   // align-items: center;
-  margin-top: 24px;
+  // margin-top: 24px;
+  padding: 24px 0;
   .title {
     padding: 36px 0 0 0;
     font-weight: 600;
@@ -88,10 +89,11 @@ export default {
     .in-content-box {
       display: flex;
       flex-direction: column;
-      padding: 20px;
+      padding: 5px;
       box-sizing: border-box;
       width: 25%;
       position: relative;
+      
       .content-cart {
         border-radius: 3px;
         // box-sizing: border-box;
@@ -133,7 +135,7 @@ export default {
         -webkit-box-orient: vertical;
       }
       .content-synopsis {
-        line-height: 24px;
+        line-height: 16px;
         font-size: 12px;
         color: #666666;
         overflow: hidden;

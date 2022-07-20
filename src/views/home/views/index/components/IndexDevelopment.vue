@@ -292,6 +292,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     .in-content-box {
+   
       position: relative;
       padding: 20px;
       box-sizing: border-box;
@@ -309,6 +310,7 @@ export default {
         top: 50px;
         left: 30px;
         font-size: 18px;
+        line-height: 18px;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;

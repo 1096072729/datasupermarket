@@ -127,7 +127,10 @@
 
         <div class="delete-all">
           <div class="delete-all-left"> <span class="iconfont">&#xe64f;</span><span>{{selectNumberMessage}}</span></div>
-          <div class="delete-all-right"></div>
+          <div
+            class="delete-all-right"
+            @click="deleteAllParameterDefinition"
+          >删除全部</div>
         </div>
         <el-table
           ref="multipleTable"
@@ -546,7 +549,7 @@
     </el-dialog>
 
 
-
+    <!-- //删除全部的自定义参数 -->
     <el-dialog
       class="delete-all"
       size="small"
@@ -571,12 +574,12 @@
               width="150"
             ></el-table-column>
             <el-table-column
-              property="place"
+              property="place.value"
               label="参数位置"
               width="200"
             ></el-table-column>
             <el-table-column
-              property="type"
+              property="type.value"
               label="类型"
             ></el-table-column>
           </el-table>
@@ -593,7 +596,7 @@
         <el-button
           size="small"
           type="primary"
-          @click="deleteAllParameterDefinitionVisible = false"
+          @click="deleteAllClick"
         >确 定</el-button>
       </div>
     </el-dialog>
@@ -877,6 +880,13 @@ export default {
       this.addParameterDefinitionVisible = true
     },
     deleteAllParameterDefinition () {
+      if (this.parameterDefinitionData.length == 0) {
+        this.$message({
+          message: '没有数据无法删除',
+          type: 'warning'
+        });
+        return
+      }
       this.deleteAllParameterDefinitionVisible = true
     },
     addParameterDefinitionClick () {
@@ -910,6 +920,10 @@ export default {
       }
       console.log(this.constantDefinitionData)
       this.addConstantVisible = false;
+    },
+    deleteAllClick () {
+      this.parameterDefinitionData = []
+      this.deleteAllParameterDefinitionVisible = false
     }
   },
   components: {
@@ -948,7 +962,7 @@ export default {
     .delete-all {
       margin: 16px 0;
       padding: 0 10px;
-      width: 1000px;
+      width: 1025px;
       height: 35px;
       background-color: #e6f7ff;
       display: flex;
@@ -962,6 +976,10 @@ export default {
         }
       }
       .delete-all-right {
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        color: #0090ff;
       }
     }
     .button {

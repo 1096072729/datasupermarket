@@ -18,6 +18,7 @@ import IndexRecommend from '@/views/home/views/index/components/IndexRecommend.v
 import IndexDevelopment from '@/views/home/views/index/components/IndexDevelopment.vue'
 import IndexThirdParty from '@/views/home/views/index/components/IndexThirdParty.vue'
 
+import { Loading } from 'element-ui';
 import axios from 'axios'
 export default {
   name: 'IndexView',
@@ -26,7 +27,7 @@ export default {
       swiperList: [],
       recommendList: [],
       developmentList: [],
-
+      loadingInstance: null,
     }
   },
   components: {
@@ -38,9 +39,18 @@ export default {
   },
   methods: {
     getHomeInfo () {
+this.loadingInstance = Loading.service({
+                // 动画中的文字
+                text:'加载中',
+                // 要加载动画的容器
+                target:'.index'
+            });
+
+
       axios.get("http://localhost:8080/api/home")
         .then((res) => {
           this.getHomeInfoSuc(res);
+          this.loadingInstance.close();
         })
     },
     getHomeInfoSuc (res) {

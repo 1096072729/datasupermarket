@@ -197,6 +197,7 @@ export default {
       console.log('submit!');
     },
     handleClose (tag) {
+      console.log(this.ruleForm.dynamicTags.indexOf(tag))
       this.dynamicTags.splice(this.ruleForm.dynamicTags.indexOf(tag), 1);
     },
 

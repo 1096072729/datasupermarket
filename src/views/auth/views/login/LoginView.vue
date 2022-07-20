@@ -138,7 +138,7 @@ export default {
         this.$router.push('/home/index')
       }
       else {
-        alert('登录失败 ')
+        this.$message.error('账号或密码错误，请重新输入');
       }
     }
   }

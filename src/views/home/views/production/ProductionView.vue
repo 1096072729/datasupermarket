@@ -31,6 +31,7 @@
 import ProductionSearch from './components/ProductionSearch.vue'
 import ProductionLimit from './components/ProductionLimit.vue'
 import ProductionList from './components/ProductionList.vue'
+import { Loading } from 'element-ui';
 import axios from 'axios'
 export default {
   name: 'ProductionView',
@@ -38,7 +39,8 @@ export default {
     return {
       recommendList: [],
       total: 100,
-      productionList: []
+      productionList: [],
+      loadingInstance: null,
     }
   },
   components: {
@@ -48,9 +50,16 @@ export default {
   },
   methods: {
     getProductionInfo () {
+      this.loadingInstance = Loading.service({
+        // 动画中的文字
+        text: '加载中',
+        // 要加载动画的容器
+        target: '.index'
+      });
       axios.get("http://localhost:8080/home/production")
         .then((res) => {
           this.getProductionInfoSuc(res);
+          this.loadingInstance.close();
         })
     },
     getProductionInfoSuc (res) {

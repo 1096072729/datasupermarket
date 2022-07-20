@@ -68,11 +68,13 @@ export default {
     display: flex;
     height: 160px;
     .plan-item-out-box:hover {
-      // box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.15); /* 鼠标悬浮时盒子出现的阴影 */
+      box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.15); /* 鼠标悬浮时盒子出现的阴影 */
       // transform: translate(0, -10px); /* 鼠标悬浮时盒子上移10px */
       // margin-bottom: 10px;
-      position: relative;
-      top: -10px;
+      // position: relative;
+      // top: -10px;
+      margin-top: -10px;
+      margin-bottom: 30px;
     }
     .plan-item-out-box {
       animation-duration: 2s;

@@ -14,7 +14,7 @@
       </el-breadcrumb>
       <div class="steps-out-box">
         <div class="steps-in-box">
-          <el-steps
+          <!-- <el-steps
             :active="active"
             align-center
             finish-status="wait"
@@ -35,21 +35,30 @@
               title="步骤4"
               description="这是一段很长很长很长的描述性文字"
             ></el-step>
-          </el-steps>
+          </el-steps> -->
+          <a-steps
+            :current="active"
+            size="small"
+          >
+            <a-step title="填写接口信息" />
+            <a-step title="定义API请求与后端服务" />
+            <a-step title="定义返回结果" />
+            <a-step title="上传证明" />
+          </a-steps>
 
           <div class="step-content">
-            <div v-if="active==0">
+            <div v-show="active==0">
 
               <create-form-one @next="next"></create-form-one>
             </div>
-            <div v-if="active==1">
+            <div v-show="active==1">
 
               <create-form-two
                 @next="next"
                 @last="last"
               ></create-form-two>
             </div>
-            <div v-if="active==2">
+            <div v-show="active==2">
 
               <create-form-three
                 @next="next"
@@ -57,7 +66,7 @@
               >
               </create-form-three>
             </div>
-            <div v-if="active==3">
+            <div v-show="active==3">
 
               <create-form-four
                 @create="create"
@@ -112,9 +121,6 @@ export default {
 
 
 <style lang="scss" scoped>
-.myColor >>> .el-breadcrumb__inner {
-  color: #3a6df3;
-}
 .create-production {
   padding: 20px;
   .path {
@@ -136,6 +142,10 @@ export default {
         }
       }
     }
+  }
+  :deep(.el-breadcrumb__item:last-child .el-breadcrumb__inner) {
+    font-weight: 600;
+    color: #333333;
   }
 }
 </style>

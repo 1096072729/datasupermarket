@@ -104,7 +104,7 @@
 <script>
 
 import axios from 'axios'
-
+import { Loading } from 'element-ui';
 export default {
   name: 'ProductionList',
   data () {
@@ -119,7 +119,8 @@ export default {
       maxPrice: 1000000000000,
       currentPage: 1,
       productionList: [],
-      total: 0
+      total: 0,
+      loadingInstance: null,
     }
   },
   props: {
@@ -160,6 +161,12 @@ export default {
     },
     updateProduct () {
       console.log('updateProduct')
+      this.loadingInstance = Loading.service({
+        // 动画中的文字
+        text: '加载中',
+        // 要加载动画的容器
+        target: '.index'
+      });
       axios.post("http://localhost:8080/home/production/update", { search: this.searchValue, type: this.type, field: this.field, minPrice: this.minPrice, maxPrice: this.maxPrice, pageSize: this.pageSize, currentPage: this.currentPage })
         .then((res) => {
           this.updateSuc(res)
@@ -173,6 +180,7 @@ export default {
         this.total = data.total
         this.productionList = data.productionList
       }
+      this.loadingInstance.close();
     },
     handleCurrentChange () {
       console.log(this.currentPage)

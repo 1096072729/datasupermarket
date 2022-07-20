@@ -70,6 +70,25 @@
 
           <span class="iconfont icon">&#xe651;</span>
         </div>
+        <div
+          @focusin="search"
+          class="search-content"
+          :style="{ height:height,width:width,opacity:opacity}"
+        >
+          <div class="search-content-title-box">
+            <span class="search-content-title">
+              热门搜索
+            </span>
+
+          </div>
+          <el-divider></el-divider>
+          <div><span
+              @click="input=item"
+              class="search-content-content"
+              v-for="item,index of searchList "
+              :key="index"
+            >{{item}}</span></div>
+        </div>
       </div>
       <div
         v-if="!hasUser"
@@ -115,25 +134,7 @@
 
 
     </div>
-    <div
-      @focusin="search"
-      class="search-content"
-      :style="{ height:height,width:width,opacity:opacity}"
-    >
-      <div class="search-content-title-box">
-        <span class="search-content-title">
-          热门搜索
-        </span>
 
-      </div>
-      <el-divider></el-divider>
-      <div><span
-          @click="input=item"
-          class="search-content-content"
-          v-for="item,index of searchList "
-          :key="index"
-        >{{item}}</span></div>
-    </div>
 
   </div>
 </template>
@@ -164,7 +165,7 @@ export default {
     search () {
       console.log('asdasd')
       this.showIcon = 'focus'
-      this.width = '283px';
+      this.width = '270px';
       this.height = '150px';
       this.opacity = 1
     },
@@ -311,26 +312,26 @@ export default {
           padding: 0 8px;
         }
       }
-    }
-  }
-  .search-content {
-    z-index: 10;
-    position: absolute;
-    top: 60px;
-    right: 135px;
+      .search-content {
+        z-index: 10;
+        position: absolute;
+        top: 60px;
+        right: 135px;
 
-    background-color: #fff;
-    transition: all 0.5s ease-in-out;
-    .search-content-title-box {
-      padding: 8px 8px 0 8px;
-      .search-content-title {
-        font-size: 16px;
-        color: #333333;
+        background-color: #fff;
+        transition: all 0.5s ease-in-out;
+        .search-content-title-box {
+          padding: 8px 8px 0 8px;
+          .search-content-title {
+            font-size: 16px;
+            color: #333333;
+          }
+        }
+        .search-content-content {
+          background-color: #e0e0e0;
+          margin: 8px;
+        }
       }
-    }
-    .search-content-content {
-      background-color: #e0e0e0;
-      margin: 8px;
     }
   }
 }

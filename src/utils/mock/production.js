@@ -3,9 +3,9 @@ import banner1 from '../../assets/img/production/data_service.svg';
 import backgroundImg from '../../assets/img/production/pricebg.png';
 import processImg from '../../assets/img/production/liucheng.png';
 const Mock = require('mockjs');
-// Mock.setup({
-//   timeout: '2000-3600',
-// });
+Mock.setup({
+  timeout: '2000-3600',
+});
 let data = Mock.mock({
   'recommendList|4': ['@csentence(5)'],
   'searchLimit|2-5': [
@@ -207,14 +207,16 @@ Mock.mock(RegExp('/upload'), 'post', () => {
   return;
 });
 Mock.mock(RegExp('/home/production/update'), 'post', req => {
-  var list = JSON.parse(JSON.stringify(uptateList));
+  let list = JSON.parse(JSON.stringify(uptateList));
   // const { searchValue, type ,field ,currentPage ,pageSize,minprice} = JSON.parse(req.body); //将传递进来的数据保存
-  const { pageSize, currentPage } = JSON.parse(req.body); //将传递进来的数据保存
-
-  list.page = 1;
-  console.log(currentPage);
-  console.log(currentPage * pageSize);
-  console.log(currentPage * pageSize + pageSize);
+  const { pageSize, currentPage, type } = JSON.parse(req.body); //将传递进来的数据保存
+  let productionList = [];
+  list.page = currentPage;
+  for (const item of list.productionList) {
+    if (item.type == type) {
+      productionList.push(item);
+    }
+  }
   list.productionList = list.productionList.slice(
     currentPage * pageSize,
     currentPage * pageSize + pageSize
