@@ -135,5 +135,11 @@ const VueRouterPush = Router.prototype.push;
 Router.prototype.push = function push(to) {
   return VueRouterPush.call(this, to).catch(err => err);
 };
+// 解决bug：页面/路由跳转后，滚动条消失，页面无法滚动
+// router.afterEach(() => {
+//   document
+//     .querySelector('body')
+//     .setAttribute('style', 'overflow: auto !important;');
+// });
 
 export default router;

@@ -9,9 +9,9 @@ import pre from '../../assets/img//home/arrl.png';
 import next from '../../assets/img//home/arr.png';
 import signnImg from '../../assets/img//home/cardTagWarning.png';
 const Mock = require('mockjs');
-Mock.setup({
-  timeout: '2000-3600',
-});
+// Mock.setup({
+//   timeout: '2000-3600',
+// });
 let data = Mock.mock({
   homeSwipper: [
     { id: 0, imgUrl: banner1 },

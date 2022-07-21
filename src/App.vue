@@ -21,7 +21,6 @@ export default {
   padding: 0px;
   margin: 0px;
   border: 0px;
-
   font-size: 14px;
 }
 .app {

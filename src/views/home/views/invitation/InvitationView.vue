@@ -34,7 +34,7 @@ import InvitationPartner from './components/InvitationPartner.vue'
 import InvitationJoin from './components/InvitationJoin.vue'
 import InvitationPlan from './components/InvitationPlan.vue'
 import InvitationService from './components/InvitationService.vue'
-import { Loading } from 'element-ui';
+// import { Loading } from 'element-ui';
 import axios from 'axios'
 // import axios from 'axios'
 export default {
@@ -50,21 +50,21 @@ export default {
       showJoin: false,
       showPartner: false,
       showService: false,
-      loadingInstance: null,
+      // loadingInstance: null,
     }
   },
   methods: {
     getInvitation () {
-      this.loadingInstance = Loading.service({
-        // 动画中的文字
-        text: '加载中',
-        // 要加载动画的容器
-        target: '.index'
-      });
+      // this.loadingInstance = Loading.service({
+      //   // 动画中的文字
+      //   text: '加载中',
+      //   // 要加载动画的容器
+      //   target: '.index'
+      // });
       axios.get("http://localhost:8080/home/invitation").then(
         (res) => {
           this.getInvitationSuc(res);
-          this.loadingInstance.close();
+          // this.loadingInstance.close();
         }
 
       )

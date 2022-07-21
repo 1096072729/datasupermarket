@@ -3,9 +3,9 @@ import banner1 from '../../assets/img/production/data_service.svg';
 import backgroundImg from '../../assets/img/production/pricebg.png';
 import processImg from '../../assets/img/production/liucheng.png';
 const Mock = require('mockjs');
-Mock.setup({
-  timeout: '2000-3600',
-});
+// Mock.setup({
+//   timeout: '2000-3600',
+// });
 let data = Mock.mock({
   'recommendList|4': ['@csentence(5)'],
   'searchLimit|2-5': [
