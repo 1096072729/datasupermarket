@@ -18,33 +18,26 @@
             :active="active"
             align-center
             finish-status="wait"
+            class="steps-title"
           >
-            <el-step
-              title="步骤asdddddddddd1"
-              description="这是一段很长很长很长的描述性文字"
-            ></el-step>
-            <el-step
-              title="步骤2"
-              description="这是一段很长很长很长的描述性文字"
-            ></el-step>
-            <el-step
-              title="步骤3"
-              description="这是一段很长很长很长的描述性文字"
-            ></el-step>
-            <el-step
-              title="步骤4"
-              description="这是一段很长很长很长的描述性文字"
-            ></el-step>
+            <el-step title="填写基本信息"></el-step>
+            <el-step title="定义API请求与后端服务"></el-step>
+            <el-step title="定义返回结果"></el-step>
+            <el-step title="上传证明"></el-step>
           </el-steps> -->
-          <a-steps
-            :current="active"
-            size="small"
-          >
-            <a-step title="填写接口信息" />
-            <a-step title="定义API请求与后端服务" />
-            <a-step title="定义返回结果" />
-            <a-step title="上传证明" />
-          </a-steps>
+          <steps-component
+            :currentStep="1"
+            :totalSteps="3"
+            :stepsLabel="stepsLabel"
+            :stepsDesc="stepsDesc"
+            @change="onChange"
+          ></steps-component>
+
+
+
+
+
+
 
           <div class="step-content">
             <div v-show="active==0">
@@ -86,20 +79,23 @@ import CreateFormOne from './CreateOne.vue'
 import CreateFormTwo from './CreateTwo.vue'
 import CreateFormThree from './CreateThree.vue'
 import CreateFormFour from './CreateFour.vue'
+import StepsComponent from './step.vue'
 export default {
   name: 'CreateProduction',
   data () {
     return {
       active: 0,
-      step: [
-      ],
+
+      stepsLabel: ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'],
+      stepsDesc: ['description 1', 'description 2', 'description 3', 'description 4', 'description 5']
     }
   },
   components: {
     CreateFormOne,
     CreateFormTwo,
     CreateFormThree,
-    CreateFormFour
+    CreateFormFour,
+    StepsComponent
   }
   ,
   methods: {
@@ -137,6 +133,17 @@ export default {
         background-color: #fff;
         padding: 24px 250px;
         margin: 0 auto;
+        .steps-title {
+          :deep(.el-step.is-center .el-step__line) {
+            left: 120%;
+            right: -40%;
+          }
+          :deep(.el-step__title) {
+            position: relative;
+            left: 80px;
+            bottom: 40px;
+          }
+        }
         .step-content {
           min-height: 1000px;
         }

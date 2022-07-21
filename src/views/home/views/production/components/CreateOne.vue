@@ -7,7 +7,7 @@
       :rules="rules"
       ref="ruleForm"
       label-width="100px"
-      class="demo-ruleForm"
+      class="demo-rule-form"
       size="small"
     >
       <el-form-item
@@ -23,38 +23,25 @@
       </el-form-item>
       <el-form-item
         label="产品标签"
+        multiple
         prop="dynamicTags"
       >
-        <!-- suffix-icon="el-icon-plus" -->
-        <el-input>
-        </el-input>
-        <el-tag
-          class="input-old-tag"
-          :key="tag"
-          v-for="tag in ruleForm.dynamicTags"
-          closable
-          :disable-transitions="false"
-          @close="handleClose(tag)"
+        <el-select
+          class="dynamic-tags"
+          size="medium"
+          v-model="ruleForm.dynamicTags.value"
+          multiple
+          placeholder="请选择"
         >
-          {{tag}}
-        </el-tag>
-        <el-input
-          class="input-new-tag"
-          v-if="inputVisible"
-          v-model="inputValue"
-          ref="saveTagInput"
-          size="mini"
-          @keyup.enter.native="handleInputConfirm"
-          @blur="handleInputConfirm"
-        >
-        </el-input>
-        <!-- v-else -->
-        <el-button
-          v-if="ruleForm.dynamicTags.length<3"
-          class="button-new-tag"
-          size="mini"
-          @click="showInput"
-        >+ New Tag</el-button>
+          <el-option
+            v-for="item in ruleForm.dynamicTags.options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+
       </el-form-item>
       <el-form-item
         label="API概述"
@@ -71,17 +58,38 @@
       >
         <el-input
           type="textarea"
+          rows="4"
           v-model="ruleForm.APIIntroduce"
         ></el-input>
       </el-form-item>
       <el-form-item
         label="产品定价"
-        prop="price"
+        prop="setPrice"
       >
-        <el-input
-          v-model="ruleForm.price"
-          placeholder="请一句话描述API的整体情况，最多输入30个字符"
-        ></el-input>
+        <div class="set-price">
+          <el-input
+            class="unit-time"
+            v-model="ruleForm.setPrice.unitTime"
+          ></el-input>
+          <el-select
+            class="unit-duration"
+            v-model="ruleForm.setPrice.unitDuration.value"
+            placeholder="请选择"
+          >
+            <el-option
+              v-for="item in ruleForm.setPrice.unitDuration.options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>/
+          <el-input
+            class="all-price"
+            v-model="ruleForm.setPrice.price"
+          ></el-input>
+          <span>元</span>
+        </div>
       </el-form-item>
       <el-form-item
         label="权限设置"
@@ -90,6 +98,7 @@
         <el-select
           v-model="ruleForm.jurisdiction.value"
           placeholder="请选择"
+          @visible-change="visible"
         >
           <el-option
             v-for="item in ruleForm.jurisdiction.options"
@@ -119,23 +128,88 @@
 
 <script>
 
+let validateSummary = (rule, value, callback) => {
+  let codeReg = new RegExp("[^A-Za-z0-9\u4e00-\u9fa5]");
+  if (codeReg.test(value)) {
+    callback(new Error("只允许输入中文、英文、数字"));
+  }
+
+  else {
+    callback()
+  }
+};
+
+let validateName = (rule, value, callback) => {
+  let codeReg = new RegExp("^[0-9a-zA-Z]");
+  if (!codeReg.test(value)) {
+    callback(new Error("仅以汉字或者英文开头"));
+  }
+
+  else {
+    callback()
+  }
+};
+
+let validateSetPrice = (rule, value, callback) => {
+  let codeReg = new RegExp("[^0-9]");
+
+  if (!(value.unitTime && value.unitDuration.value && value.price)) {
+    callback(new Error("必须完整的填写价格信息"));
+  }
+  else if (codeReg.test(value.unitTime) || codeReg.test(value.price)) {
+    callback(new Error("只允许填写数字"));
+  }
+  else if (!(value.unitTime.length <= 9 && value.price.length <= 9)) {
+    callback(new Error("输入的字符必须小于9个"));
+  }
+
+  else {
+    callback()
+  }
+};
+let dynamicTagsValidate = (rule, value, callback) => {
+  console.log(value.value.length)
+  if (value.value.length == 0) {
+    callback(new Error("必须选择标签"));
+  }
+  callback()
+
+};
+
+
 
 
 export default {
   name: 'CreateFormOne',
   data () {
     return {
-
+      codeReg: RegExp("[A-Za-z0-9]+")
+      ,
       step: [
 
       ],
       ruleForm: {
         name: '',
         response: 'default',
-        dynamicTags: [],
+        dynamicTags: {
+          options: [{
+            value: '黄金糕',
+            label: '黄金糕'
+          }, {
+            value: '蚵仔煎',
+            label: '蚵仔煎'
+          }, {
+            value: '龙须面',
+            label: '龙须面'
+          }, {
+            value: '北京烤鸭',
+            label: '北京烤鸭'
+          }],
+          value: ''
+        },
         APISummary: '',
         APIIntroduce: '',
-        price: 999,
+
         jurisdiction: {
           options: [{
             value: '选项1',
@@ -144,48 +218,52 @@ export default {
             value: '选项2',
             label: '仅自己可见'
           }],
-          value: '所有人可见'
-        }
-        ,
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+          value: ''
+        },
+        setPrice: {
+          unitTime: null
+          ,
+          unitDuration: {
+            options: [{
+              value: '年',
+              label: '年'
+            }, {
+              value: '月',
+              label: '月'
+            }, {
+              value: '日',
+              label: '日'
+            }],
+            value: '年'
+          },
+          price: null,
+        },
       },
       rules: {
         name: [
           { required: true, message: '请输入API名称', trigger: 'blur' },
-          { min: 3, max: 255, message: '长度在 3 到 255 个字符', trigger: 'blur' }
+          { min: 3, max: 64, message: '长度在 3 到 64 个字符', trigger: 'blur' },
+          { validator: validateName, trigger: 'blur', required: true }
         ],
-        dynamicTags: [
-          { required: true, message: '请输入产品标签', trigger: 'change' }
-        ],
+        dynamicTags:
+          [
+            // { required: true, message: '请输入产品标签', trigger: 'blur' },
+            { validator: dynamicTagsValidate, trigger: 'blur', required: true }
+          ]
+        ,
         APISummary: [
           { required: true, message: '请输入API概述', trigger: 'change' },
-          { max: 30, message: '长度小于 30 个字符', trigger: 'blur' }
+          { max: 30, message: '长度小于 60 个字符', trigger: 'blur' },
+          { validator: validateSummary, trigger: 'change', required: true }
         ],
         APIIntroduce: [
           { required: true, message: '请输入API介绍', trigger: 'change' },
-          { max: 255, message: '长度小于 255 个字符', trigger: 'blur' }
+          { max: 400, message: '长度小于 400 个字符', trigger: 'blur' }
         ],
+        setPrice: [
+          { validator: validateSetPrice, trigger: 'blur', required: true }]
 
-        date1: [
-          { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-        ],
-        date2: [
-          { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-        ],
-        type: [
-          { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-        ],
-        resource: [
-          { required: true, message: '请选择活动资源', trigger: 'change' }
-        ],
-        desc: [
-          { required: true, message: '请填写活动形式', trigger: 'blur' }
-        ]
+
       },
       dynamicTags: [],
       inputVisible: false,
@@ -223,9 +301,11 @@ export default {
       this.inputValue = '';
     },
     submitForm (formName) {
+      console.log('submitForm')
       console.log(formName)
       this.$emit('next');
       // this.$refs[formName].validate((valid) => {
+      //   console.log('asdasd')
       //   if (valid) {
       //     this.$emit('next');
       //   } else {
@@ -233,7 +313,13 @@ export default {
       //     return false;
       //   }
       // });
+    },
+    visible (e) {
+      if (e) {
+        this.ruleForm.jurisdiction.value = '所有人可见'
+      }
     }
+
   }
 }
 </script>
@@ -245,28 +331,37 @@ export default {
 <style lang="scss" scoped>
 .create-form-one {
   padding: 20px 340px;
-  .el-tag + .el-tag {
-    margin-left: 10px;
+  .dynamic-tags {
+    display: flex;
+    :deep(.el-input__inner) {
+      // width: 100% !important;
+      border: 1px solid #dcdfe6;
+      height: 35px !important;
+    }
+    :deep(.el-tag.el-tag--info .el-tag__close) {
+      color: #000 !important;
+      background-color: #f0f2f5;
+    }
   }
-  .button-new-tag {
-    margin-left: 10px;
-    height: 32px;
-    line-height: 30px;
-    padding-top: 0;
-    padding-bottom: 0;
-    position: relative;
-    bottom: 34px;
-  }
-  .input-new-tag {
-    position: relative;
-    bottom: 34px;
-    width: 90px;
-    margin-left: 10px;
-    vertical-align: bottom;
-  }
-  .input-old-tag {
-    position: relative;
-    bottom: 34px;
+
+  .set-price {
+    flex-wrap: nowrap;
+    display: flex;
+    .unit-time {
+      padding: 0 8px 0 0;
+      width: 180px;
+    }
+
+    .unit-duration {
+      padding: 0 8px;
+      width: 80px;
+    }
+
+    .all-price {
+      margin: 0 8px;
+      flex: 1;
+      width: 180px;
+    }
   }
 }
 </style>

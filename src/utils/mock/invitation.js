@@ -12,7 +12,9 @@ import baozhang1 from '../../assets/img/invitation/baozhang_1.png';
 import baozhang2 from '../../assets/img/invitation/baozhang_2.png';
 import baozhang3 from '../../assets/img/invitation/baozhang_3.png';
 import baozhang4 from '../../assets/img/invitation/baozhang_4.png';
-
+// Mock.setup({
+//   timeout: '500-1000',
+// });
 const Mock = require('mockjs');
 let data = Mock.mock({
   'banner|1': [banner1],

@@ -31,6 +31,7 @@
 import ProductionSearch from './components/ProductionSearch.vue'
 import ProductionLimit from './components/ProductionLimit.vue'
 import ProductionList from './components/ProductionList.vue'
+
 import { Loading } from 'element-ui';
 import axios from 'axios'
 export default {
@@ -46,7 +47,8 @@ export default {
   components: {
     ProductionSearch,
     ProductionLimit,
-    ProductionList
+    ProductionList,
+
   },
   methods: {
     getProductionInfo () {

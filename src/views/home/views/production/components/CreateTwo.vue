@@ -36,6 +36,7 @@
         <el-select
           v-model="ruleForm.method.value"
           placeholder="请选择"
+          @visible-change="visible($event,ruleForm,'method')"
         >
           <el-option
             v-for="item in ruleForm.method.options"
@@ -56,11 +57,12 @@
       </el-form-item>
       <el-form-item
         label="后端请求方式"
-        prop="name"
+        prop="backendMethod"
       >
         <el-select
           v-model="ruleForm.backendMethod.value"
           placeholder="请选择"
+          @visible-change="visible($event,ruleForm,'backendMethod')"
         >
           <el-option
             v-for="item in ruleForm.backendMethod.options"
@@ -321,6 +323,7 @@
       append-to-body
     >
       <el-form
+        ref="parameterDefinition"
         :model="addParameterDefinitionform"
         :rules="addParameterDefinitionRules"
       >
@@ -461,7 +464,7 @@
         <el-button @click="addParameterDefinitionVisible = false">取 消</el-button>
         <el-button
           type="primary"
-          @click="addParameterDefinitionClick"
+          @click="addParameterDefinitionClick('parameterDefinition')"
         >确 定</el-button>
       </div>
     </el-dialog>
@@ -473,6 +476,7 @@
       append-to-body
     >
       <el-form
+        ref="addConstantform"
         :model="addConstantform"
         :rules="addParameterDefinitionRules"
       >
@@ -543,7 +547,7 @@
         <el-button @click="addConstantVisible = false">取 消</el-button>
         <el-button
           type="primary"
-          @click="addConstantVisibleClike"
+          @click="addConstantVisibleClike('addConstantform')"
         >确 定</el-button>
       </div>
     </el-dialog>
@@ -608,6 +612,37 @@
 
 import CollapseTransition from "@/utils/collapse-transition";
 //注册
+let serviceAddressValidate = (rule, value, callback) => {
+  let codeReg1 = new RegExp("http://");
+  let codeReg2 = new RegExp("https://");
+  console.log(value)
+  console.log(codeReg1.test(value))
+  console.log(codeReg2.test(value))
+  if (!(codeReg1.test(value) || codeReg2.test(value))) {
+    callback(new Error("必须http://或者https://开头"));
+  }
+
+  else {
+    callback()
+  }
+};
+let timeoutValidate = (rule, value, callback) => {
+  let codeReg = new RegExp("[^0-9]");
+
+
+
+  if (codeReg.test(value)) {
+    callback(new Error("必须为数字"));
+  }
+  else if (value > 600000) {
+    callback(new Error("不能超过10分钟"));
+  }
+
+  else {
+    callback()
+  }
+};
+
 
 
 export default {
@@ -642,7 +677,7 @@ export default {
             value: 'POST',
             label: 'POST'
           }],
-          value: 'POST'
+          value: ''
         },
         serviceAddress: '',
         timeout: 5000
@@ -661,10 +696,13 @@ export default {
         ],
         serviceAddress: [
           { required: true, message: '请填入后端服务地址', trigger: 'blur' },
+          { validator: serviceAddressValidate, trigger: 'blur', required: true }
         ],
         timeout: [
-          { type: 'number', message: '必须填写数字', trigger: 'change' },
           { required: true, message: '必须填写超时时间', trigger: 'blur' },
+          // { type: 'number', message: '必须填写数字', trigger: 'change' },
+          { validator: timeoutValidate, trigger: 'change', required: true },
+
         ],
       },
       //自定义参数数据
@@ -889,11 +927,20 @@ export default {
       }
       this.deleteAllParameterDefinitionVisible = true
     },
-    addParameterDefinitionClick () {
-      if (this.operation == 'add') {
-        this.parameterDefinitionData.push(this.addParameterDefinitionform)
-      }
-      this.addParameterDefinitionVisible = false;
+    addParameterDefinitionClick (formName) {
+      this.$refs[formName].validate((valid) => {
+
+        if (valid) {
+          if (this.operation == 'add') {
+            this.parameterDefinitionData.push(this.addParameterDefinitionform)
+          }
+          this.addParameterDefinitionVisible = false;
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+
     },
     updateParameterDefinition (row) {
       this.operation = 'update'
@@ -913,17 +960,34 @@ export default {
       this.operation = 'update'
     },
     //添加常量参数的确认按钮
-    addConstantVisibleClike () {
-      if (this.operation == 'add') {
-        console.log(this.addConstantform)
-        this.constantDefinitionData.push(this.addConstantform)
-      }
-      console.log(this.constantDefinitionData)
-      this.addConstantVisible = false;
+    addConstantVisibleClike (formName) {
+      this.$refs[formName].validate((valid) => {
+
+        if (valid) {
+          if (this.operation == 'add') {
+            console.log(this.addConstantform)
+            this.constantDefinitionData.push(this.addConstantform)
+          }
+          console.log(this.constantDefinitionData)
+          this.addConstantVisible = false;
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+
+
+
     },
     deleteAllClick () {
       this.parameterDefinitionData = []
       this.deleteAllParameterDefinitionVisible = false
+    },
+    visible (e, formname, name) {
+      console.log(e)
+      if (e) {
+        formname[name].value = 'GET'
+      }
     }
   },
   components: {
@@ -960,6 +1024,7 @@ export default {
       background-color: #e6f7ff;
     }
     .delete-all {
+      box-sizing: border-box;
       margin: 16px 0;
       padding: 0 10px;
       width: 1025px;

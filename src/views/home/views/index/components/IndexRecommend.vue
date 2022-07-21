@@ -114,13 +114,13 @@ export default {
           position: relative;
           color: white;
           top: 17px;
-          right: 15px;
+          right: 6px;
           font-size: 12px;
         }
         .cart-signn-img {
           position: relative;
-          right: 22px;
-          width: 55px;
+          right: 12px;
+          width: 60px;
         }
       }
       .content-title {

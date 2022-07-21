@@ -120,7 +120,7 @@
           <el-button
             type="primary"
             size="small"
-            @click="next"
+            @click="next('ruleForm')"
           >下一步</el-button>
           <el-button
             size="small"
@@ -164,11 +164,11 @@ export default {
         }`,
         failExample: `例：
         { 
-                  "code":0,
+                  "code":400,
                   "message":"校验完成",
                   "data":{
                     "result":1,
-                    "remark":"验证通过"
+                    "remark":"验证失败"
                   }
         }`,
         fail: '',
@@ -195,8 +195,17 @@ export default {
     resetForm (formName) {
       this.$refs[formName].resetFields();
     },
-    next () {
-      this.$emit('next');
+    next (formName) {
+      this.$refs[formName].validate((valid) => {
+        console.log('asdasd')
+        if (valid) {
+          this.$emit('next');
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+
     },
     last () {
       this.$emit('last')

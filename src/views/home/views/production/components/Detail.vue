@@ -111,6 +111,7 @@
 <script>
 
 import axios from 'axios'
+import { Loading } from 'element-ui';
 export default {
   name: 'ProductionDetail',
   data () {
@@ -123,19 +124,34 @@ export default {
   },
   methods: {
     getPopularityList () {
+      this.loadingInstance = Loading.service({
+        // 动画中的文字
+        text: '加载中',
+        // 要加载动画的容器
+        target: '.index'
+      });
       axios.get("http://localhost:8080/home/popularity")
         .then((res) => {
           if (res.data) {
             this.popularityList = res.data.popularityList
+            this.loadingInstance.close();
             console.log(res)
           }
         })
     },
     getDetail () {
-      axios.get("http://localhost:8080/home/detail?id=" + this.$route.query.id)
+      // axios.get("http://localhost:8080/home/detail?id=" + this.$route.query.id)
+      //   .then((res) => {
+      //     if (res.data) {
+      //       this.detail = res.data.detail
+      //       console.log(this.detail)
+      //     }
+      //   })
+      axios.post("http://localhost:8080/home/detail", { id: this.$route.query.id })
         .then((res) => {
+          console.log(res)
           if (res.data) {
-            this.detail = res.data.detail
+            this.detail = res.data
             console.log(this.detail)
           }
         })
