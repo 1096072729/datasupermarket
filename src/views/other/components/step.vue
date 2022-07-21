@@ -3,7 +3,7 @@
     <div class="m-steps">
       <div
         :class="['m-steps-item',
-          { 'finished': current > n,
+         { 'finished': current > n,
             'process': current === n && n !== totalSteps,
             'last-process': current === totalSteps && n === totalSteps,
             'middle-wait': current < n && n !== totalSteps,
@@ -12,21 +12,28 @@
         ]"
         v-for="n in totalSteps"
         :key="n"
-        @click="onChange(n)"
       >
+        <!-- @click="onChange(n)" -->
+        <!-- { 'finished': current > n,
+            'process': current === n && n !== totalSteps,
+            'last-process': current === totalSteps && n === totalSteps,
+            'middle-wait': current < n && n !== totalSteps,
+            'last-wait': current < n && n === totalSteps,
+          } -->
         <div class="m-steps-icon">
-          <span
+          <!-- <span
             class="u-icon"
             v-if="current<=n"
           >{{ n }}</span>
           <span
             class="u-icon"
             v-else
-          >✓</span>
+          >✓</span> -->
+          <span class="u-icon">{{ n }}</span>
         </div>
         <div class="m-steps-content">
           <div class="u-steps-title">{{ stepsLabel[n-1] || 'S ' + n }}</div>
-          <div class="u-steps-description">{{ stepsDesc[n-1] || 'Desc ' + n }}</div>
+          <!-- <div class="u-steps-description">{{ stepsDesc[n-1] || 'Desc ' + n }}</div> -->
         </div>
       </div>
     </div>
@@ -50,7 +57,7 @@ export default {
     },
     totalSteps: { // 总的步骤数
       type: Number,
-      default: 3
+      default: 4
     },
     currentStep: { // 当前选中的步骤
       type: Number,
@@ -72,9 +79,15 @@ export default {
       }
     }
   }
+  ,
+  watch: {
+    currentStep () {
+      this.onChange(this.currentStep)
+    }
+  }
 }
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .m-steps-area {
   width: 1100px;
   margin: 0px auto;
@@ -126,9 +139,9 @@ export default {
       .m-steps-icon {
         background: #fff;
         border: 1px solid rgba(0, 0, 0, 0.25);
-        border-color: #1890ff;
+        // border-color: #1890ff;
         .u-icon {
-          color: #1890ff;
+          // color: #1890ff;
         }
       }
       .m-steps-content {

@@ -27,7 +27,7 @@ let data = Mock.mock({
       ],
     },
   ],
-  total: 300,
+  total: 10000,
   productionList: [],
   // 'productionList|8': [
   //   {
@@ -69,78 +69,79 @@ let data = Mock.mock({
 });
 
 let popularityList = Mock.mock({
-  'popularityList|8': [
-    {
-      'id|+1': 0,
-      title: 'TESsaddddddddddddasdasdddddddddasd',
-      imgUrl: banner1,
-      usageScenarios: ['大白天'],
-      'type|1': [
-        '数据服务',
-        '数据分析报告',
-        '数据报表',
-        '数据模型',
-        '通用软件',
-        '其他',
-      ],
-      'serviceProvider|1': [
-        '阿斯顿',
-        '大实打',
-        '莫阿斯顿',
-        '青蛙撒',
-        '萨阿瑟东',
-      ],
-      launchTime: '@date(yyyy-MM-dd)',
-      'price|+1': 9090,
-      'viewsNumber|1-1000': 1,
-      'appliedNumber|1-1000': 1,
-    },
-  ],
+  'popularityList|8': [],
+  // [
+  //   {
+  //     'id|+1': 0,
+  //     title: 'TESsaddddddddddddasdasdddddddddasd',
+  //     imgUrl: banner1,
+  //     usageScenarios: ['大白天'],
+  //     'type|1': [
+  //       '数据服务',
+  //       '数据分析报告',
+  //       '数据报表',
+  //       '数据模型',
+  //       '通用软件',
+  //       '其他',
+  //     ],
+  //     'serviceProvider|1': [
+  //       '阿斯顿',
+  //       '大实打',
+  //       '莫阿斯顿',
+  //       '青蛙撒',
+  //       '萨阿瑟东',
+  //     ],
+  //     launchTime: '@date(yyyy-MM-dd)',
+  //     'price|+1': 9090,
+  //     'viewsNumber|1-1000': 1,
+  //     'appliedNumber|1-1000': 1,
+  //   },
+  // ],
 });
-let detail = Mock.mock({
-  'detail|1': [
-    {
-      'id|+1': 0,
-      'title|1': [
-        '云原生数据库 TDSQL-C',
-        '轻量应用服务器',
-        '云硬盘',
-        '即时通信 IM',
-        '腾讯云微搭低代码',
-      ],
-      imgUrl: banner1,
-      'usageScenarios|1': ['大白天'],
-      'type|1': [
-        '数据服务',
-        '数据分析报告',
-        '数据报表',
-        '数据模型',
-        '通用软件',
-        '其他',
-      ],
-      'serviceProvider|1': [
-        '阿斯顿',
-        '大实打',
-        '莫阿斯顿',
-        '青蛙撒',
-        '萨阿瑟东',
-      ],
-      launchTime: '@date(yyyy-MM-dd)',
-      'price|+1': 9090,
-      'viewsNumber|1-1000': 1,
-      'appliedNumber|1-1000': 1,
-      pricebg: backgroundImg,
-      processImg: processImg,
-      'field|1': ['医疗', '证券', '稀土资源', '教育', '娱乐'],
-      synopsis: '牙髓炎days打压试验电压时调用',
-    },
-  ],
-});
+// let detail = Mock.mock({
+//   'detail|1': [
+//     {
+//       'id|+1': 0,
+//       'title|1': [
+//         '云原生数据库 TDSQL-C',
+//         '轻量应用服务器',
+//         '云硬盘',
+//         '即时通信 IM',
+//         '腾讯云微搭低代码',
+//       ],
+//       imgUrl: banner1,
+//       'usageScenarios|1': ['大白天'],
+//       'type|1': [
+//         '数据服务',
+//         '数据分析报告',
+//         '数据报表',
+//         '数据模型',
+//         '通用软件',
+//         '其他',
+//       ],
+//       'serviceProvider|1': [
+//         '阿斯顿',
+//         '大实打',
+//         '莫阿斯顿',
+//         '青蛙撒',
+//         '萨阿瑟东',
+//       ],
+//       launchTime: '@date(yyyy-MM-dd)',
+//       'price|+1': 9090,
+//       'viewsNumber|1-1000': 1,
+//       'appliedNumber|1-1000': 1,
+//       pricebg: backgroundImg,
+//       processImg: processImg,
+//       'field|1': ['医疗', '证券', '稀土资源', '教育', '娱乐'],
+//       synopsis: '牙髓炎days打压试验电压时调用',
+//     },
+//   ],
+// });
 
 let uptateList = Mock.mock({
-  total: 300,
+  total: 10000,
   page: 1,
-  'productionList|300': [
+  'productionList|10000': [
     {
       'id|+1': 0,
       'title|1': [
@@ -175,10 +176,27 @@ let uptateList = Mock.mock({
       'price|+10000': 50000,
       'viewsNumber|1-1000': 1,
       'appliedNumber|1-1000': 1,
-      'price|+1': 9090,
+      'price|+2q000': 9090,
       pricebg: backgroundImg,
       processImg: processImg,
-      'field|1': ['医疗', '证券', '稀土资源', '教育', '娱乐'],
+      'field|1': [
+        '全部',
+        '科技创新',
+        '财务金融',
+        '公共安全',
+        '机构团体',
+        '法律服务',
+        '市场监管',
+        '资源能源',
+        '安全生产',
+        '生活服务',
+        '信用服务',
+        '气象服务',
+        '教育文化',
+        '社保就业',
+        '社会救助',
+        '商贸互通',
+      ],
       synopsis: '牙髓炎days打压试验电压时调用',
     },
   ],
@@ -194,6 +212,21 @@ let apiTest = Mock.mock({
     }`,
 });
 
+function by(name) {
+  return function (o, p) {
+    let a, b;
+    a = o[name];
+    b = p[name];
+    if (a === b) {
+      return 0;
+    }
+    if (typeof a === typeof b) {
+      return a < b ? -1 : 1;
+    }
+    return typeof a < typeof b ? -1 : 1;
+  };
+}
+
 Mock.mock(/home\/production/, 'get', () => {
   let list = JSON.parse(JSON.stringify(uptateList));
 
@@ -202,12 +235,10 @@ Mock.mock(/home\/production/, 'get', () => {
   return data;
 });
 
-// Mock.mock(/home\/popularity/, 'get', () => {
-//   //三个参数。第一个：路径，第二个：请求方式post/get，第三个：回调，返回值
-//   return popularityList;
-// });
 Mock.mock(RegExp('/home/popularity'), 'get', () => {
   //三个参数。第一个：路径，第二个：请求方式post/get，第三个：回调，返回值
+  let list = JSON.parse(JSON.stringify(uptateList));
+  popularityList.popularityList = list.productionList.slice(0, 8);
   return popularityList;
 });
 
@@ -223,7 +254,6 @@ Mock.mock(RegExp('/home/detail'), 'post', req => {
       return uptateList.productionList[i];
     }
   }
-  return detail;
 });
 
 Mock.mock(RegExp('/upload'), 'post', () => {
@@ -232,15 +262,38 @@ Mock.mock(RegExp('/upload'), 'post', () => {
 Mock.mock(RegExp('/home/production/update'), 'post', req => {
   let list = JSON.parse(JSON.stringify(uptateList));
   // const { searchValue, type ,field ,currentPage ,pageSize,minprice} = JSON.parse(req.body); //将传递进来的数据保存
-  const { pageSize, currentPage, type } = JSON.parse(req.body); //将传递进来的数据保存
+  const {
+    pageSize,
+    currentPage,
+    type,
+    field,
+    minPrice,
+    maxPrice,
+    keyValue,
+    reserve,
+  } = JSON.parse(req.body); //将传递进来的数据保存
   let productionList = [];
   list.page = currentPage;
-  for (const item of list.productionList) {
-    if (item.type == type) {
-      productionList.push(item);
+
+  for (let i = 0; i < uptateList.productionList.length; i++) {
+    //
+    if (
+      (type == uptateList.productionList[i].type || type == '全部') &&
+      (field == uptateList.productionList[i].field || field == '全部') &&
+      minPrice <= uptateList.productionList[i].price &&
+      maxPrice >= uptateList.productionList[i].price
+    ) {
+      productionList.push(uptateList.productionList[i]);
     }
   }
-  list.productionList = list.productionList.slice(
+  console.log(keyValue, reserve);
+  productionList.sort(by(keyValue));
+  if (reserve) {
+    productionList.reverse();
+  }
+
+  list.total = productionList.length;
+  list.productionList = productionList.slice(
     currentPage * pageSize - pageSize,
     currentPage * pageSize
   );

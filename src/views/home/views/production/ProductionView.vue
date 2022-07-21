@@ -82,7 +82,9 @@ export default {
     handleLaunchTime (keyValue, reserve) {
       // console.log(keyValue)
       // console.log(reserve)
-      this.$refs.productionList.sort(keyValue, reserve)
+      // this.$refs.productionList.sort(keyValue, reserve)
+      this.$refs.productionList.keyValue=keyValue
+      this.$refs.productionList.reserve=reserve
     },
     handleArrange (arrange) {
       this.$refs.productionList.handleArrange(arrange)

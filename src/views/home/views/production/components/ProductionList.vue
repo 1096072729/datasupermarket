@@ -111,7 +111,7 @@ export default {
     return {
       list: [],
       arrange: 'block',
-      pageSize: 8,
+      pageSize: 12,
       search: '',
       type: '全部',
       field: '全部',
@@ -121,6 +121,8 @@ export default {
       productionList: [],
       total: 0,
       loadingInstance: null,
+      keyValue: '',
+      reserve: ''
     }
   },
   props: {
@@ -128,31 +130,26 @@ export default {
     oldTotal: Number
   },
   methods: {
-    sort (sortKey, direction) {
-      // console.log('asdaasdddddddddddddddddddsd')
-      // console.log(this.list)
-      this.list.sort(this.by(sortKey))
-      if (direction == true) { this.list.reverse(); }
-    },
+
     handleArrange (arrange) {
       this.arrange = arrange;
     },
-    by (name) {
-      return function (o, p) {
-        let a, b;
-        a = o[name];
-        b = p[name];
-        if (a === b) {
-          return 0;
-        }
-        if (typeof a === typeof b) {
-          return a < b ? -1 : 1;
-        }
-        return typeof a < typeof b ? -1 : 1;
+    // by (name) {
+    //   return function (o, p) {
+    //     let a, b;
+    //     a = o[name];
+    //     b = p[name];
+    //     if (a === b) {
+    //       return 0;
+    //     }
+    //     if (typeof a === typeof b) {
+    //       return a < b ? -1 : 1;
+    //     }
+    //     return typeof a < typeof b ? -1 : 1;
 
-      }
+    //   }
 
-    },
+    // },
     toDetail (id) {
       this.$router.push({ path: '/detail', query: { id: id } })
     },
@@ -167,7 +164,17 @@ export default {
         // 要加载动画的容器
         target: '.index'
       });
-      axios.post("http://localhost:8080/home/production/update", { search: this.searchValue, type: this.type, field: this.field, minPrice: this.minPrice, maxPrice: this.maxPrice, pageSize: this.pageSize, currentPage: this.currentPage })
+      axios.post("http://localhost:8080/home/production/update", {
+        search: this.searchValue,
+        type: this.type,
+        field: this.field,
+        minPrice: this.minPrice,
+        maxPrice: this.maxPrice,
+        pageSize: this.pageSize,
+        currentPage: this.currentPage,
+        keyValue: this.keyValue,
+        reserve: this.reserve
+      })
         .then((res) => {
           this.updateSuc(res)
 
@@ -221,8 +228,17 @@ export default {
       this.updateProduct()
     },
     pageSize () {
+      console.log(this.pageSize)
       this.updateProduct()
-    }
+    },
+    keyValue () {
+      this.updateProduct()
+    },
+    reserve () {
+      this.updateProduct()
+    },
+
+
 
   }
 }

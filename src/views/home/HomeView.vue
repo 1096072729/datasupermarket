@@ -2,10 +2,9 @@
   <div class="home">
 
     <home-header></home-header>
-    <keep-alive exclude="InvitaionView">
 
       <router-view />
-    </keep-alive>
+ 
 
   </div>
 </template>
@@ -13,7 +12,7 @@
 <script>
 
 import HomeHeader from '@/views/home/components/HomeHeader.vue'
-// import drawMixin from "@/utils/drawMixin.js";
+
 
 export default {
   name: 'HomeView',
@@ -26,10 +25,6 @@ export default {
   // mixins: [drawMixin],
   components: {
     HomeHeader
-  },
-  mounted () {
-    // this.routes = this.$router.options.routes;
-    // console.log(this.routes);
   }
 }
 </script>

@@ -26,12 +26,12 @@
             <el-step title="上传证明"></el-step>
           </el-steps> -->
           <steps-component
-            :currentStep="1"
-            :totalSteps="3"
+            :currentStep="active"
+            :totalSteps="4"
             :stepsLabel="stepsLabel"
-            :stepsDesc="stepsDesc"
             @change="onChange"
           ></steps-component>
+          <!-- :stepsDesc="stepsDesc" -->
 
 
 
@@ -40,18 +40,18 @@
 
 
           <div class="step-content">
-            <div v-show="active==0">
+            <div v-show="active==1">
 
               <create-form-one @next="next"></create-form-one>
             </div>
-            <div v-show="active==1">
+            <div v-show="active==2">
 
               <create-form-two
                 @next="next"
                 @last="last"
               ></create-form-two>
             </div>
-            <div v-show="active==2">
+            <div v-show="active==3">
 
               <create-form-three
                 @next="next"
@@ -59,7 +59,7 @@
               >
               </create-form-three>
             </div>
-            <div v-show="active==3">
+            <div v-show="active==4">
 
               <create-form-four
                 @create="create"
@@ -84,10 +84,10 @@ export default {
   name: 'CreateProduction',
   data () {
     return {
-      active: 0,
+      active: 2,
 
-      stepsLabel: ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'],
-      stepsDesc: ['description 1', 'description 2', 'description 3', 'description 4', 'description 5']
+      stepsLabel: ['填写基本信息', '定义API请求与后端服务', '定义返回结果', '上传证明'],
+      stepsDesc: ['', '', '', '', 'description 5']
     }
   },
   components: {
@@ -110,6 +110,9 @@ export default {
         message: '恭喜你，创建产品成功',
         type: 'success'
       });
+    },
+    onChange (active) {
+      this.active = active
     }
   }
 }

@@ -91,6 +91,7 @@
         <el-button
           plain
           size="mini"
+          @click="setPriceClick"
         >确认</el-button>
         <el-button
           plain
@@ -188,7 +189,6 @@ export default {
   ,
   methods: {
     select (id, value) {
-
       console.log(this.searchLimit)
       console.log(id + value)
       console.log(this.Limitlist)
@@ -249,6 +249,9 @@ export default {
         this.maxPrice = 100000000000000000000
       }
        this.$emit('changePrice', this.minPrice,this.maxPrice)
+    },
+    setPriceClick(){
+      this.$emit('changePrice', this.minPrice,this.maxPrice)
     }
   },
 

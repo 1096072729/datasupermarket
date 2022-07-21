@@ -88,6 +88,7 @@
       <el-divider></el-divider>
       <div class="right-content">
         <div
+          @click="toDetail(item.id)"
           class="popularity"
           v-for="(item, index) in popularityList"
           :key="index"
@@ -155,7 +156,10 @@ export default {
             console.log(this.detail)
           }
         })
-    }
+    },
+    toDetail (id) {
+      this.$router.push( { path: '/detail', query: { id: id } })
+    },
   },
   mounted () {
     this.getPopularityList();
@@ -178,7 +182,7 @@ export default {
   display: flex;
   .detail-left {
     // background-color: #f5f7fa;
-    height: 100%;
+    height: 680px;
     margin-right: 15px;
 
     flex: 1;
@@ -255,7 +259,7 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 250px;
+      height: 275px;
       font-size: 14px;
       line-height: 30px;
       // height: 200px;

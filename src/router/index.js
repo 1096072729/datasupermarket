@@ -31,30 +31,24 @@ const routes = [
           import('../views/home/views/production/ProductionView.vue'),
       },
       {
-        path: '',
+        path: '/demand',
         meta: {
           title: '需求大厅',
         },
       },
       {
-        path: '/test',
+        path: '/resources',
         meta: {
           isAuth: true,
           title: '资源目录',
         },
-        component: () =>
-          import('../views/home/views/production/components/APItest.vue'),
       },
       {
-        path: '/create',
+        path: '/notice',
         meta: {
           isAuth: true,
           title: '通知公告',
         },
-        component: () =>
-          import(
-            '../views/home/views/production/components/CreateProduction.vue'
-          ),
       },
       {
         path: '/invitation',
@@ -65,13 +59,51 @@ const routes = [
           import('../views/home/views/invitation/InvitationView.vue'),
       },
       {
-        path: '/detail',
+        path: '/about',
         meta: {
           isAuth: true,
           title: '关于我们',
         },
+      },
+      // {
+      //   path: '/detail',
+      //   meta: {
+      //     isAuth: true,
+      //     title: '关于我们',
+      //   },
+      //   component: () =>
+      //     import('../views/home/views/production/components/Detail.vue'),
+      // },
+    ],
+  },
+
+  {
+    path: '/other',
+
+    component: () => import('../views/home/HomeView.vue'),
+    children: [
+      {
+        path: '/detail',
+        meta: {
+          title: '详情',
+        },
         component: () =>
           import('../views/home/views/production/components/Detail.vue'),
+      },
+      {
+        path: '/create',
+        meta: {
+          title: '创建产品',
+        },
+        component: () =>
+          import('../views/other/components/CreateProduction.vue'),
+      },
+      {
+        path: '/test',
+        meta: {
+          title: 'API测试',
+        },
+        component: () => import('../views/other/components/APItest.vue'),
       },
     ],
   },
@@ -127,11 +159,9 @@ const router = new VueRouter({
 //   //     return to;
 //   //   }
 //   // }
-//   console.log(to);
-//   console.log('asdddddddddddddddddddddddddddddddddaaaaaasdasdasdasd   ');
-//   return '/auth/login';
-// });
+
 const VueRouterPush = Router.prototype.push;
+
 Router.prototype.push = function push(to) {
   return VueRouterPush.call(this, to).catch(err => err);
 };

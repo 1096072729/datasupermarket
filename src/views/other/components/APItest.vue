@@ -1,5 +1,5 @@
 <template>
-  <div class="create-production">
+  <div class="create-production,ProductionDetail">
     <div class="path">
       <el-breadcrumb
         class="breadcrumb"
