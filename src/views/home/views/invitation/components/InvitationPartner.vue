@@ -29,7 +29,10 @@
 export default {
   name: 'InvitationPartner',
   props: {
-    partnerList: []
+    partnerList: {
+      type: Array,
+      default: () => []
+    }
   }
 
 }

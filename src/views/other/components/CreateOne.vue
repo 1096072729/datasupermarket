@@ -24,7 +24,7 @@
       <el-form-item
         label="产品标签"
         multiple
-        prop="dynamicTags"
+        prop="dynamicTags.value"
       >
         <el-select
           class="dynamic-tags"
@@ -167,14 +167,14 @@ let validateSetPrice = (rule, value, callback) => {
     callback()
   }
 };
-let dynamicTagsValidate = (rule, value, callback) => {
-  console.log(value.value.length)
-  if (value.value.length == 0) {
-    callback(new Error("必须选择标签"));
-  }
-  callback()
+// let dynamicTagsValidate = (rule, value, callback) => {
+//   console.log(value.value.length)
+//   if (value.value.length == 0) {
+//     callback(new Error("必须选择标签"));
+//   }
+//   callback()
 
-};
+// };
 
 
 
@@ -245,11 +245,13 @@ export default {
           { min: 3, max: 64, message: '长度在 3 到 64 个字符', trigger: 'blur' },
           { validator: validateName, trigger: 'blur', required: true }
         ],
-        dynamicTags:
-          [
+        dynamicTags: {
+          value: [
             // { required: true, message: '请输入产品标签', trigger: 'blur' },
-            { validator: dynamicTagsValidate, trigger: 'blur', required: true }
+            { required: true, message: '必须选择标签', trigger: 'blur' }
           ]
+        }
+
         ,
         APISummary: [
           { required: true, message: '请输入API概述', trigger: 'change' },
@@ -301,18 +303,17 @@ export default {
       this.inputValue = '';
     },
     submitForm (formName) {
-      console.log('submitForm')
-      console.log(formName)
-      this.$emit('next');
-      // this.$refs[formName].validate((valid) => {
-      //   console.log('asdasd')
-      //   if (valid) {
-      //     this.$emit('next');
-      //   } else {
-      //     console.log('error submit!!');
-      //     return false;
-      //   }
-      // });
+
+      // this.$emit('next');
+      this.$refs[formName].validate((valid) => {
+        console.log('asdasd')
+        if (valid) {
+          this.$emit('next', this.ruleForm);
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
     },
     visible (e) {
       if (e) {

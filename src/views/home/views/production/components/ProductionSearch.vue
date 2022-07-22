@@ -41,7 +41,10 @@ export default {
     }
   },
   props: {
-    recommendList: Array
+    recommendList: {
+      type: Array,
+      default: () => []
+    }
   },
   methods: {
     search () {

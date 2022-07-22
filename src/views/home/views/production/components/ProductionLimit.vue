@@ -1,26 +1,7 @@
 <template>
   <div class="limit">
     <div class="in-box">
-      <!-- <div
-        class="criteria"
-        v-for="item of searchLimit"
-        :key="item.id"
-      >
-        <span class="criteria-title">{{item.criteriaTitle}}：</span>
 
-        <span
-          class="criteria-content"
-          v-for="content,index of item.criteriaContent"
-          :key="index"
-          @click="select(item.id,content)"
-          :class="{ active:a(item.id,content) }"
-        >{{content}}</span>
-        <el-button
-          plain
-          size="mini"
-          class="el-icon-arrow-down open-strip"
-        >更多</el-button>
-      </div> -->
       <div class="criteria">
         <span class="criteria-title">产品分类：</span>
         <span
@@ -160,15 +141,9 @@ export default {
   name: 'ProductionLimit',
   data () {
     return {
-      typeLimitList: ['全部',
-        '数据服务',
-        '数据分析报告',
-        '数据报表',
-        '数据模型',
-        '通用软件',
-        '其他',],
-      fieldLimitList: ['全部', '科技创新', '财务金融', '公共安全', '机构团体', '法律服务', '市场监管', '资源能源', '安全生产', '生活服务', '信用服务', '气象服务', '教育文化', '社保就业', '社会救助', '商贸互通'],
-      priceLimitList: ['全部', '10万以下', '10-500万', '500-1000万', '1000万以上'],
+      typeLimitList: [],
+      fieldLimitList: [],
+      priceLimitList: [],
       Limitlist: [],
       length: 0,
       lastClick: '',
@@ -183,21 +158,22 @@ export default {
     }
   },
   props: {
-    searchLimit: Array,
-    productionList: Array
+    searchLimit: {
+      type: Object,
+      default: () => { }
+    },
+    productionList: {
+      type: Array,
+      default: () => []
+    }
   }
   ,
   methods: {
     select (id, value) {
-      console.log(this.searchLimit)
-      console.log(id + value)
-      console.log(this.Limitlist)
+
       this.Limitlist[id] = value
     },
-    a (id, content) {
-      console.log(this.Limitlist)
-      return this.Limitlist[id] == content
-    },
+
     handleLaunchTime (sortKey) {
       if (sortKey == this.lastClick) {
         this.clickNumber = this.clickNumber + 1;
@@ -248,16 +224,22 @@ export default {
         this.minPrice = 10000000
         this.maxPrice = 100000000000000000000
       }
-       this.$emit('changePrice', this.minPrice,this.maxPrice)
+      this.$emit('changePrice', this.minPrice, this.maxPrice)
     },
-    setPriceClick(){
-      this.$emit('changePrice', this.minPrice,this.maxPrice)
+    setPriceClick () {
+      this.price = '自定义'
+      this.$emit('changePrice', this.minPrice, this.maxPrice)
     }
   },
 
   watch: {
     productionList () {
       this.length = this.productionList.length
+    },
+    searchLimit () {
+      this.typeLimitList = this.searchLimit.typeLimitList
+      this.fieldLimitList = this.searchLimit.fieldLimitList
+      this.priceLimitList = this.searchLimit.priceLimitList
     }
   },
   computed: {

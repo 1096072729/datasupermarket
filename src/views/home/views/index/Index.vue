@@ -6,7 +6,11 @@
     <index-recommend :recommendList="recommendList"></index-recommend>
     <index-development :developmentList="developmentList"></index-development>
     <index-third-party :thirdPartyList="thirdPartyList"></index-third-party>
-    <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
+
+    <el-backtop :visibility-height="60">
+      <i class="el-icon-arrow-up"></i>
+    </el-backtop>
+
   </div>
 </template>
 
@@ -40,16 +44,14 @@ export default {
     IndexThirdParty
   },
   methods: {
-    getHomeInfo () {
+    async getHomeInfo () {
       this.loadingInstance = Loading.service({
         // 动画中的文字
         text: '加载中',
         // 要加载动画的容器
         target: '.index'
       });
-
-
-      axios.get("http://localhost:8080/api/home")
+      await axios.get("http://localhost:8080/api/home")
         .then((res) => {
           this.getHomeInfoSuc(res);
           this.loadingInstance.close();

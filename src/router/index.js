@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Router from 'vue-router';
-
+import store from '@/store';
 import HomeView from '../views/home/HomeView.vue';
 
 Vue.use(VueRouter);
@@ -29,6 +29,16 @@ const routes = [
 
         component: () =>
           import('../views/home/views/production/ProductionView.vue'),
+        beforeEnter: (to, from, next) => {
+          console.log(to);
+          console.log('路由独享守卫beforeEnter');
+
+          if (store.state.user.username == '') {
+            console.log('权限不够，请登录');
+          } else {
+            next();
+          }
+        },
       },
       {
         path: '/demand',
@@ -89,6 +99,16 @@ const routes = [
         },
         component: () =>
           import('../views/home/views/production/components/Detail.vue'),
+        beforeEnter: (to, from, next) => {
+          console.log(to);
+          console.log('路由独享守卫beforeEnter');
+
+          if (store.state.user.username == '') {
+            console.log('权限不够，请登录');
+          } else {
+            next();
+          }
+        },
       },
       {
         path: '/create',
@@ -97,6 +117,16 @@ const routes = [
         },
         component: () =>
           import('../views/other/components/CreateProduction.vue'),
+        beforeEnter: (to, from, next) => {
+          console.log(to);
+          console.log('路由独享守卫beforeEnter');
+
+          if (store.state.user.username == '') {
+            console.log('权限不够，请登录');
+          } else {
+            next();
+          }
+        },
       },
       {
         path: '/test',
@@ -104,6 +134,16 @@ const routes = [
           title: 'API测试',
         },
         component: () => import('../views/other/components/APItest.vue'),
+        beforeEnter: (to, from, next) => {
+          console.log(to);
+          console.log('路由独享守卫beforeEnter');
+
+          if (store.state.user.username == '') {
+            console.log('权限不够，请登录');
+          } else {
+            next();
+          }
+        },
       },
     ],
   },

@@ -185,7 +185,7 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          this.$emit('next',this.ruleForm);
         } else {
           console.log('error submit!!');
           return false;
@@ -197,9 +197,8 @@ export default {
     },
     next (formName) {
       this.$refs[formName].validate((valid) => {
-        console.log('asdasd')
         if (valid) {
-          this.$emit('next');
+          this.$emit('next',this.f);
         } else {
           console.log('error submit!!');
           return false;

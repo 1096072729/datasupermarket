@@ -1,5 +1,9 @@
 <template>
-  <div class="index-third-party">
+  <div
+    class="index-third-party"
+    @mouseover="navigation=true"
+    @mouseout="navigation=false"
+  >
     <div class="third-party-title">
       第三方服务
     </div>
@@ -32,8 +36,22 @@
 
         </swiper-slide>
 
-
       </swiper>
+    </div>
+    <div class="swiper-navigation">
+
+      <div
+        class="swiper-prev"
+        @click="prev"
+        v-show="navigation"
+      ><span class="iconfont font">&#xe685;</span></div>
+      <!--左箭头。如果放置在swiper外面，需要自定义样式。-->
+      <div
+        class="swiper-next"
+        @click="next"
+        v-show="navigation"
+      ><span class="iconfont font">&#xe666;</span></div>
+      <!--右箭头。如果放置在swiper外面，需要自定义样式。-->
     </div>
   </div>
 </template>
@@ -52,6 +70,7 @@ export default {
         slidesPerView: 4.5,
         // initialSlide: 2,
         centeredSlides: true,
+
         coverflowEffect: {
           rotate: 5,
           stretch: 1,
@@ -65,11 +84,24 @@ export default {
         //     //你的事件
         //   },
         // },
-      }
+      },
+      navigation: false
     }
   },
+  methods: {
+    prev () {
+      this.swiper.slidePrev()
+    },
+    next () {
+      this.swiper.slideNext()
+    }
+  }
+  ,
   props: {
-    thirdPartyList: { type: Array, default: () => [] },
+    thirdPartyList: {
+      type: Array,
+      default: () => []
+    },
   },
   computed: {
     swiper () {
@@ -95,11 +127,14 @@ export default {
 
 <style lang="scss" scoped>
 .index-third-party {
-  margin: 36px auto;
-  max-width: 1100px;
+  margin: 24px 0;
+  padding: 0 400px;
+  width: 1100px;
   .third-party-title {
     text-align: center;
     font-size: 24px;
+
+    font-weight: 600;
   }
   .swiper {
     margin: 24px;
@@ -141,6 +176,45 @@ export default {
         display: -webkit-box;
         -webkit-line-clamp: 2; /*2行*/
         -webkit-box-orient: vertical;
+      }
+    }
+  }
+  .swiper-navigation {
+    height: 0;
+    display: flex;
+    justify-content: space-between;
+    .swiper-prev {
+      position: relative;
+      right: 390px;
+      bottom: 250px;
+      height: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border: 1px solid black;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      .font {
+        font-size: 24px;
+      }
+    }
+    .swiper-next {
+      position: relative;
+      left: 390px;
+      bottom: 250px;
+      height: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border: 1px solid black;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      .font {
+        font-size: 24px;
       }
     }
   }

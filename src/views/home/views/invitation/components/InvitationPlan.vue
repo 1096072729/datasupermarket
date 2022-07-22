@@ -44,7 +44,10 @@ export default {
     }
   },
   props: {
-    planList: Array
+    planList: {
+      type: Array,
+      default: () => []
+    }
   }
 
 }

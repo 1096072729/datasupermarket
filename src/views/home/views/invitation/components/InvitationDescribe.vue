@@ -27,8 +27,14 @@
 export default {
   name: 'InvitationDescribe',
   props: {
-    imgUrl: String,
-    Content: Array
+    imgUrl: {
+      type: String,
+      default: ''
+    },
+    Content: {
+      type: Array,
+      default: () => []
+    }
   },
 
 }

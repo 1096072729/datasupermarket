@@ -54,14 +54,14 @@ export default {
     }
   },
   methods: {
-    getInvitation () {
+   async getInvitation () {
       this.loadingInstance = Loading.service({
         // 动画中的文字
         text: '加载中',
         // 要加载动画的容器
         target: '.index'
       });
-      axios.get("http://localhost:8080/home/invitation").then(
+    await  axios.get("http://localhost:8080/home/invitation").then(
         (res) => {
           this.getInvitationSuc(res);
           this.loadingInstance.close();

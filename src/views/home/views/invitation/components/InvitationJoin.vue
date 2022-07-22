@@ -23,7 +23,10 @@ export default {
     }
   },
   props: {
-    joinImg: String
+    joinImg: {
+      type: String,
+      default: ''
+    }
   }
 
 }

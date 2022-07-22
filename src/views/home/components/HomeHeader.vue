@@ -19,22 +19,7 @@
         >
           {{item.meta.title}}
         </el-menu-item>
-        <!-- <router-link
-          tag="el-menu-item"
-          v-for="(item) of this.$router.options.routes[0].children"
-          :key="item.path"
-          :index="item.path"
-          class="item"
-          :to="item.path"
-        >{{item.meta.title}}</router-link> -->
-        <!-- <el-menu-item
-          v-for="(item,index) of this.$router.options.routes[0].children"
-          :key="index"
-          :index="item.path"
-          class="item"
-          router="true"
-        >{{item.meta.title}}
-        </el-menu-item> -->
+
       </el-menu>
     </div>
 
@@ -50,18 +35,23 @@
         @focusin="search"
         @focusout="unsearch"
       >
+        <!-- @focusout="unsearch" -->
 
         <input
           class="search-input"
           v-model="input"
           placeholder="请输入内容"
+          :style="{width:inputWidth}"
         >
         <div
           class="search-icon"
           v-if="showIcon=='focus'"
         >
 
-          <span class="iconfont icon">&#xe651;</span>|<span class="iconfont icon">&#xe64d;</span>
+          <span class="iconfont icon">&#xe651;</span>|<span
+            class="iconfont icon"
+            @click="input=' '"
+          >&#xe64d;</span>
         </div>
         <div
           class="search-icon"
@@ -76,13 +66,17 @@
           :style="{ height:height,width:width,opacity:opacity}"
         >
           <div class="search-content-title-box">
-            <span class="search-content-title">
+            <span
+              class="search-content-title"
+              v-show="searchContent"
+            >
               热门搜索
             </span>
 
           </div>
-          <el-divider></el-divider>
+          <el-divider v-show="searchContent"></el-divider>
           <div><span
+              v-show="searchContent"
               @click="input=item"
               class="search-content-content"
               v-for="item,index of searchList "
@@ -154,7 +148,9 @@ export default {
       height: 0,
       width: 0,
       opacity: 0,
-      searchList: ['啊实打实大师大小乔', '好事', '阿三大苏打']
+      searchList: ['啊实打实大师大小乔', '好事', '阿三大苏打'],
+      searchContent: false,
+      inputWidth: '100px'
     };
   },
   methods: {
@@ -168,13 +164,18 @@ export default {
       this.width = '270px';
       this.height = '150px';
       this.opacity = 1
+      this.inputWidth = '182px'
+      this.searchContent = true;
     },
     unsearch () {
       this.showIcon = 'blur'
       this.width = '0';
       this.height = '0';
-      this.opacity = 0
+      this.opacity = 0;
+      this.inputWidth = '100px'
       console.log(this.showIcon)
+
+
     },
 
     login () {
@@ -288,10 +289,10 @@ export default {
       color: #666666;
       // margin-top: -10px;
       .search-input {
+        // &:focus {
+        //   width: 200px;
+        // }
         color: white;
-        &:focus {
-          width: 200px;
-        }
         outline: none;
 
         padding: 0 8px;

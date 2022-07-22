@@ -1,5 +1,5 @@
 <template>
-  <div class="create-production,ProductionDetail">
+  <div class="create-production ProductionDetail">
     <div class="path">
       <el-breadcrumb
         class="breadcrumb"
@@ -27,6 +27,7 @@
           <el-button
             plain
             size="small"
+            @click="textarea=``"
           >重置</el-button>
         </div>
         <p class="title top">Reponse</p>
@@ -53,16 +54,24 @@
 <script>
 import axios from 'axios'
 
+import { Loading } from 'element-ui';
 export default {
   name: 'CreateProduction',
   data () {
     return {
       testContent: '',
-      textarea: ``
+      textarea: ``,
+      loadingInstance: null,
     }
   },
   methods: {
     postApiTest () {
+      this.loadingInstance = Loading.service({
+        // 动画中的文字
+        text: '加载中',
+        // 要加载动画的容器
+        target: '.index'
+      });
       axios.post("http://localhost:8080/create/test", { testContent: this.testContent })
         .then((res) => {
           this.postApiTestSuc(res);
@@ -73,12 +82,16 @@ export default {
       let data = res.data
       if (data) {
         this.textarea = data.textarea
+        this.loadingInstance.close();
       }
     },
     returnLast () {
 
       this.$router.go(-1)
     }
+  },
+  destroyed () {
+    console.log('销毁了组件')
   }
 
 }

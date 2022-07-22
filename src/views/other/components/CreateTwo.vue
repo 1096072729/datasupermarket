@@ -5,7 +5,7 @@
     <el-form
       :model="ruleForm"
       :rules="rules"
-      ref="ruleFormOne"
+      ref="ruleForm"
       label-width="200px"
       class="demo-ruleForm"
       size="small"
@@ -31,7 +31,7 @@
 
       <el-form-item
         label="Method"
-        prop="method"
+        prop="method.value"
       >
         <el-select
           v-model="ruleForm.method.value"
@@ -57,7 +57,7 @@
       </el-form-item>
       <el-form-item
         label="后端请求方式"
-        prop="backendMethod"
+        prop="backendMethod.value"
       >
         <el-select
           v-model="ruleForm.backendMethod.value"
@@ -117,15 +117,7 @@
           show-icon
         >
         </el-alert>
-        <!-- 
-        <el-alert
-          class="parameter-alert"
-          :title="selectNumberMessage"
-          close-text="删除全部"
-          type="warning"
-          @close="deleteAllParameterDefinition"
-        >
-        </el-alert> -->
+
 
         <div class="delete-all">
           <div class="delete-all-left"> <span class="iconfont">&#xe64f;</span><span>{{selectNumberMessage}}</span></div>
@@ -329,7 +321,7 @@
       >
         <el-form-item
           label="参数名"
-          prop="name"
+          prop="name.value"
           :label-width="formLabelWidth"
         >
           <el-input
@@ -341,7 +333,7 @@
         </el-form-item>
         <el-form-item
           label="参数位置"
-          prop="place"
+          prop="place.value"
           :label-width="formLabelWidth"
         >
           <el-select
@@ -415,7 +407,7 @@
         <el-form-item
           label="后端位置参数"
           :label-width="formLabelWidth"
-          prop="lastPlace"
+          prop="lastPlace.value"
         >
           <el-select
             size="small"
@@ -495,7 +487,7 @@
 
         <el-form-item
           label="参数位置"
-          prop="place"
+          prop="place.value"
           :label-width="formLabelWidth"
         >
           <el-select
@@ -688,12 +680,18 @@ export default {
           { required: true, message: '请输入API名称', trigger: 'blur' },
           { min: 3, max: 255, message: '长度在 3 到 255 个字符', trigger: 'blur' }
         ],
-        method: [
-          { required: true, message: '请选择方法', trigger: 'blur' },
-        ],
-        backendMethod: [
-          { required: true, message: '请选择后端方法', trigger: 'blur' },
-        ],
+        // method: [
+        //   { required: true, message: '请选择方法', trigger: 'blur' },
+        // ],
+        method: {
+          value: [{ required: true, message: '请选择方法', trigger: 'blur' }]
+        },
+        backendMethod: {
+          value: [{ required: true, message: '请选择后端方法', trigger: 'blur' }]
+        },
+        // backendMethod: [
+        //   { required: true, message: '请选择后端方法', trigger: 'blur' },
+        // ],
         serviceAddress: [
           { required: true, message: '请填入后端服务地址', trigger: 'blur' },
           { validator: serviceAddressValidate, trigger: 'blur', required: true }
@@ -808,11 +806,13 @@ export default {
       },
       //添加自定义参数规则
       addParameterDefinitionRules: {
-        name: [{ required: true, message: '请输入参数名', trigger: 'blur' },
-        { min: 1, max: 32, message: '长度在 1 到 32 个字符', trigger: 'blur' }],
-        place: [{ required: true, message: '请输入参数位置', trigger: 'blur' }],
+        name: {
+          value: [{ required: true, message: '请输入参数名', trigger: 'blur' },
+          { min: 1, max: 32, message: '长度在 1 到 32 个字符', trigger: 'blur' }]
+        },
+        place: { value: [{ required: true, message: '请输入参数位置', trigger: 'blur' }] },
         lastName: [{ required: true, message: '请输入后端参数名称', trigger: 'blur' }],
-        lastPlace: [{ required: true, message: '请输入后端位置参数', trigger: 'blur' }],
+        lastPlace: { value: [{ required: true, message: '请输入参数位置', trigger: 'blur' }] },
         example: [{ required: true, message: '请输入示例', trigger: 'blur' }],
       },
       addConstantVisible: false,
@@ -847,10 +847,11 @@ export default {
         value: '',
         describe: ''
       },
+      //添加常量参数规则
       addConstantRules: {
         name: [{ required: true, message: '请输入参数名', trigger: 'blur' },
         { min: 1, max: 32, message: '长度在 1 到 32 个字符', trigger: 'blur' }],
-        place: [{ required: true, message: '请输入参数位置', trigger: 'blur' }],
+        place: { value: [{ required: true, message: '请输入参数位置', trigger: 'blur' }] },
         value: [{ required: true, message: '请输入参数位置', trigger: 'blur' }],
       },
       deleteAllParameterDefinitionVisible: false,
@@ -907,7 +908,15 @@ export default {
       this.inputValue = '';
     },
     next () {
-      this.$emit('next');
+      // this.$emit('next');
+      this.$refs['ruleForm'].validate((valid) => {
+        if (valid) {
+          this.$emit('next', this.ruleForm, this.parameterDefinitionData, this.constantDefinitionData);
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
     },
     last () {
       this.$emit('last')
@@ -1065,21 +1074,4 @@ export default {
   color: #999999;
   font-size: 12px;
 }
-
-// .delete-all {
-//   .delete-all-content {
-//     line-height: 24px;
-//     display: flex;
-//     .title-icon {
-//       text-align: right;
-//       width: 50px;
-//       .iconfont {
-//         padding: 0 15px;
-//       }
-//     }
-//   }
-// }
-// .el-form-item__label {
-//   padding-right: 50px;
-// }
 </style>

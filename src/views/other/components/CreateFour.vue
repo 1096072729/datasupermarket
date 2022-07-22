@@ -21,6 +21,8 @@
           multiple
           :limit="1"
           :on-exceed="handleExceed"
+          :on-success="handleAvatarSuccess"
+          v-model="ruleForm.agreement"
           accept=".rar, .zip, .doc, .docx, .pdf, .jpg"
           :file-list="ruleForm.agreement"
         >
@@ -212,7 +214,7 @@ export default {
         agreement: [
           { required: true, message: '请选择数据产品框架协议', trigger: 'blur' },
         ],
- 
+
       },
       createFormFour: {
         registrationRightImg: ''
@@ -223,11 +225,11 @@ export default {
   methods: {
 
     submitForm (formName) {
-     
-     
+
+
       this.$refs[formName].validate((valid) => {
         if (valid) {
-       this.$emit('create');
+          this.$emit('create', this.ruleForm);
         } else {
           console.log('error submit!!');
           return false;
@@ -243,6 +245,10 @@ export default {
     last () {
       this.$emit('last')
     },
+    handleAvatarSuccess(res,file){
+      console.log(res, file)
+      this.ruleForm.agreement.push(file)
+    }
   }
 }
 </script>

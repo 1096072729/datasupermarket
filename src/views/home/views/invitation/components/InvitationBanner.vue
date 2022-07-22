@@ -33,7 +33,10 @@ export default {
     }
   },
   props: {
-    banner: String
+    banner:{
+      type: String,
+      default: ''
+    }
   },
   methods: {
     // showList (i) {

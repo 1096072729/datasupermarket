@@ -41,7 +41,10 @@ export default {
     }
   },
   props: {
-    serviceList: Array
+    serviceList: {
+      type: Array,
+      default: () => []
+    }
   },
   methods: {
 

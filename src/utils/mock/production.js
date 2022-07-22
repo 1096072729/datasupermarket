@@ -21,22 +21,42 @@ let data = Mock.mock({
     'C程序设计语言',
     'C Primer Plus(第6版)',
   ],
-  'searchLimit|2-5': [
-    {
-      'id|+1': 0,
-      type: 'price',
-      criteriaTitle: '产品分类',
-      criteriaContent: [
-        '全部',
-        '数据服务',
-        '数据分析报告',
-        '数据报表',
-        '数据模型',
-        '通用软件',
-        '其他',
-      ],
-    },
-  ],
+  searchLimit: {
+    typeLimitList: [
+      '全部',
+      '数据服务',
+      '数据分析报告',
+      '数据报表',
+      '数据模型',
+      '通用软件',
+      '其他',
+    ],
+    fieldLimitList: [
+      '全部',
+      '科技创新',
+      '财务金融',
+      '公共安全',
+      '机构团体',
+      '法律服务',
+      '市场监管',
+      '资源能源',
+      '安全生产',
+      '生活服务',
+      '信用服务',
+      '气象服务',
+      '教育文化',
+      '社保就业',
+      '社会救助',
+      '商贸互通',
+    ],
+    priceLimitList: [
+      '全部',
+      '10万以下',
+      '10-500万',
+      '500-1000万',
+      '1000万以上',
+    ],
+  },
   total: 10000,
   productionList: [],
   // 'productionList|8': [
@@ -269,10 +289,14 @@ Mock.mock(RegExp('/home/detail'), 'post', req => {
 Mock.mock(RegExp('/upload'), 'post', () => {
   return;
 });
+Mock.mock(RegExp('/home/create'), 'post', () => {
+  return;
+});
 Mock.mock(RegExp('/home/production/update'), 'post', req => {
   let list = JSON.parse(JSON.stringify(uptateList));
   // const { searchValue, type ,field ,currentPage ,pageSize,minprice} = JSON.parse(req.body); //将传递进来的数据保存
   const {
+    searchValue,
     pageSize,
     currentPage,
     type,
@@ -291,11 +315,14 @@ Mock.mock(RegExp('/home/production/update'), 'post', req => {
       (type == uptateList.productionList[i].type || type == '全部') &&
       (field == uptateList.productionList[i].field || field == '全部') &&
       minPrice <= uptateList.productionList[i].price &&
-      maxPrice >= uptateList.productionList[i].price
+      maxPrice >= uptateList.productionList[i].price &&
+      (uptateList.productionList[i].title.indexOf(searchValue) !== -1 ||
+        searchValue == '')
     ) {
       productionList.push(uptateList.productionList[i]);
     }
   }
+
   console.log(keyValue, reserve);
   productionList.sort(by(keyValue));
   if (reserve) {

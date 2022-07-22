@@ -183,7 +183,10 @@ export default {
     Slide
   },
   props: {
-    developmentList: Array
+    developmentList: {
+      type: Array,
+      default: () => []
+    }
   },
   watch: {
   },

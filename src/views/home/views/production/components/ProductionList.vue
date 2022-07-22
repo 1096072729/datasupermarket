@@ -126,12 +126,19 @@ export default {
       total: 0,
       loadingInstance: null,
       keyValue: '',
-      reserve: ''
+      reserve: '',
+
     }
   },
   props: {
-    oldProductionList: Array,
-    oldTotal: Number
+    oldProductionList: {
+      type: Array,
+      default: () => []
+    },
+    oldTotal:{
+      type: Number,
+      default: () => null
+    }
   },
   methods: {
 
@@ -171,7 +178,7 @@ export default {
         target: '.index'
       });
       await axios.post("http://localhost:8080/home/production/update", {
-        search: this.searchValue,
+        searchValue: this.search,
         type: this.type,
         field: this.field,
         minPrice: this.minPrice,

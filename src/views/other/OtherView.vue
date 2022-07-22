@@ -1,11 +1,11 @@
 <template>
   <div class="other">
-    <keep-alive exclude="InvitaionView">
-      <home-header></home-header>
+
+    <home-header></home-header>
+    <keep-alive >
+
+      <router-view />
     </keep-alive>
-
-
-    <router-view />
 
   </div>
 </template>
