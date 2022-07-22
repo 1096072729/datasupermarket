@@ -84,7 +84,7 @@ export default {
   name: 'CreateProduction',
   data () {
     return {
-      active: 2,
+      active: 1,
 
       stepsLabel: ['填写基本信息', '定义API请求与后端服务', '定义返回结果', '上传证明'],
       stepsDesc: ['', '', '', '', 'description 5']

@@ -6,6 +6,7 @@
     <index-recommend :recommendList="recommendList"></index-recommend>
     <index-development :developmentList="developmentList"></index-development>
     <index-third-party :thirdPartyList="thirdPartyList"></index-third-party>
+    <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
   </div>
 </template>
 
@@ -27,6 +28,7 @@ export default {
       swiperList: [],
       recommendList: [],
       developmentList: [],
+      thirdPartyList: [],
       loadingInstance: null,
     }
   },
@@ -39,12 +41,12 @@ export default {
   },
   methods: {
     getHomeInfo () {
-this.loadingInstance = Loading.service({
-                // 动画中的文字
-                text:'加载中',
-                // 要加载动画的容器
-                target:'.index'
-            });
+      this.loadingInstance = Loading.service({
+        // 动画中的文字
+        text: '加载中',
+        // 要加载动画的容器
+        target: '.index'
+      });
 
 
       axios.get("http://localhost:8080/api/home")

@@ -89,7 +89,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .m-steps-area {
-  width: 1100px;
+  width: 1500px;
   margin: 0px auto;
   .m-steps {
     padding: 30px 0;
@@ -149,7 +149,7 @@ export default {
         .u-steps-title {
           color: rgba(0, 0, 0, 0.65);
           &:after {
-            background: #1890ff;
+            background: #dcdfe6;
             position: absolute;
             top: 16px;
             left: 100%;

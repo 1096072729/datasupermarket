@@ -10,7 +10,17 @@ Mock.setup({
   timeout: '500-1000',
 });
 let data = Mock.mock({
-  'recommendList|4': ['@csentence(5)'],
+  recommendList: [
+    'mysql',
+    '高级数据库教程',
+    'nodejs全套讲解',
+    '程序员的自我修养--链接、装载与库',
+    '深入理解计算机系统',
+    '计算机科学导论',
+    '计算机科学概论',
+    'C程序设计语言',
+    'C Primer Plus(第6版)',
+  ],
   'searchLimit|2-5': [
     {
       'id|+1': 0,

@@ -23,6 +23,9 @@
           <strong class="content-title">
             {{item.title}}
           </strong>
+          <div class="horizontal-line">
+            <!-- v-show="swiper.activeIndex==index" -->
+          </div>
           <br>
           <span class="content-synopsis">{{item.synopsis}}</span>
 
@@ -41,25 +44,50 @@ export default {
   data () {
     return {
       swiperOptions: {
+        loop: true,
         effect: 'coverflow',
-        spaceBetween: 50,
-        freeMode: true,
-        initialSlide: 3,
-        slidesPerView: 5,
+        spaceBetween: 40,
+        // freeMode: true,
+        initialSlide: 2,
+        slidesPerView: 4.5,
         // initialSlide: 2,
         centeredSlides: true,
         coverflowEffect: {
           rotate: 5,
           stretch: 1,
-          depth: 10,
+          depth: 20,
           modifier: 3,
           slideShadows: false
         },
+        // on: {
+        //   slideChangeTransitionStart () {
+        //     this.swiper.activeIndex
+        //     //你的事件
+        //   },
+        // },
       }
     }
   },
   props: {
-    thirdPartyList: Array,
+    thirdPartyList: { type: Array, default: () => [] },
+  },
+  computed: {
+    swiper () {
+      return this.$refs.mySwiper.$swiper
+    },
+
+
+  },
+
+  watch: {
+    'swiper.activeIndex': {
+      handler (newValue, oldValue) {
+        console.log(newValue, oldValue)
+        console.log('numbers正在被侦听')
+      },
+      deep: true,
+      // immediate: true
+    }
   }
 }
 </script>
@@ -76,10 +104,19 @@ export default {
   .swiper {
     margin: 24px;
     .swiper-slide {
+      padding-buttom: 36px;
       min-width: 0px;
       background-color: #fff;
       .content-img {
         width: 100%;
+      }
+      .horizontal-line {
+        // display: block;
+        // min-width: 100px;
+
+        // max-width: 500px;
+        // width: 80px;
+        border-bottom: 4px solid #0090ff;
       }
       .content-title {
         color: #0090ff;
@@ -102,7 +139,7 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: 4; /*2行*/
+        -webkit-line-clamp: 2; /*2行*/
         -webkit-box-orient: vertical;
       }
     }

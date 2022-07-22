@@ -19,6 +19,7 @@
         <span
           v-for="(item,index) of recommendList"
           :key="index"
+          @click="recommendSearch(item)"
         >{{item}} </span>
       </div>
     </div>
@@ -43,8 +44,13 @@ export default {
     recommendList: Array
   },
   methods: {
-    search(){
-      this.$emit('search',this.input)
+    search () {
+      this.$emit('search', this.input)
+      this.input = ''
+    },
+    recommendSearch (item) {
+      this.$emit('search', item)
+      this.input = ''
     }
   }
 }

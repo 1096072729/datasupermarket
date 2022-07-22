@@ -51,14 +51,14 @@ export default {
 
   },
   methods: {
-    getProductionInfo () {
+   async getProductionInfo () {
       this.loadingInstance = Loading.service({
         // 动画中的文字
         text: '加载中',
         // 要加载动画的容器
         target: '.index'
       });
-      axios.get("http://localhost:8080/home/production")
+    await  axios.get("http://localhost:8080/home/production")
         .then((res) => {
           this.getProductionInfoSuc(res);
           this.loadingInstance.close();

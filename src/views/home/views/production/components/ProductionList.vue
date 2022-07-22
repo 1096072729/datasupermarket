@@ -85,7 +85,11 @@
       </div>
     </div>
     <div class="pagination">
-
+      <el-button
+        type="primary"
+        size="small"
+        @click="toCreate"
+      >创建产品</el-button>
       <el-pagination
         background
         @current-change="handleCurrentChange"
@@ -111,7 +115,7 @@ export default {
     return {
       list: [],
       arrange: 'block',
-      pageSize: 12,
+      pageSize: 8,
       search: '',
       type: '全部',
       field: '全部',
@@ -153,10 +157,12 @@ export default {
     toDetail (id) {
       this.$router.push({ path: '/detail', query: { id: id } })
     },
-    handleSizeChange () {
+    handleSizeChange (val) {
+      console.log(val)
       console.log(this.pageSize)
+      this.pageSize = val
     },
-    updateProduct () {
+    async updateProduct () {
       console.log('updateProduct')
       this.loadingInstance = Loading.service({
         // 动画中的文字
@@ -164,7 +170,7 @@ export default {
         // 要加载动画的容器
         target: '.index'
       });
-      axios.post("http://localhost:8080/home/production/update", {
+      await axios.post("http://localhost:8080/home/production/update", {
         search: this.searchValue,
         type: this.type,
         field: this.field,
@@ -189,8 +195,11 @@ export default {
       }
       this.loadingInstance.close();
     },
-    handleCurrentChange () {
-      console.log(this.currentPage)
+    handleCurrentChange (val) {
+      this.currentPage = val
+    },
+    toCreate () {
+      this.$router.push('/create')
     }
   },
   watch: {
@@ -198,25 +207,24 @@ export default {
       this.list = this.productionList
     },
     search () {
-
-      this.updateProduct()
       this.currentPage = 1
+      this.updateProduct()
     },
     type () {
-      this.updateProduct()
       this.currentPage = 1
+      this.updateProduct()
     },
     field () {
-      this.updateProduct()
       this.currentPage = 1
+      this.updateProduct()
     },
     minPrice () {
-      this.updateProduct()
       this.currentPage = 1
+      this.updateProduct()
     },
     maxPrice () {
-      this.updateProduct()
       this.currentPage = 1
+      this.updateProduct()
     },
     oldProductionList () {
       this.productionList = this.oldProductionList
@@ -224,11 +232,12 @@ export default {
     oldTotal () {
       this.total = this.oldTotal
     },
-    currentPage () {
+    currentPage (val) {
+      console.log(val + 'currentPage')
       this.updateProduct()
     },
-    pageSize () {
-      console.log(this.pageSize)
+    pageSize (val) {
+      console.log(111, val)
       this.updateProduct()
     },
     keyValue () {
@@ -368,7 +377,7 @@ export default {
   }
   .pagination {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     padding: 24px;
     :deep(.el-pager li) {
       background-color: #fff;

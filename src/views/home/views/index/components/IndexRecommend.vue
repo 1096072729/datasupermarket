@@ -24,7 +24,7 @@
           </div>
           <div>
             <strong class="content-title">{{item.title}}</strong>
-            <br>
+
             <p class="content-synopsis">{{item.synopsis}}</p>
 
           </div>
@@ -93,7 +93,7 @@ export default {
       box-sizing: border-box;
       width: 25%;
       position: relative;
-      
+
       .content-cart {
         border-radius: 3px;
         // box-sizing: border-box;
@@ -124,6 +124,7 @@ export default {
         }
       }
       .content-title {
+        margin: 12px;
         font-size: 16px;
         line-height: 24px;
         color: #333333;
@@ -135,6 +136,7 @@ export default {
         -webkit-box-orient: vertical;
       }
       .content-synopsis {
+        margin: 12px;
         line-height: 16px;
         font-size: 12px;
         color: #666666;
